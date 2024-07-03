@@ -14,13 +14,14 @@
 </head>
 
 <body>
-    <header> <!--Cabeçalho do site-->
+    <!--CABEÇALHO-->
+    <header>
         <div class="content">
-            <div class="logo"> <!--Logo-->
+            <div class="logo">
                 <a href="#"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" alt=""></a>
             </div>
     
-            <nav class="nav-links"><!--navegação-->
+            <nav class="nav-links">
                 <ul>
                     <li class="home"><a href="#">Home</a></li>
                 </ul>
@@ -31,37 +32,46 @@
             </div>
         </div>
     </header>
-
-    <main> <!--Main do site-->
+    <!--FIM CABEÇALHO-->
+    <!--MAIN-->
+    <main>
         <div class="signup-left">
             <img src="../Img/ImgCadastro.png" alt="imagem-musico">
         </div>
+
         <div class="signup-right">
             <div class="card">
                 <h2>Sign up</h2>
+
                 <form id="form">
                     <div>
                         <input type="text" class="name required" placeholder="Nome completo" oninput="nameValidate()">
                         <span class="span-required">Nome deve ter no mínimo 3 caracteres</span>
                     </div>
+
                     <div>
                         <input type="email" class="email required" placeholder="E-mail" oninput="emailValidate()">
                         <span class="span-required">Digite um email válido</span>
                     </div>
+
                     <div>
                         <input type="password" class="password required" placeholder="Senha" oninput="passwordValidate()">
                         <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
                     </div>
+
                     <div>
                         <input type="password" class="confirm-password required" placeholder="Confirmar senha" oninput="comparePassword()">
                         <span class="span-required">Senhas devem ser compatíveis</span>
                     </div>
+
                     <button type="submit" id="button-signup">Cadastrar</button>
                 </form>
+
                 <p>Ao criar uma conta, você concorda com os <span>Termos de uso</span>
                     e <span>Política de Privacidade</span></p>
             </div>
         </div>
     </main>
+    <!--FIM MAIN-->
 </body>
 </html>

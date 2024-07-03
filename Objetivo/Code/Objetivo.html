@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+    <!--MAIN-->
     <main>
         <div class="select-options">
             <div class="card">
@@ -19,46 +20,56 @@
                     <h2>Selecione o seu objetivo</h2>
                     <span>Você deve escolher uma das opções para continuar!</span>
                 </div>
+
                 <div class="box-select">
                     <label class="select-music" for="music" onclick="validateSelection()">
                         <div>
                             <input type="radio" name="options" id="music">
                             <h3>Sou Músico</h3>
                         </div>
+
                         <p>Busco oportunidades de contrato</p>
                     </label>
+
                     <label class="select-contractor" for="contractor" onclick="validateSelection()">
                         <div>
                             <input type="radio" name="options" id="contractor">
                             <h3>Sou Contratante</h3>
                         </div>
+
                         <p>Busco músicos para contratar</p>
                     </label>
                 </div>
+
                 <div class="buttons">
                     <div class="button-help" id="button-help">
                         <button type="button">Ajuda</button>
                     </div>
+
                     <div class="button-cancel">
                         <button type="submit" id="button-cancel">Cancelar</button>
                     </div>
+
                     <div class="button-confirm">
                         <button type="submit" onclick="validateSelection()" id="button-confirm">Confirmar</button>
                     </div>
                 </div>
-                
+                <!--CANCELAR CADASTRO-->
                 <div class="modal-cancel">
                     <dialog open>
                         <h3>Tem certeza que deseja cancelar?</h3>
                         <p>Ao cancelar você perderá todo seu cadastro feito até aqui</p>
+
                         <div class="button">
                             <button type="button" class="button-not" id="button-not">NÃO</button>
                             <button type="button" class="button-yes" id="button-yes">SIM</button>
                         </div>
                     </dialog>
                 </div>
+                <!--FIM CANCELAR CADASTRO-->
             </div>
         </div>
+        <!--INFORMAÇÕES AJUDA-->
         <div class="overlay-modal">
             <div class="modal-help">
                 <div class="music">
@@ -69,6 +80,7 @@
                         exibir suas habilidades e conectar-se com oportunidades de contrato emocionantes.
                         Queremos ajudá-lo a levar sua carreira musical para o próximo nível.</p>
                 </div>
+
                 <div class="contractor">
                     <h3>Sou Contratante</h3>
                     <p>Você está organizando um evento especial e precisa do toque mágico de músicos 
@@ -78,11 +90,14 @@
                         prontos para transformar sua visão em realidade. Encontre os artistas perfeitos para
                         o seu evento e faça dele um sucesso absoluto.</p>
                 </div>
+
                 <div class="button-close">
                     <button type="button" id="button-close">Fechar</button>
                 </div>
             </div>
         </div>
+        <!--FIM INFORMAÇÕES AJUDA-->
     </main>
+    <!--FIM MAIN-->
 </body>
 </html>

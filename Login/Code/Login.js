@@ -23,10 +23,10 @@ form.addEventListener("submit", (event) =>{
             clearField(1);
         }
         else if (loginMusico()){
-            window.location.href = "/HomeMusico/Code/HomeMusico.html";
+            window.location.href = "/Home-Musico/Code/HomeMusico.html";
         } 
         else if (loginContratante()){
-            window.location.href = "/HomeContratante/Code/HomeContratante.html";
+            window.location.href = "/Home-Contratante/Code/HomeContratante.html";
         }
         
         

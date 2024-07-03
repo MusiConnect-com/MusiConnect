@@ -43,9 +43,9 @@ buttonConfirm.addEventListener("click", function(event) {
         const contractorOption = document.getElementById('contractor');
         
         if (musicOption.checked) {
-            window.location.href = "/HomeMusico/Code/HomeMusico.html";
+            window.location.href = "/Home-Musico/Code/HomeMusico.html";
         } else if (contractorOption.checked) {
-            window.location.href = "/HomeContratante/Code/HomeContratante.html";
+            window.location.href = "/Home-Contratante/Code/HomeContratante.html";
         }
     }
 });

@@ -14,12 +14,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header> <!--Cabeçalho do site-->
-        <div class="logo"> <!--Logo-->
+    <!--OVERLAY-->
+    <div class="overlay"></div>
+    <!--FIM OVERLAY-->
+    <!--CABEÇALHO-->
+    <header>
+        <div class="logo">
             <a href="/HomeMusico/Code/HomeMusico.html"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" alt=""></a>
         </div>
 
-        <nav class="nav-links"><!--navegação-->
+        <nav class="nav-links">
             <ul>
                 <li class="search-ads"><a href="/Anúncios/Code/Anuncios.html">Buscar Anúncios</a></li>
                 <li class="contracts"><a href="#">Meus Contratos</a></li>
@@ -27,12 +31,14 @@
             </ul>
         </nav>
 
-        <div class="profile"> <!--perfil-->
+        <div class="profile">
             <div class="profile-button" id="profile-button">
                 <span>João Víctor</span>
+
                 <div>
                     <img src="../Img/Perfil.jpeg" width="30px" height="30px" alt="">
                 </div>
+
                 <i id="down" class="bi bi-caret-down-fill"></i>
             </div>
 
@@ -43,102 +49,123 @@
             </div>
         </div>
     </header>
-    <main> <!--Corpo do site-->
-        <div class="search"> <!--Pesquisa-->
+    <!--FIM CABEÇALHO-->
+    <!--MAIN-->
+    <main>
+        <div class="search">
             <div class="palavra-chave">
                 <input type="text" placeholder="Palavra-chave">
             </div>
+
             <div class="local">
                 <input type="text" placeholder="Local">
             </div>
+
             <div class="button-search" id="button-search">
                 <button type="button">Pesquisar</button>
             </div>
         </div>
-        <div class="filters-order"> <!--Filtros-->
+        <!--FILTROS-->
+        <div class="filters-order">
             <div class="filters">
                 <div class="button-filters" id="button-filters">
                     <span>Filtros</span>
                     <i id="i-filter" class="bi bi-caret-down-fill"></i>
                 </div>
+
                 <div class="filters-list" id="filters-list">   
                     <div class="list">          
                         <div class="category">
                             <div>
                                 <p>Categorias</p>
                             </div>
+
                             <div class="options-label">
                                 <label for="sertanejo">
                                     <input type="checkbox" name="options-category" class="filter-box" id="sertanejo">
                                     <span>Sertanejo</span>
                                 </label>
+                                
                                 <label for="pagode">
                                     <input type="checkbox" name="options-category" class="filter-box" id="pagode">
                                     <span>Pagode</span>
                                 </label>
+                                
                                 <label for="dj">
                                     <input type="checkbox" name="options-category" class="filter-box" id="dj">
                                     <span>Dj</span>
                                 </label>
+
                                 <label for="rock">
                                     <input type="checkbox" name="options-category" class="filter-box" id="rock">
                                     <span>Rock</span>
                                 </label>
+
                                 <label for="banda">
                                     <input type="checkbox" name="options-category" class="filter-box" id="banda">
                                     <span>Banda</span>
                                 </label>
                             </div>
                         </div>
+
                         <div class="event">
                             <div>
                                 <p>Tipo de evento</p>
                             </div>
+
                             <div class="options-label">
                                 <label for="bar">
                                     <input type="checkbox" name="options-event" class="filter-box" id="bar">
                                     <span>Bar</span>
                                 </label>
+
                                 <label for="restaurante">
                                     <input type="checkbox" name="options-event" class="filter-box" id="restaurante">
                                     <span>Restaurante</span>
                                 </label>
+
                                 <label for="casamento">
                                     <input type="checkbox" name="options-event" class="filter-box" id="casamento">
                                     <span>Casamento</span>
                                 </label>
+
                                 <label for="show">
                                     <input type="checkbox" name="options-event" class="filter-box" id="show">
                                     <span>Show</span>
                                 </label>
+
                                 <label for="aniversario">
                                     <input type="checkbox" name="options-event" class="filter-box" id="aniversario">
                                     <span>Aniversário</span>
                                 </label>
                             </div>                            
                         </div>
+
                         <div class="value">
                             <div>
                                 <p>Valor</p>
                             </div>
+
                             <div class="input">
                                 <input type="value" id="minimum-value" placeholder="Valor mínimo">
                                 <input type="value" id="maximum-value" placeholder="Valor máximo">
                             </div>
                         </div>
                     </div>
+
                     <div class="buttons">
                         <button type="button" class="button-clean">Limpar</button>
                         <button type="button" class="button-filter">Filtrar</button>
                     </div>
                 </div>
-                
             </div>
+
             <div class="order">
                 <div class="select">
                     <span class="selected">Mais recente</span>
                     <i id="i-order" class="bi bi-caret-down-fill"></i>
                 </div>
+
                 <ul class="order-list">
                     <li class="active">Mais recente</li>
                     <li>Menor valor</li>
@@ -146,9 +173,12 @@
                 </ul>
             </div>
         </div>
-        <div class="ads"> <!--Anuncios-->
+        <!--FIM FILTROS-->
+        <!--ANÚNCIOS-->
+        <div class="ads">
             <div class="ad">
                 <img src="../Img/Estabelecimento 1.png" alt="">
+
                 <div class="info">
                     <h2>Restaurante Carioca</h2>
                     <p class="value">R$ 400,00</p>
@@ -156,11 +186,13 @@
                     </p>
                     <p class="local">Campo Grande - MS</p>
                 </div>
+
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
             <div class="ad">
                 <img src="../Img/Casamento 1.png" alt="">
+
                 <div class="info">
                     <h2>Meu Casamento</h2>
                     <p class="value">R$ 1.000,00</p>
@@ -169,11 +201,13 @@
                     </p>
                     <p class="local">Campo Grande - MS</p>
                 </div>
+
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
             <div class="ad">
                 <img src="../Img/Estabelecimento 2.png" alt="">
+
                 <div class="info">
                     <h2>Cultural</h2>
                     <p class="value">R$ 600,00</p>
@@ -182,11 +216,13 @@
                     </p>
                     <p class="local">Campo Grande - MS</p>
                 </div>
+
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
             <div class="ad">
                 <img src="../Img/festa-15-anos.webp" alt="">
+
                 <div class="info">
                     <h2>Meus 15 anos</h2>
                     <p class="value">À Combinar</p>
@@ -195,21 +231,25 @@
                     </p>
                     <p class="local">Campo Grande - MS</p>
                 </div>
+
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
             <div class="ad">
                 <img src="../Img/CaféMostarda.jpg" alt="">
+
                 <div class="info">
                     <h2>Café Mostarda</h2>
                     <p class="value">R$ 800,00</p>
                     <p class="descr"> Músico sertanejo que tenha experências e vontade de fazer um belo show!</p>
                     <p class="local">Campo Grande - MS</p>
                 </div>
+
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
-
         </div>
+        <!--FIM ANÚNCIOS-->
     </main>
+    <!--FIM MAIN-->
 </body>
 </html>

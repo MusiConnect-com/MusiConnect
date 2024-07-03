@@ -14,39 +14,44 @@
 </head>
 
 <body>
-    <header> <!--Cabeçalho do site-->
+    <!--CABEÇALHO-->
+    <header> 
         <div class="content">
-            <div class="logo"> <!--Logo-->
+            <div class="logo"> 
                 <a href=""><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" alt=""></a>
             </div>
-    
-            <nav class="nav-links"><!--navegação-->
+
+            <nav class="nav-links">
                 <ul>
                     <li class="home"><a href="">Home</a></li>
                 </ul>
             </nav>
-    
+
             <div class="button-signup" id="button-signup">
                 <button type="button">Cadastrar-se</button>
             </div>
         </div>
     </header>
-
-    <main> <!--Main do site-->
+    <!--FIM CABEÇALHO-->
+    <!--MAIN-->
+    <main> 
         <div class="login-left">
-            <div class="card"> <!--Card do login-->
+            <div class="card">
                 <h2>Login</h2>
                 <span class="span-correct">Email não cadastrado!</span>
                 <span class="span-correct">Senha incorreto! Verifique e tente novamente</span>
+
                 <form class="form" id="form">
                     <div>
                         <input type="email" class="email required" placeholder="E-mail" oninput="emailValidate()">
                         <span class="span-required">Digite um email válido</span>
                     </div>
+
                     <div>
                         <input type="password" class="password required" placeholder="Senha" oninput="passwordValidate()">
                         <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
                     </div>
+
                     <button type="submit" id="button-login">Entrar</button>
                 </form>
                 
@@ -54,9 +59,10 @@
                 <p><a href="#">Esqueceu sua senha?</a></p>
             </div>
         </div>
-        <div class="login-right"> <!--Imagem na direita do site-->
+        <div class="login-right">
                 <img class="login-img" src="../Img/imgLogin.png" alt="imagem__musico">
         </div>
     </main>
+    <!--FIM MAIN-->
 </body>
 </html>
