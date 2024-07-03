@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicConnect</title>
+    <script src="HomeContratante.js" defer></script>
+    <script src="ContratosAtivos.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../Styles/HomeContratante.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="overlay"></div> <!--Overlay-->
+    <header> <!--Cabeçalho do site-->
+        <div class="content">
+            <div class="logo"> <!--Logo-->
+                <a href="../Code/HomeContratante.html"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" width="30px" height="30px" alt=""></a>
+            </div>
+    
+            <nav class="nav-links"><!--navegação-->
+                <ul>
+                    <li class="search-music"><a href="">Buscar Músicos</a></li>
+                    <li class="my-contracts"><a href="#">Meus Contratos</a></li>
+                    <li class="home"><a href="/HomeContratante/Code/HomeContratante.html">Home</a></li>
+                    <li class="announce">
+                        <a href="">
+                            Anunciar
+                            <i id="i-not-hover" class="bi bi-plus-circle"></i>
+                            <i id="i-hover" class="bi bi-plus-circle-fill"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+    
+            <div class="profile"> <!--perfil-->
+                <div class="profile-button" id="profile-button">
+                    <div>
+                        <img src="../Img/Perfil.jpeg" alt="">
+                    </div>
+                    <span>Robert Bueno</span>
+                    <i id="down" class="bi bi-caret-down-fill"></i>
+                </div>
+    
+                <div class="profile-list" id="profile-list">
+                    <li class="profile-list-items"><a href="">Ver perfil</a></li>
+                    <li class="profile-list-items"><a href="">Configurações</a></li>
+                    <li id="leave" class="profile-list-items"><a href="/Login/Code/Login.html">Sair</a></li>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+    <main> <!--Corpo do site-->
+        <section class="section-1">
+            <div class="create-ads"> <!--Criar anuncio-->
+                <div class="content-text">
+                    <h1>Encontre o músico perfeito para o seu evento</h1>
+                    <p> Precisando de um músico?<br>
+                        Crie um anúncio agora e selecione o ideal que o seu evento merece!
+                    </p>
+                    <a href="" class="btn-create-ads">Criar Agora</a>
+                    <div class="content-search">
+                        <p>Se preferir, você pode fazer uma busca rápida por perfis de músicos <br>
+                            e estilos musicais, <span>EXPERIMENTE!</span></p>
+                        <div class="search-input"> <!--Pesquisa-->
+                            <input type="text" placeholder="Ex: Jorge Lucas">
+                            <input type="text" placeholder="Ex: Sertanejo">
+                            <button type="submit">Pesquisar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-img">
+                    <img src="../Img/Mulher cantando-Photoroom-menor.png" alt="">
+                </div>
+            </div>  
+        </section>
+
+        <section class="section-2">
+            <div class="contracts-active"> <!--Contratos ativos-->
+                <div class="title"><p>Contratos ativos</p></div>
+                <div class="contracts">
+                    <div class="modal-confirm">
+                        <p>Deseja confirmar o contrato?</p>
+                        <button class="not-confirm">Não</button>
+                        <button class="yes-confirm">Sim</button>
+                    </div>
+                    <div class="modal-confirmed">
+                        <p>Contrato confirmada com sucesso!</p>
+                        <button class="btn-ok">Ok</button>
+                    </div>
+                    <div class="contracts-item">
+                        <div class="alert">
+                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
+                        </div>
+                        <div class="content">
+                            <div class="content-img">
+                                <img src="../Img/Victor Vidal.png" alt="">
+                            </div>
+                            <div class="content-text">
+                                <div class="info-music">
+                                    <p>Victor Vidal</p>
+                                    <div class="icons-chat">
+                                        <i class="bi bi-chat"></i>
+                                        <i class="bi bi-chat-fill"></i>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <p>Evento no dia 01/10/2077 às 09:00 horas.</p>
+                                    <p class="value">R$2.800,00</p>
+                                </div>
+                                <div class="btns">
+                                    <button class="cancel">Cancelar</button>
+                                    <button class="confirm">Confirmar</button>
+                                    <button class="confirmed">Confirmado</button>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="contracts-item">
+                        <div class="alert">
+                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
+                        </div>
+                        <div class="content">
+                            <div class="content-img">
+                                <img src="../Img/Juliano Silva.jpg" alt="">
+                            </div>
+                            <div class="content-text">
+                                <div class="info-music">
+                                    <p>Juliano Silva</p>
+                                    <div class="icons-chat">
+                                        <i class="bi bi-chat"></i>
+                                        <i class="bi bi-chat-fill"></i>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <p>Evento no dia 27/06/2077 às 18:00 horas.</p>
+                                    <p class="value">R$700,00</p>
+                                </div>
+                                <div class="btns">
+                                    <button class="cancel">Cancelar</button>
+                                    <button class="confirm">Confirmar</button>
+                                    <button class="confirmed">Confirmado</button>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-3">
+            <div class="title">
+                <h1>Músicos recomendados</h1>
+                <div class="see-all">
+                    <p>Ver mais</p>
+                    <i id="arrow-see-all" class="bi bi-arrow-right"></i>
+                </div>
+            </div>
+            <div class="profiles-music">
+
+                <!-- Estrelas para avaliação 
+                 Não marcada - <i class="bi bi-star"></i>
+                 Meio marcada - <i class="bi bi-star-half"></i>
+                 Marcada - <i class="bi bi-star-fill"></i>
+                -->
+                <div class="profiles-items">
+                    <div class="content-img">
+                        <div>
+                            <img src="../Img/Aline Martins.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="content-text">
+                        <div class="top">
+                            <h1>Aline Martins</h1>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                        </div>
+                        <ul>
+                            <li class="genres"> Música clássica, Jazz, MPB</li>
+                            <li class="descr">
+                                Sou apaixonada por música desde os seis anos de idade. 
+                                Tenho mais de uma década de experiência tocando violino 
+                                e piano, e a música sempre foi a minha maior paixão. 
+                            </li>
+                            <li class="local">Campo Grande - MS</li>
+                            <li class="value">R$500,00</li>
+                        </ul>
+                        <a href="">Contratar</a>
+                    </div>
+                </div>
+
+                <div class="profiles-items">
+                    <div class="content-img">
+                        <div>
+                            <img src="../Img/Jorge Lucas.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="content-text">
+                        <div class="top">
+                            <h1>Jorge Lucas</h1>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                            </div>
+                        </div>
+                        <ul>
+                            <li class="genres"> Rock, Blues, Indie</li>
+                            <li class="descr">
+                                Sou guitarrista e cantor com mais de 15 anos de estrada. 
+                                Comecei a tocar guitarra quando ainda era adolescente e desde então, 
+                                a música se tornou uma parte essencial da minha vida. 
+                            </li>
+                            <li class="local">Campo Grande - MS</li>
+                            <li class="value">R$840,00</li>
+                        </ul>
+                        <a href="">Contratar</a>
+                    </div>
+                </div>
+
+                <div class="profiles-items">
+                    <div class="content-img">
+                        <div>
+                            <img src="../Img/Pedro Pedrinho.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="content-text">
+                        <div class="top">
+                            <h1>Pedro Pedrinho</h1>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                        <ul>
+                            <li class="genres"> Música Latina, Samba, Funk, Pop</li>
+                            <li class="descr">
+                                Olá, eu sou Pedro Pedrinho, percussionista e baterista com mais
+                                de 10 anos de experiência. Desde pequeno, sempre fui fascinado pelos 
+                                ritmos e pelos diferentes sons que podemos criar.
+                            </li>
+                            <li class="local">Campo Grande - MS</li>
+                            <li class="value">R$400,00</li>
+                        </ul>
+                        <a href="">Contratar</a>
+                    </div>
+                </div>
+
+            </div>
+            
+        </section>
+
+        <footer>
+            <h3>@ MusicConnect</h3>
+        </footer>
+    </main>
+</body>
+</html>

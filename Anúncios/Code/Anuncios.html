@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicConnect</title>
+    <script src="Anuncios.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    <link rel="stylesheet" href="../Styles/Anuncios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header> <!--Cabeçalho do site-->
+        <div class="logo"> <!--Logo-->
+            <a href="/HomeMusico/Code/HomeMusico.html"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" alt=""></a>
+        </div>
+
+        <nav class="nav-links"><!--navegação-->
+            <ul>
+                <li class="search-ads"><a href="/Anúncios/Code/Anuncios.html">Buscar Anúncios</a></li>
+                <li class="contracts"><a href="#">Meus Contratos</a></li>
+                <li class="home"><a href="/HomeMusico/Code/HomeMusico.html">Home</a></li>
+            </ul>
+        </nav>
+
+        <div class="profile"> <!--perfil-->
+            <div class="profile-button" id="profile-button">
+                <span>João Víctor</span>
+                <div>
+                    <img src="../Img/Perfil.jpeg" width="30px" height="30px" alt="">
+                </div>
+                <i id="down" class="bi bi-caret-down-fill"></i>
+            </div>
+
+            <div class="profile-list" id="profile-list">
+                <li class="profile-list-items"><a href="">Ver perfil</a></li>
+                <li class="profile-list-items"><a href="">Configurações</a></li>
+                <li id="leave" class="profile-list-items"><a href="/Login/Code/Login.html">Sair</a></li>
+            </div>
+        </div>
+    </header>
+    <main> <!--Corpo do site-->
+        <div class="search"> <!--Pesquisa-->
+            <div class="palavra-chave">
+                <input type="text" placeholder="Palavra-chave">
+            </div>
+            <div class="local">
+                <input type="text" placeholder="Local">
+            </div>
+            <div class="button-search" id="button-search">
+                <button type="button">Pesquisar</button>
+            </div>
+        </div>
+        <div class="filters-order"> <!--Filtros-->
+            <div class="filters">
+                <div class="button-filters" id="button-filters">
+                    <span>Filtros</span>
+                    <i id="i-filter" class="bi bi-caret-down-fill"></i>
+                </div>
+                <div class="filters-list" id="filters-list">   
+                    <div class="list">          
+                        <div class="category">
+                            <div>
+                                <p>Categorias</p>
+                            </div>
+                            <div class="options-label">
+                                <label for="sertanejo">
+                                    <input type="checkbox" name="options-category" class="filter-box" id="sertanejo">
+                                    <span>Sertanejo</span>
+                                </label>
+                                <label for="pagode">
+                                    <input type="checkbox" name="options-category" class="filter-box" id="pagode">
+                                    <span>Pagode</span>
+                                </label>
+                                <label for="dj">
+                                    <input type="checkbox" name="options-category" class="filter-box" id="dj">
+                                    <span>Dj</span>
+                                </label>
+                                <label for="rock">
+                                    <input type="checkbox" name="options-category" class="filter-box" id="rock">
+                                    <span>Rock</span>
+                                </label>
+                                <label for="banda">
+                                    <input type="checkbox" name="options-category" class="filter-box" id="banda">
+                                    <span>Banda</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="event">
+                            <div>
+                                <p>Tipo de evento</p>
+                            </div>
+                            <div class="options-label">
+                                <label for="bar">
+                                    <input type="checkbox" name="options-event" class="filter-box" id="bar">
+                                    <span>Bar</span>
+                                </label>
+                                <label for="restaurante">
+                                    <input type="checkbox" name="options-event" class="filter-box" id="restaurante">
+                                    <span>Restaurante</span>
+                                </label>
+                                <label for="casamento">
+                                    <input type="checkbox" name="options-event" class="filter-box" id="casamento">
+                                    <span>Casamento</span>
+                                </label>
+                                <label for="show">
+                                    <input type="checkbox" name="options-event" class="filter-box" id="show">
+                                    <span>Show</span>
+                                </label>
+                                <label for="aniversario">
+                                    <input type="checkbox" name="options-event" class="filter-box" id="aniversario">
+                                    <span>Aniversário</span>
+                                </label>
+                            </div>                            
+                        </div>
+                        <div class="value">
+                            <div>
+                                <p>Valor</p>
+                            </div>
+                            <div class="input">
+                                <input type="value" id="minimum-value" placeholder="Valor mínimo">
+                                <input type="value" id="maximum-value" placeholder="Valor máximo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="button-clean">Limpar</button>
+                        <button type="button" class="button-filter">Filtrar</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="order">
+                <div class="select">
+                    <span class="selected">Mais recente</span>
+                    <i id="i-order" class="bi bi-caret-down-fill"></i>
+                </div>
+                <ul class="order-list">
+                    <li class="active">Mais recente</li>
+                    <li>Menor valor</li>
+                    <li>Maior valor</li>
+                </ul>
+            </div>
+        </div>
+        <div class="ads"> <!--Anuncios-->
+            <div class="ad">
+                <img src="../Img/Estabelecimento 1.png" alt="">
+                <div class="info">
+                    <h2>Restaurante Carioca</h2>
+                    <p class="value">R$ 400,00</p>
+                    <p class="descr">Musica Ao Vivo no Restaurante Carioca, horário das 20:00 / 21:30.
+                    </p>
+                    <p class="local">Campo Grande - MS</p>
+                </div>
+                <button class="button-want" type="button">EU QUERO</button>
+            </div>
+
+            <div class="ad">
+                <img src="../Img/Casamento 1.png" alt="">
+                <div class="info">
+                    <h2>Meu Casamento</h2>
+                    <p class="value">R$ 1.000,00</p>
+                    <p class="descr">Vou me casar no dia 03/06/2024, preciso de alguém que saiba tocar
+                        músicas antigas de sertanejo, e que seja animado para cantar por 4 horas seguidas!
+                    </p>
+                    <p class="local">Campo Grande - MS</p>
+                </div>
+                <button class="button-want" type="button">EU QUERO</button>
+            </div>
+
+            <div class="ad">
+                <img src="../Img/Estabelecimento 2.png" alt="">
+                <div class="info">
+                    <h2>Cultural</h2>
+                    <p class="value">R$ 600,00</p>
+                    <p class="descr">Abertura de show para um evento cultural, precisamos de um músico que
+                        saiba tocar músicas clássicas brasileiras.
+                    </p>
+                    <p class="local">Campo Grande - MS</p>
+                </div>
+                <button class="button-want" type="button">EU QUERO</button>
+            </div>
+
+            <div class="ad">
+                <img src="../Img/festa-15-anos.webp" alt="">
+                <div class="info">
+                    <h2>Meus 15 anos</h2>
+                    <p class="value">À Combinar</p>
+                    <p class="descr"> Preciso de um DJ para tocar no aniversário da minha filha, das 19:00
+                        até 21:00. Que já tenha experências e avaliações!
+                    </p>
+                    <p class="local">Campo Grande - MS</p>
+                </div>
+                <button class="button-want" type="button">EU QUERO</button>
+            </div>
+
+            <div class="ad">
+                <img src="../Img/CaféMostarda.jpg" alt="">
+                <div class="info">
+                    <h2>Café Mostarda</h2>
+                    <p class="value">R$ 800,00</p>
+                    <p class="descr"> Músico sertanejo que tenha experências e vontade de fazer um belo show!</p>
+                    <p class="local">Campo Grande - MS</p>
+                </div>
+                <button class="button-want" type="button">EU QUERO</button>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

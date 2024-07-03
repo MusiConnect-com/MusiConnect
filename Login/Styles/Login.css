@@ -1,0 +1,226 @@
+/* importação do global */
+@import url(/global.css);
+
+/* Style body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--light-apricot);
+    height: 100vh;
+}
+
+/* Style Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-apricot);
+    height: 10%;
+    min-height: 90px;
+    max-height: 90px;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+header .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 95%;
+    padding: 20px 0px;
+}
+
+.logo img{
+    display: block;
+    box-sizing: border-box;
+    width: 200px;
+    height: 65px;
+    cursor: pointer;
+}
+
+.nav-links {
+    margin-left: auto;
+    transition: .3s;
+}
+
+
+.nav-links a{
+    display: inline-block;
+    transition: .3s;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.nav-links a:hover{
+    background-color: var(--black);
+    color: var(--orange);
+    transition: .3s;
+}
+
+.button-signup {
+    margin-left: 2%;
+}
+
+.button-signup button{
+    background-color: var(--black);
+    color: var(--orange);
+    border: none;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 10px 30px;
+    text-align: center;
+    transition: .3s;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+
+.button-signup button:hover {
+    background-color: var(--orange);
+    color: var(--white);
+    transition: .3s;
+}
+
+
+/*Style main*/
+
+main{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+    position: relative;
+}
+
+.login-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    position: relative;
+    
+}
+
+.card {
+    background-color: var(--white);
+    padding: 40px;
+    box-shadow: 0 0 10px 1px var(--black25);
+    max-width: 400px;
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 40px;
+    cursor: default;
+    font-weight: 500;
+}
+
+.span-correct {
+    font-size: 13px;
+    color: var(--red);
+    text-align: center;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.span-required {
+    font-size: 12px;
+    color: var(--red);
+    text-align: left;
+    margin: 5px 0 0 5px;
+    display: none;
+}
+.card input {
+    width: 100%;
+    padding: 12px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+.card input:hover {
+    border-color: var(--textt);
+}
+
+.card input:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 1px 4px var(--black25);
+}
+
+.card input:not(:focus) {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.card button {
+    background-color: var(--black);
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--orange);
+
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    box-sizing: border-box;
+}
+
+.card button:hover {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.card p {
+    font-size: 14px;
+    margin-top: 20px;
+    cursor: default;
+}
+
+.card p a {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+.card p a:hover{
+    text-decoration:underline;
+}
+
+.login-right {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 50%;
+}
+.login-img{
+    width: 100%;
+    max-width: 400px;
+}

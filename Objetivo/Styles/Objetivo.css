@@ -1,0 +1,401 @@
+/* importação do global */
+@import url(/global.css);
+
+/* Style body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--light-apricot);
+    height: 100vh;
+}
+
+/*Style main*/
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 90vh;
+    width: 100%;
+}
+
+/*Style card*/
+
+.select-options {
+    background-color: var(--white);
+    padding: 20px;
+    width: 60vw;
+    height: 60vh;
+    box-shadow: 0 0 10px 1px var(--black25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/*Style top*/
+
+.card .top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 20%;
+    text-align: center;
+}
+
+.card span{
+    color: var(--red);
+    display: none;
+}
+
+h2 {
+    cursor: default;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/*Style options*/
+
+.box-select {
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 60%;
+    box-sizing: border-box;
+}
+
+
+.box-select label div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.box-select input{
+    width: 20px;
+    height: 20px;
+}
+
+.box-select h3 {
+    width: 200px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.box-select p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text75);
+    height: 80%;
+    width: 100%;
+}
+
+.select-music {
+    background-color: var(--white);
+    width: 40%;
+    height: 60%;
+    min-height: 140px;
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 10px 1px var(--black40);
+    cursor: pointer;
+
+    transition: 500ms;
+}
+
+.select-music:hover {
+    border: 1px solid var(--black);
+    box-shadow: 0 0 1px 4px var(--black25);
+    transition: 500ms;
+}
+
+.select-contractor {
+    background-color: var(--white);
+    width: 40%;
+    height: 60%;
+    min-height: 140px;
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 10px 1px var(--black40);
+    cursor: pointer;
+
+    transition: 500ms;
+}
+
+.select-contractor:hover {
+    border: 1px solid var(--black);
+    box-shadow: 0 0 1px 4px var(--black25);
+    transition: 500ms;
+}
+
+
+/*Style buttons*/
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    padding: 0px 6%;
+}
+
+
+.button-help button {
+    background-color: var(--white);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--text);
+    border: 1px solid var(--black);
+    cursor: pointer;
+
+    border-radius: 10px;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: center;
+    transition: .3s;
+    box-sizing: border-box;
+    
+}
+
+.button-help button:hover {
+    background-color: var(--black);
+    color: var(--orange);
+}
+
+.button-cancel {
+   margin-left: auto;
+}
+
+.button-cancel button {
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--black);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    box-sizing: border-box;
+}
+
+.button-cancel button:hover {
+    background-color: var(--black);
+    color: var(--orange);
+}
+
+.button-confirm {
+    margin-left: 4%;
+}
+
+.button-confirm button{
+    background-color: var(--black);
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--orange);
+
+    width: 100%;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    box-sizing: border-box;
+}
+
+.button-confirm button:hover {
+    background-color: var(--orange);
+    color: var(--white);
+    transition: .3s;
+}
+
+
+/*Style modal-help*/
+
+
+.overlay-modal {
+    cursor: default;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 99999;
+    background-color: var(--black40);
+}
+
+.modal-help {
+    text-align: center;
+    width: 50vw;
+    padding: 20px 30px;
+    font-size: 14px;
+    background-color: var(--black);
+    color: var(--orange);
+    border: none;
+    box-shadow: 0 0 10px 5px var(--black40);
+}
+
+.modal-help .music,
+.modal-help .contractor {
+    background-color: var(--grey);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 20px;
+    width: 100%;
+    height: 80%;
+}
+
+.modal-help h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--orange);
+}
+
+.modal-help .music p,
+.modal-help .contractor p {
+    margin-top: 20px;
+}
+
+.button-close {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-close button {
+    width: 50%;
+    background-color: var(--black);
+    color: var(--orange);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button-close button:hover {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+
+/*Style modal-cancel*/
+
+.modal-cancel {
+    display: none;
+}
+
+.modal-cancel dialog {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 40%;
+    height: 30%;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -70%);
+    padding: 20px;
+    position: absolute;
+    background-color: var(--black);
+    color: var(--orange);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px var(--black40);
+}
+
+.modal-cancel dialog h3 {
+    color: var(--orange);
+    font-weight: 500;
+    font-size: 18px;
+    cursor: default;
+    height: 30%;
+}
+
+.modal-cancel dialog p {
+    cursor: default;
+    height: 30%;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.modal-cancel .button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 40%;
+}
+
+.modal-cancel .button-yes {
+    width: 30%;
+    background-color: var(--black);
+    color: var(--orange);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px;
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal-cancel .button-yes:hover {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+
+.modal-cancel .button-not {
+    width: 30%;
+    background-color: var(--orange);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal-cancel .button-not:hover {
+    box-shadow: 0 0 10px 1px var(--orange);
+}
