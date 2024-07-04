@@ -1,6 +1,7 @@
 const profileButton = document.querySelector(".profile-button");
 const profileList = document.querySelector(".profile-list");
 const profileItems = document.querySelectorAll(".profile-list-items");
+const buttonClose = document.getElementById("close-profile-list");
 const leave = document.getElementById("leave");
 const buttonSearch = document.querySelector(".button-search");
 const overlay = document.querySelector(".overlay");
@@ -36,6 +37,13 @@ profileItems.forEach(items => {
 })
 
 overlay.addEventListener("click", function() {
+    profileList.style.display = "none";
+    overlay.style.display = "none";
+    profileList.classList.remove("open-profile")
+    profileButton.classList.remove("open-profile")
+})
+
+buttonClose.addEventListener("click", function(){
     profileList.style.display = "none";
     overlay.style.display = "none";
     profileList.classList.remove("open-profile")
