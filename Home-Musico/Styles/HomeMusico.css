@@ -236,6 +236,7 @@ footer h3{
 .profile-button img:hover {
     border-color:var(--black);
 }
+
 .profile-list {
     display: none;
     justify-content: center;
