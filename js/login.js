@@ -1,11 +1,4 @@
 
-const buttonSignup = document.getElementById("button-signup")
-
-buttonSignup.onclick = function (){
-    window.location.href = "/Cadastro/Code/Cadastro.html";
-}
-
-
 //validações do formulário
 const form = document.getElementById("form");
 const campos = document.querySelectorAll(".required");

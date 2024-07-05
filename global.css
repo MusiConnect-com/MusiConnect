@@ -13,6 +13,7 @@
     --light-grey:#EEEEEE;
     --white:#ffff;
     --navy-blue:#003366;
+    --navy-blue2:#00264d;
     --black25:#00000025;
     --black40:#00000040;
     --black:#000000;
@@ -33,10 +34,6 @@ body, button, a, h1, h2, h3, p {
     font-style: normal;
     font-size: 14px;
     font-weight: 100;
-}
-
-input:hover {
-    border-color: var(--orange);
 }
 
 :focus{
