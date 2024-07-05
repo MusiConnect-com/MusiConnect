@@ -59,7 +59,7 @@ footer {
     width: 100%;
     height: 20vh;
     border-top: 1px solid var(--navy-blue);
-    background-color: var(--navy-blue);
+    background-color: var(--orange);
 }
 
 footer h3{
@@ -655,6 +655,7 @@ main {
 
 .contracts-item .content .btns .confirmed, .confirm {
     background-color: var(--navy-blue);
+    border-color: solid var(--navy-blue) !important;
     color: var(--white);
 }
 
@@ -670,7 +671,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    padding: 50px 0 100px 0;
     width: 100%; 
     background-color: var(--navy-blue);
 }
@@ -809,8 +810,8 @@ main {
 /*Style button-ADS*/
 
 .ad-item button {
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--navy-blue);
+    color: var(--white);
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -831,13 +832,13 @@ main {
 
 .ads i {
     font-size: 30px;
-    color: var(--orange);
+    color: var(--white);
     cursor: pointer;
     transition: .3s;
 }
 
 .ads i::before {
-    background-color: var(--black);
+    background-color: var(--orange);
     border-radius: 100%;
     text-align: center;
     padding: 8px 8px 8px 10px;
