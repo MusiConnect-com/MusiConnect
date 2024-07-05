@@ -9,7 +9,6 @@ const btnNot = document.querySelector(".not-confirm");
 const btnYes = document.querySelector(".yes-confirm");
 const btnOk = document.querySelector(".btn-ok");
 
-alertSpan[1].style.display = "none"
 confirmedOn();
 
 function confirmedOn() {
@@ -71,7 +70,7 @@ btnOk.addEventListener("click", function () {
 });
 
 overlay.addEventListener("click", function(){
-    let i = modalConfirmed.dataset.currentIndex;
+    let i = modalConfirm.dataset.currentIndex;
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirmed).display; 
     if (displayStyleAlert === "flex" && displayStyleModal === "block"){
@@ -83,6 +82,4 @@ overlay.addEventListener("click", function(){
         modalConfirm.style.display = "none";
         overlay.style.display = "none";
     }
-    
-    
 });
