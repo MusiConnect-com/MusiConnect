@@ -83,5 +83,4 @@ overlay.addEventListener("click", function(){
         modalConfirm.style.display = "none";
         overlay.style.display = "none";
     }
-
 });

@@ -4,11 +4,13 @@ const btnConfirm = document.querySelectorAll(".btns .confirm");
 const btnConfirmed = document.querySelectorAll(".btns .confirmed");
 const modalConfirm = document.querySelector(".modal-confirm");
 const modalConfirmed = document.querySelector(".modal-confirmed");
+const overlay3 = document.getElementById("overlay3");
 
 const btnNot = document.querySelector(".not-confirm");
 const btnYes = document.querySelector(".yes-confirm");
 const btnOk = document.querySelector(".btn-ok");
 
+alertSpan[1].style.display = "none"
 confirmedOn();
 
 function confirmedOn() {
@@ -32,7 +34,7 @@ contractsAtivos.forEach((contracts, i) => {
         if (displayStyle === "flex") {
             modalConfirm.dataset.currentIndex = i; 
             modalConfirm.style.display = "block";
-            overlay.style.display = "block";
+            overlay3.style.display = "block";
         }
     });
 });
@@ -43,7 +45,7 @@ btnNot.addEventListener("click", function () {
     let displayStyleModal = window.getComputedStyle(modalConfirm).display;
     if (displayStyleAlert === "flex" && displayStyleModal === "block") {
         modalConfirm.style.display = "none";
-        overlay.style.display = "none";
+        overlay3.style.display = "none";
     }
 });
 
@@ -64,22 +66,22 @@ btnOk.addEventListener("click", function () {
     if (displayStyleAlert === "flex" && displayStyleModal === "block") {
         modalConfirmed.style.display = "none";
         alertSpan[i].style.display = "none";
-        overlay.style.display = "none";
+        overlay3.style.display = "none";
         confirmedOn();
     }
 });
 
-overlay.addEventListener("click", function(){
+overlay3.addEventListener("click", function(){
     let i = modalConfirm.dataset.currentIndex;
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirmed).display; 
     if (displayStyleAlert === "flex" && displayStyleModal === "block"){
         modalConfirmed.style.display = "none";
         alertSpan[i].style.display = "none";
-        overlay.style.display = "none";
+        overlay3.style.display = "none";
         confirmedOn();
     }else {
         modalConfirm.style.display = "none";
-        overlay.style.display = "none";
+        overlay3.style.display = "none";
     }
 });

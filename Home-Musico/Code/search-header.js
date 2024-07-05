@@ -3,6 +3,7 @@ const iconClose = document.getElementById("icon-close");
 const searchHeader = document.querySelector(".search-header");
 const searchInput = document.querySelector(".search-header input");
 const adsSearch = document.getElementById("ads-search");
+const overlay1 = document.getElementById("overlay1");
 
 function saveQuery() {
     const query = searchInput.value;
@@ -19,13 +20,13 @@ searchIcon.addEventListener("click", function(){
         searchHeader.style.display = "flex";
         setTimeout(() => {
             searchHeader.classList.add("open-search");
-            overlay.style.display = "block";
+            overlay1.style.display = "block";
             searchInput.focus();
         }, 300);
     }
     else {
         searchHeader.classList.remove("open-search");
-        overlay.style.display = "none";
+        overlay1.style.display = "none";
         searchInput.value = "";
         searchInput.blur();
         setTimeout(() => {
@@ -38,7 +39,7 @@ searchIcon.addEventListener("click", function(){
 iconClose.addEventListener("click", function(){
     if(searchHeader.classList.contains("open-search")){
         searchHeader.classList.remove("open-search");
-        overlay.style.display = "none";
+        overlay1.style.display = "none";
         searchInput.value = "";
         searchInput.blur();
         setTimeout(() => {
@@ -48,10 +49,10 @@ iconClose.addEventListener("click", function(){
     }
 })
 
-overlay.addEventListener("click", function(){
+overlay1.addEventListener("click", function(){
     if(searchHeader.classList.contains("open-search")){
         searchHeader.classList.remove("open-search");
-        overlay.style.display = "none";
+        overlay1.style.display = "none";
         searchInput.value = "";
         setTimeout(() => {
             searchHeader.style.display = "none";
@@ -65,7 +66,7 @@ searchInput.addEventListener("keydown", function(event) {
         searchHeader.style.display = "none";
         searchIcon.classList.remove("open-search");
         searchHeader.classList.remove("open-search");
-        overlay.style.display = "none";
+        overlay1.style.display = "none";
         event.preventDefault();
         performSearch();
     }
