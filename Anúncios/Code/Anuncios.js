@@ -4,18 +4,25 @@
 $('#minimum-value').mask("#.##0,00", {reverse: true});
 $('#maximum-value').mask("#.##0,00", {reverse: true});
 
+document.addEventListener("DOMContentLoaded", function(){
+    const query = localStorage.getItem("searchQuery");
+    if (query){
+        const queryInput = document.getElementById("keyword");
+        queryInput.value = query;
+        queryInput.focus();
+    }
+});
+
+
+
 //Menu perfil
 const profileButton = document.querySelector(".profile-button");
 const profileList = document.querySelector(".profile-list");
 const profileItems = document.querySelectorAll(".profile-list-items");
 const buttonClose = document.getElementById("close-profile-list");
 const leave = document.getElementById("leave");
-const buttonSearch = document.querySelector(".button-search");
 const overlay = document.querySelector(".overlay");
 
-buttonSearch.addEventListener("click", function() {
-    window.location.href = "/Anúncios/Code/Anuncios.html"
-});
 
 leave.addEventListener("click", function() {
     window.location.href = "/Login/Code/Login.html"

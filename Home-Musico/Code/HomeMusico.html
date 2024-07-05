@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <script src="HomeMusico.js" defer></script>
+    <script src="Profile.js" defer></script>
+    <script src="search-header.js" defer></script>
     <script src="ContratosAtivos.js" defer></script>
     <script src="RolagemAds.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -21,12 +22,19 @@
     <!--CABEÇALHO-->
     <header>
         <div class="content">
-            <div class="logo">
-                <a href="../Code/Home.html"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" width="30px" height="30px" alt=""></a>
-            </div>
+            
+            <a class="logo" href="../Code/Home.html"><img src="../Img/Logo-Photoroom.png"alt=""></a>
+            
     
             <nav class="nav-links">
                 <ul>
+                    <li><i id="search-icon" class="bi bi-search"></i>
+                        <div class="search-header">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Ex : Bar da esquina" autofocus>
+                            <i id="icon-close" class="bi bi-x"></i>
+                        </div>
+                    </li>
                     <li><a href="/Anúncios/Code/Anuncios.html">Buscar Anúncios</a></li>
                     <li><a href="#">Meus Contratos</a></li>
                     <li class="nav-active"><a href="/HomeMusico/Code/Home.html">Home</a></li>
@@ -70,7 +78,7 @@
                     <div class="search-input">
                         <input type="text" placeholder="Ex : Bar da esquina">
                         <input type="text" placeholder="Ex : Campo Grande">
-                        <button class="button-search" type="button">Pesquisar</button>
+                        <button class="button-search" type="button"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
 
@@ -83,7 +91,7 @@
         <!--SEÇÃO 2-->
         <section class="section-2">
             <div class="contracts-active">
-                <div class="title"><p>Contratos ativos</p></div>
+                <div class="title">Contratos ativos</div>
 
                 <div class="contracts">
                     <div class="modal-confirm">

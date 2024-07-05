@@ -8,27 +8,24 @@
 
 /* global */
 :root {
-    --text:#202020;
-    --text75:#00000075;
     --grey:#f0f0f0;
-    --textt:#525252;
-    --light-apricot:#fab779;
-    --light-apricot2:#d69d67;
-    --peach-orange:#fcc591;
+    --dark-grey:#333333;
+    --light-grey:#EEEEEE;
     --white:#ffff;
-    --blue:#84bff7;
+    --navy-blue:#003366;
     --black25:#00000025;
     --black40:#00000040;
     --black:#000000;
     --red:#e63636;
     --orange:#F96900;
+    --soft-yellow:#FFD700;
 }
 
-body, button, a, h1, h2, h3 {
+body, button, a, h1, h2, h3, p {
     font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 300;
-    color: var(--black);
+    color: var(--dark-grey);
 }
 
 ::placeholder {

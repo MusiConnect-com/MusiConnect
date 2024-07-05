@@ -3,12 +3,7 @@ const profileList = document.querySelector(".profile-list");
 const profileItems = document.querySelectorAll(".profile-list-items");
 const buttonClose = document.getElementById("close-profile-list");
 const leave = document.getElementById("leave");
-const buttonSearch = document.querySelector(".button-search");
 const overlay = document.querySelector(".overlay");
-
-buttonSearch.addEventListener("click", function() {
-    window.location.href = "/Anúncios/Code/Anuncios.html"
-});
 
 leave.addEventListener("click", function() {
     window.location.href = "/Login/Code/Login.html"
