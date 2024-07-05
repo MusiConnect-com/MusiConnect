@@ -144,6 +144,8 @@ footer h3{
     justify-content: space-between;
     position: absolute;
     background-color: var(--white);
+    border: 1px solid var(--orange);
+    box-shadow: 0 0 1px 1px var(--orange);
     padding: 0 20px;
     border-radius: 5px;
     top: 20px;
@@ -173,34 +175,27 @@ footer h3{
     cursor: default;
 }
 
+.search-header .bi-search {
+    background-color: var(--orange);
+}
+
 .search-header input {
     background-color: var(--white);
     font-size: 14px;
     font-weight: 100;
     padding: 0px 0px 0px 10px;
-    border: none;
+    border: 1px solid transparent !important;
     box-sizing: border-box;
     outline: none;
     width: 100%;
     height: 50px;
 }
 
-.search-header input:hover {
-    border-color: var(--textt);
+.search-header input:focus{
+    border-color: solid transparent !important;
+    box-shadow: none !important;
 }
 
-.search-input input:focus{
-    border-color: var(--black);
-    box-shadow: 0 0 1px 4px var(--black25);
-}
-
-
-.search-input input:not(:focus){
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    font-weight: 100;
-}
 
 .search-header .bi-x::before{
     font-size: 26px;
@@ -400,23 +395,6 @@ main {
 
 .search-input input[placeholder="Ex : Campo Grande"] {
     border-radius: 0px;
-}
-
-.search-input input:hover {
-    border-color: var(--textt);
-}
-
-.search-input input:focus{
-    border-color: var(--black);
-    box-shadow: 0 0 1px 4px var(--black25);
-}
-
-
-.search-input input:not(:focus){
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    font-weight: 100;
 }
 
 .search-input button {

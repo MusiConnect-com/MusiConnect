@@ -71,7 +71,7 @@ btnOk.addEventListener("click", function () {
 });
 
 overlay.addEventListener("click", function(){
-    let i = modalConfirm.dataset.currentIndex;
+    let i = modalConfirmed.dataset.currentIndex;
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirmed).display; 
     if (displayStyleAlert === "flex" && displayStyleModal === "block"){
