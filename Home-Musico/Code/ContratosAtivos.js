@@ -8,7 +8,6 @@ const modalConfirmed = document.querySelector(".modal-confirmed");
 const btnNot = document.querySelector(".not-confirm");
 const btnYes = document.querySelector(".yes-confirm");
 const btnOk = document.querySelector(".btn-ok");
-const overlay = document.querySelector(".overlay");
 
 alertSpan[1].style.display = "none"
 confirmedOn();

@@ -12,35 +12,65 @@ body {
     height: 100%;
 }
 
-/* Style Header */
+/* Style overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
 
+/* Style Header */
 header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--light-apricot);
-    padding: 20px;
-    height: 10%;
+    height: 10vh;
     min-height: 90px;
     max-height: 90px;
     width: 100%;
-    min-width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    z-index: 99999;
-    box-shadow: 0px 1px 5px var(--light-apricot2);
+    z-index: 1001;
+    border-bottom: 1px solid var(--light-apricot2);
     position: fixed;
     top: 0;
 }
 
-.logo {
-    margin-left: 2%;
+header .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 95%;
+    padding: 20px 0px;
 }
 
+/* Style footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20vh;
+    border-top: 1px solid var(--light-apricot2);
+    background-color: var(--light-apricot);
+}
+
+footer h3{
+    font-weight: 500;
+}
+
+/* Style nav Header */
 .logo img{
     display: block;
     box-sizing: border-box;
     width: 200px;
-    height: 65px;
+    height: auto;
     cursor: pointer;
 }
 
@@ -53,10 +83,11 @@ header {
 .nav-links ul {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.nav-links .search-ads a{
+.nav-links .nav-active a{
     background-color: var(--black);
     color: var(--orange);
 }
@@ -65,12 +96,12 @@ header {
 .nav-links a{
     display: inline-block;
     transition: .3s;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     padding: 10px;
     text-decoration: none;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .nav-links a:hover{
@@ -79,108 +110,118 @@ header {
     transition: .3s;
 }
 
-.profile{
-    position: relative;
-    width: fit-content;
-    user-select: none;
-    font-weight: 400;
-    height: 100%;
-}
 
+/* style perfil */
 .profile-button {
-    padding: 5px 10px 5px 20px;
-    gap: 5px;
-    font-size: 18px;
     display: flex;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     height: 50px;
     max-height: 50px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.profile-button.open-profile {
-    background-color: var(--black);
-    color: var(--orange);
-}
-
-.profile-button.open-profile #down {
-    transform: scaleY(-1);
-    transition: .2s;
-}
-
-
-.profile-button:hover {
-    background-color: var(--black);
-    color: var(--orange);
-}
-
-.profile-button #down {
-    margin-left: 5px;
-    font-size: 20px;
-    transition: .2s;
-}
-
-.profile-button div {
-    display: flex;
-    align-items: center;
 }
 
 .profile-button img{
-    border: 1px solid var(--black);
     border-radius: 100%;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: border-color .4s ease;
+}
+
+.profile-button img:hover {
+    border-color:var(--black);
 }
 .profile-list {
     display: none;
     justify-content: center;
     flex-direction: column;
-    gap: 10px;
-    text-align: right;
     position: absolute;
-    top: 60px;
-    width: 100%;
+    gap: 20px;
+    top: 0;
     right: 0;
+    z-index: 1001;
+    width: 250px;
     padding: 20px;
-    background-color: var(--black);
+    opacity: 0;
+    transform: translateX(100%);
+    background-color: var(--white);
     border: 1px solid var(--black25);
-    border-radius: 10px;
+    border-radius: 5px;
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+.profile-list.open-profile {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.profile-list .content-top {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.profile-list .content-top img {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    cursor: default;
+    margin-right: 5px;
+}
+
+.profile-list .content-top p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.profile-list .content-top i::before {
+    font-size: 26px;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.profile-list .content-top i:hover::before {
+    background-color: var(--black);
+    color: var(--orange);
+    border-radius: 5px;
+}
+
+.profile-list .content-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .profile-list-items {
     cursor: pointer;
     width: 100%;
     padding: 10px 10px;
-    border: 1px solid var(--orange);
     transition: .3s;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .profile-list-items:hover{
-    background-color: var(--orange);
+    background-color: var(--black);
     transition: .3s;
 }
 
 .profile-list-items:hover a {
-    color: var(--white);
+    color: var(--orange);
 }
 
 .profile-list-items a{
-    color: var(--orange);
+    color: var(--black);
     width: 100%;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 
 /*Style main*/
-
 main {
     display: flex;
     align-items: center;
@@ -190,7 +231,6 @@ main {
 }
 
 /*Style search*/
-
 .search {
     width: 80%;
     display: flex;
@@ -205,7 +245,7 @@ main {
 .search input {
     background-color: var(--white);
     padding: 0px 200px 0px 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--black40);
     box-sizing: border-box;
     outline: none;
@@ -238,7 +278,7 @@ main {
     text-transform: uppercase;
     font-weight: 300;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     padding: 15px;
     transition: .3s;
@@ -251,7 +291,6 @@ main {
 }
 
 /*Style filters-order*/
-
 .filters-order {
     display: flex;
     align-items: baseline;
@@ -260,7 +299,6 @@ main {
 }
 
 /*Style filters*/
-
 .filters {
     width: 100%;
     display: flex;
@@ -279,7 +317,7 @@ main {
     color: var(--orange);
     padding: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     user-select: none;
     transition: .3s;
@@ -313,7 +351,7 @@ main {
     width: 90%;
     padding: 20px;
     margin-top: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--black40);
     color: var(--black);
     background-color: var(--white);
@@ -407,7 +445,7 @@ main {
 .value input {
     padding: 10px;
     width: 50%;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 13px;
     border: 1px solid var(--black40);
     outline: none;
@@ -449,7 +487,7 @@ main {
     font-size: 14px;
     text-transform: uppercase;
     color: var(--black);
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     cursor: pointer;
     transition: .3s;
@@ -472,7 +510,6 @@ main {
 }
 
 /*Style filters-order*/
-
 .order {
     width: 15%;
     display: flex;
@@ -492,7 +529,7 @@ main {
     width: 140px;
     padding: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--black);
     color: var(--orange);
     cursor: pointer;
@@ -537,7 +574,7 @@ main {
     padding: 10px 8px;
     margin-top: 55px;
     border: 1px solid var(--black40);
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
     position: absolute;
 }
@@ -545,7 +582,7 @@ main {
 .order-list li{
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     user-select: none;
     transition: .3s;
 }
@@ -562,7 +599,6 @@ main {
 }
 
 /*Style ads*/
-
 .ads {
     display: flex;
     flex-wrap: wrap;
@@ -584,7 +620,7 @@ main {
     max-height: 250px;
     overflow: auto;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
     box-shadow: 5px 5px 3px var(--black25);
     cursor: pointer;
@@ -592,8 +628,6 @@ main {
 }
 
 /*Style mouseEnter*/
-
-
 .ad:hover {
     transform: translateX(10px);
 }
@@ -604,7 +638,6 @@ main {
 }
 
 /*Style info-ADS*/
-
 .ad h2 {
     font-weight: 500;
     height: 15%;
@@ -614,7 +647,6 @@ main {
 .ad img{
     width: 37%;
     max-height: 100%;
-    border-radius: 10px;
 }
 
 .info{
@@ -646,13 +678,12 @@ main {
 }
 
 /*Style button-ADS*/
-
 .ad button {
     font-size: 14px;
     background-color: var(--black);
     color: var(--orange);
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     width: 13%;
     margin-top: auto;

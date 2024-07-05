@@ -52,11 +52,11 @@ header .content {
 .nav-links a{
     display: inline-block;
     transition: .3s;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     padding: 10px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     transition: .3s;
 }
@@ -75,10 +75,10 @@ header .content {
     background-color: var(--black);
     color: var(--orange);
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px 30px;
     text-align: center;
     transition: .3s;
@@ -154,7 +154,7 @@ main{
     width: 100%;
     padding: 12px;
     outline: none;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
     transition: .5s;
@@ -188,7 +188,7 @@ main{
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
     box-sizing: border-box;

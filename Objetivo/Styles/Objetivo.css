@@ -116,7 +116,7 @@ h2 {
     height: 60%;
     min-height: 140px;
     padding: 15px 40px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid transparent;
     box-shadow: 0 0 10px 1px var(--black40);
     cursor: pointer;
@@ -136,7 +136,7 @@ h2 {
     height: 60%;
     min-height: 140px;
     padding: 15px 40px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid transparent;
     box-shadow: 0 0 10px 1px var(--black40);
     cursor: pointer;
@@ -173,7 +173,7 @@ h2 {
     border: 1px solid var(--black);
     cursor: pointer;
 
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 12px 15px;
     width: 100%;
     text-align: center;
@@ -203,7 +203,7 @@ h2 {
     width: 100%;
     padding: 12px 20px;
     border: 1px solid var(--black);
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
     box-sizing: border-box;
@@ -229,7 +229,7 @@ h2 {
     width: 100%;
     padding: 12px 30px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
     box-sizing: border-box;
@@ -273,7 +273,7 @@ h2 {
 .modal-help .music,
 .modal-help .contractor {
     background-color: var(--grey);
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 5px;
     margin-top: 20px;
     width: 100%;
@@ -304,7 +304,7 @@ h2 {
     font-weight: 500;
     padding: 12px 20px;
     border: 1px solid var(--orange);
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
 }
@@ -336,7 +336,7 @@ h2 {
     background-color: var(--black);
     color: var(--orange);
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 10px 5px var(--black40);
 }
 
@@ -372,7 +372,7 @@ h2 {
     font-weight: 500;
     padding: 12px;
     border: 1px solid var(--orange);
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
 }
@@ -391,7 +391,7 @@ h2 {
     font-weight: 500;
     padding: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .3s;
 }

@@ -26,9 +26,9 @@
     
             <nav class="nav-links">
                 <ul>
-                    <li class="search-music"><a href="">Buscar Músicos</a></li>
-                    <li class="my-contracts"><a href="#">Meus Contratos</a></li>
-                    <li class="home"><a href="/HomeContratante/Code/HomeContratante.html">Home</a></li>
+                    <li><a href="">Buscar Músicos</a></li>
+                    <li><a href="#">Meus Contratos</a></li>
+                    <li class="nav-active"><a href="/HomeContratante/Code/HomeContratante.html">Home</a></li>
                     <li class="announce">
                         <a href="">
                             Anunciar
@@ -41,19 +41,24 @@
     
             <div class="profile">
                 <div class="profile-button" id="profile-button">
-                    <div>
-                        <img src="../Img/Perfil.jpeg" alt="">
-                    </div>
-
-                    <span>Robert Bueno</span>
-                    <i id="down" class="bi bi-caret-down-fill"></i>
+                    <img src="../Img/Victor Vidal.png" alt="">
                 </div>
     
-                <div class="profile-list" id="profile-list">
-                    <li class="profile-list-items"><a href="">Ver perfil</a></li>
-                    <li class="profile-list-items"><a href="">Configurações</a></li>
-                    <li id="leave" class="profile-list-items"><a href="/Login/Code/Login.html">Sair</a></li>
-                </div>
+                <ul class="profile-list" id="profile-list">
+                    <div class="content-top">
+                        <img src="../Img/Victor Vidal.png" alt="">
+                        <p>Victor Vidal</p>
+                        <div>
+                            <i id="close-profile-list" class="bi bi-x"></i>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="content-bottom">
+                        <li class="profile-list-items"><a href="">Meu Perfil</a></li>
+                        <li class="profile-list-items"><a href="">Configurações</a></li>
+                        <li id="leave" class="profile-list-items"><a href="/Login/Code/Login.html">Sair</a></li>
+                    </div>
+                </ul>
             </div>
         </div>
     </header>

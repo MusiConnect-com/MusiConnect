@@ -4,41 +4,68 @@
 $('#minimum-value').mask("#.##0,00", {reverse: true});
 $('#maximum-value').mask("#.##0,00", {reverse: true});
 
-//Sair da conta
+//Menu perfil
+const profileButton = document.querySelector(".profile-button");
+const profileList = document.querySelector(".profile-list");
+const profileItems = document.querySelectorAll(".profile-list-items");
+const buttonClose = document.getElementById("close-profile-list");
+const leave = document.getElementById("leave");
+const buttonSearch = document.querySelector(".button-search");
+const overlay = document.querySelector(".overlay");
 
-const leave = document.getElementById("leave")
+buttonSearch.addEventListener("click", function() {
+    window.location.href = "/Anúncios/Code/Anuncios.html"
+});
 
 leave.addEventListener("click", function() {
     window.location.href = "/Login/Code/Login.html"
-})
-
-//Menu perfil
-
-const profileButton = document.querySelector(".profile-button");
-const profileList = document.querySelector(".profile-list");
+});
 
 function openProfileList(){
     if (profileList.classList.contains("open-profile")){
         profileList.style.display = "none";
-        profileList.classList.remove("open-profile")
-        profileButton.classList.remove("open-profile")
+        overlay.style.display = "none";
+        setTimeout(() => {
+            profileList.classList.remove("open-profile");
+        }, 10);
     } else {
-        profileList.style.display = "flex"
-        profileList.classList.add("open-profile")
-        profileButton.classList.add("open-profile")
+        profileList.style.display = "flex";
+        overlay.style.display = "block";
+        setTimeout(() => {
+            profileList.classList.add("open-profile");
+        }, 10);
     }
-    
 }
-
-profileButton.addEventListener("click", openProfileList);
-profileList.addEventListener("click", function() {
-    profileList.style.display = "none";
-    profileList.classList.remove("open-profile")
-    profileButton.classList.remove("open-profile")
+profileItems.forEach(items => {
+    items.addEventListener("click", function() {
+        profileList.style.display = "none";
+        overlay.style.display = "none";
+        setTimeout(() => {
+            profileList.classList.remove("open-profile");
+        }, 10);
+    })
 })
 
-//Filtros de busca
+overlay.addEventListener("click", function() {
+    profileList.style.display = "none";
+    overlay.style.display = "none";
+    setTimeout(() => {
+        profileList.classList.remove("open-profile");
+    }, 10);
+})
 
+buttonClose.addEventListener("click", function(){
+    profileList.style.display = "none";
+    overlay.style.display = "none";
+    setTimeout(() => {
+        profileList.classList.remove("open-profile");
+    }, 10);
+})
+
+
+profileButton.addEventListener("click", openProfileList);
+
+//Filtros de busca
 const buttonFilters = document.querySelector(".button-filters");
 const filtersList = document.querySelector(".filters-list");
 const buttonFilter = document.querySelector(".button-filter");
@@ -63,7 +90,6 @@ buttonFilter.addEventListener("click", function() {
 });
 
 //limpar filtros de busca
-
 const filterBox = document.querySelectorAll(".filter-box")
 const buttonClean = document.querySelector(".button-clean")
 
@@ -92,7 +118,6 @@ buttonClean.addEventListener("click", function(){
 });
 
 //Ordem de busca
-
 const order = document.querySelectorAll(".order");
 
 order.forEach(order => {

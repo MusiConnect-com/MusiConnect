@@ -18,36 +18,41 @@ function openProfileList(){
     if (profileList.classList.contains("open-profile")){
         profileList.style.display = "none";
         overlay.style.display = "none";
-        profileList.classList.remove("open-profile")
-        profileButton.classList.remove("open-profile")
+        setTimeout(() => {
+            profileList.classList.remove("open-profile");
+        }, 10);
     } else {
         profileList.style.display = "flex";
         overlay.style.display = "block";
-        profileList.classList.add("open-profile")
-        profileButton.classList.add("open-profile")
+        setTimeout(() => {
+            profileList.classList.add("open-profile");
+        }, 10);
     }
 }
 profileItems.forEach(items => {
     items.addEventListener("click", function() {
         profileList.style.display = "none";
         overlay.style.display = "none";
-        profileList.classList.remove("open-profile")
-        profileButton.classList.remove("open-profile")
+        setTimeout(() => {
+            profileList.classList.remove("open-profile");
+        }, 10);
     })
 })
 
 overlay.addEventListener("click", function() {
     profileList.style.display = "none";
     overlay.style.display = "none";
-    profileList.classList.remove("open-profile")
-    profileButton.classList.remove("open-profile")
+    setTimeout(() => {
+        profileList.classList.remove("open-profile");
+    }, 10);
 })
 
 buttonClose.addEventListener("click", function(){
     profileList.style.display = "none";
     overlay.style.display = "none";
-    profileList.classList.remove("open-profile")
-    profileButton.classList.remove("open-profile")
+    setTimeout(() => {
+        profileList.classList.remove("open-profile");
+    }, 10);
 })
 
 

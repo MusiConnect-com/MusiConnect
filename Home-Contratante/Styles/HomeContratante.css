@@ -29,11 +29,11 @@ header {
     justify-content: center;
     align-items: center;
     background-color: var(--light-apricot);
-    height: 10%;
+    height: 10vh;
     min-height: 90px;
     max-height: 90px;
     width: 100%;
-    z-index: 1000;
+    z-index: 1001;
     border-bottom: 1px solid var(--light-apricot2);
     position: fixed;
     top: 0;
@@ -82,10 +82,11 @@ footer h3{
 .nav-links ul {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.nav-links .home a{
+.nav-links .nav-active a{
     background-color: var(--black);
     color: var(--orange);
 }
@@ -107,21 +108,18 @@ footer h3{
 }
 
 .nav-links .announce a:hover #i-hover {
-    display:inline-block;
+    display: inline-block;
     margin-left: 5px;
 }
-
 
 .nav-links a{
     display: inline-block;
     transition: .3s;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     padding: 10px;
-    height: 50px;
-    max-height: 50px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -131,107 +129,113 @@ footer h3{
     transition: .3s;
 }
 
-/* Style perfil */
-.profile{
-    position: relative;
-    width: fit-content;
-    user-select: none;
-    height: 100%;
-}
-
+/* style perfil */
 .profile-button {
-    padding: 5px 10px 5px 20px;
-    gap: 5px;
-    font-size: 18px;
-    font-weight: 500;
     display: flex;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     height: 50px;
     max-height: 50px;
-    border: 1px solid var(--black);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.profile-button.open-profile {
-    background-color: var(--black);
-    color: var(--orange);
-}
-
-.profile-button.open-profile #down {
-    transform: scaleY(-1);
-    transition: .2s;
-}
-
-
-.profile-button:hover {
-    background-color: var(--black);
-    color: var(--orange);
-}
-
-.profile-button #down {
-    margin-left: 5px;
-    font-size: 20px;
-    transition: .2s;
-}
-
-.profile-button div {
-    display: flex;
-    align-items: center;
 }
 
 .profile-button img{
-    border: 1px solid var(--black);
     border-radius: 100%;
-    margin-right: 10px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: border-color .4s ease;
+}
+
+.profile-button img:hover {
+    border-color:var(--black);
 }
 .profile-list {
     display: none;
     justify-content: center;
     flex-direction: column;
-    font-size: 18px;
-    font-weight: 500;
-    gap: 10px;
-    text-align: right;
     position: absolute;
-    top: 60px;
-    width: 100%;
+    gap: 20px;
+    top: 0;
     right: 0;
+    z-index: 1001;
+    width: 250px;
     padding: 20px;
-    background-color: var(--black);
+    opacity: 0;
+    transform: translateX(100%);
+    background-color: var(--white);
     border: 1px solid var(--black25);
-    border-radius: 10px;
+    border-radius: 5px;
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+.profile-list.open-profile {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.profile-list .content-top {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.profile-list .content-top img {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    cursor: default;
+    margin-right: 5px;
+}
+
+.profile-list .content-top p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.profile-list .content-top i::before {
+    font-size: 26px;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.profile-list .content-top i:hover::before {
+    background-color: var(--black);
+    color: var(--orange);
+    border-radius: 5px;
+}
+
+.profile-list .content-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .profile-list-items {
     cursor: pointer;
     width: 100%;
     padding: 10px 10px;
-    border: 1px solid var(--orange);
     transition: .3s;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .profile-list-items:hover{
-    background-color: var(--orange);
+    background-color: var(--black);
     transition: .3s;
 }
 
 .profile-list-items:hover a {
-    color: var(--white);
+    color: var(--orange);
 }
 
 .profile-list-items a{
-    color: var(--orange);
+    color: var(--black);
     width: 100%;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 
@@ -285,7 +289,7 @@ main {
     text-decoration: none;
     background-color: var(--black);
     color: var(--orange);
-    border-radius: 10px;
+    border-radius: 5px;
     width: 50%;
     padding: 10px;
     transition: .3s;
@@ -330,7 +334,7 @@ main {
 .search-input input {
     background-color: var(--white);
     padding: 0px 0px 0px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--black40);
     box-sizing: border-box;
     outline: none;
@@ -363,7 +367,7 @@ main {
     font-weight: 500;
     font-style: normal;
     text-transform: uppercase;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     width: 20%;
     transition: .3s;
@@ -448,7 +452,7 @@ main {
     font-size: 16px;
     font-weight: 500;
     border: 1px solid var(--black);
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
     margin-top: 30px;
     margin-right: 30px;
@@ -485,6 +489,7 @@ main {
 .contracts-item .alert span {
     font-size: 24px;
     font-weight: 500;
+    color: var(--white);
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -492,6 +497,7 @@ main {
 .contracts-item .alert p {
     font-size: 20px;
     font-weight: 400;
+    color: var(--white);
 }
 
 .contracts-item .content {
@@ -600,7 +606,7 @@ main {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid transparent;
     width: 120px;
     height: 40px;
@@ -788,7 +794,7 @@ main {
     text-decoration: none;
     background-color: var(--black);
     color: var(--orange);
-    border-radius: 10px;
+    border-radius: 5px;
     width: 200px;
     height: 15%;
     transition: .3s;
