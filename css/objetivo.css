@@ -8,12 +8,11 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    background-color: var(--light-apricot);
+    background-color: var(--navy-blue);
     height: 100vh;
 }
 
 /*Style main*/
-
 main {
     display: flex;
     justify-content: center;
@@ -24,13 +23,13 @@ main {
 }
 
 /*Style card*/
-
 .select-options {
     background-color: var(--white);
     padding: 20px;
     width: 60vw;
     height: 60vh;
     box-shadow: 0 0 10px 1px var(--black25);
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,7 +46,6 @@ main {
 }
 
 /*Style top*/
-
 .card .top {
     display: flex;
     justify-content: center;
@@ -65,11 +63,11 @@ main {
 h2 {
     cursor: default;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--black);
 }
 
 /*Style options*/
-
 .box-select {
     display: flex;
     justify-content:space-evenly;
@@ -90,13 +88,20 @@ h2 {
 }
 
 .box-select input{
+    display: none;
     width: 20px;
     height: 20px;
+    margin-right: 10px;
+}
+
+.box-select input:focus {
+    box-shadow: none !important;
 }
 
 .box-select h3 {
-    width: 200px;
+    box-sizing: border-box;
     font-weight: 500;
+    color: var(--black);
     text-align: center;
 }
 
@@ -105,54 +110,36 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text75);
     height: 80%;
     width: 100%;
 }
 
-.select-music {
+.select-music, .select-contractor {
     background-color: var(--white);
     width: 40%;
     height: 60%;
     min-height: 140px;
     padding: 15px 40px;
     border-radius: 5px;
-    border: 1px solid transparent;
-    box-shadow: 0 0 10px 1px var(--black40);
+    box-shadow: 0 0 1px 1px var(--black40);
     cursor: pointer;
 
     transition: 500ms;
 }
 
-.select-music:hover {
-    border: 1px solid var(--black);
-    box-shadow: 0 0 1px 4px var(--black25);
-    transition: 500ms;
+.select-music.box-checked, .select-contractor.box-checked {
+    background-color: var(--light-grey);
+    box-shadow: 0 0 4px 1px var(--black40);
 }
 
-.select-contractor {
-    background-color: var(--white);
-    width: 40%;
-    height: 60%;
-    min-height: 140px;
-    padding: 15px 40px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    box-shadow: 0 0 10px 1px var(--black40);
-    cursor: pointer;
-
-    transition: 500ms;
-}
-
-.select-contractor:hover {
-    border: 1px solid var(--black);
-    box-shadow: 0 0 1px 4px var(--black25);
+.select-music:hover, .select-contractor:hover {
+    background-color: var(--light-grey);
+    box-shadow: 0 0 4px 1px var(--black40);
     transition: 500ms;
 }
 
 
 /*Style buttons*/
-
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -169,10 +156,9 @@ h2 {
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    color: var(--text);
+    color: var(--dark-grey);
     border: 1px solid var(--black);
     cursor: pointer;
-
     border-radius: 5px;
     padding: 12px 15px;
     width: 100%;
@@ -183,8 +169,9 @@ h2 {
 }
 
 .button-help button:hover {
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--navy-blue);
+    border-color: var(--navy-blue);
+    color: var(--white);
 }
 
 .button-cancel {
@@ -193,13 +180,12 @@ h2 {
 
 .button-cancel button {
     background-color: var(--white);
-    color: var(--black);
+    color: var(--dark-grey);
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
     text-align: center;
     text-transform: uppercase;
-
     width: 100%;
     padding: 12px 20px;
     border: 1px solid var(--black);
@@ -210,8 +196,9 @@ h2 {
 }
 
 .button-cancel button:hover {
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--navy-blue);
+    border-color: var(--navy-blue);
+    color: var(--white);
 }
 
 .button-confirm {
@@ -219,13 +206,12 @@ h2 {
 }
 
 .button-confirm button{
-    background-color: var(--black);
+    background-color: var(--dark-navy-blue);
     font-size: 18px;
     font-weight: 500;
     text-align: center;
     text-transform: uppercase;
-    color: var(--orange);
-
+    color: var(--white);
     width: 100%;
     padding: 12px 30px;
     border: none;
@@ -243,8 +229,6 @@ h2 {
 
 
 /*Style modal-help*/
-
-
 .overlay-modal {
     cursor: default;
     display: none;
@@ -261,20 +245,20 @@ h2 {
 
 .modal-help {
     text-align: center;
-    width: 50vw;
+    width: 500px;
     padding: 20px 30px;
     font-size: 14px;
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--navy-blue);
     border: none;
-    box-shadow: 0 0 10px 5px var(--black40);
+    border-radius: 5px;
+    box-shadow: 0 0 10px 1px var(--black40);
 }
 
 .modal-help .music,
 .modal-help .contractor {
-    background-color: var(--grey);
+    background-color: var(--dark-navy-blue);
     border-radius: 5px;
-    padding: 5px;
+    padding: 20px;
     margin-top: 20px;
     width: 100%;
     height: 80%;
@@ -283,11 +267,12 @@ h2 {
 .modal-help h3 {
     font-size: 24px;
     font-weight: 500;
-    color: var(--orange);
+    color: var(--white);
 }
 
 .modal-help .music p,
 .modal-help .contractor p {
+    color: var(--light-grey);
     margin-top: 20px;
 }
 
@@ -298,12 +283,12 @@ h2 {
 
 .button-close button {
     width: 50%;
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--dark-navy-blue);
+    color: var(--white);
     font-size: 18px;
     font-weight: 500;
     padding: 12px 20px;
-    border: 1px solid var(--orange);
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -316,7 +301,6 @@ h2 {
 
 
 /*Style modal-cancel*/
-
 .modal-cancel {
     display: none;
 }
@@ -326,22 +310,21 @@ h2 {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    width: 40%;
-    height: 30%;
+    width: 500px;
+    height: 200px;
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -70%);
     padding: 20px;
     position: absolute;
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--white);
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 10px 5px var(--black40);
+    box-shadow: 0 0 1px 1px var(--black40);
 }
 
 .modal-cancel dialog h3 {
-    color: var(--orange);
+    color: var(--black);
     font-weight: 500;
     font-size: 18px;
     cursor: default;
@@ -366,12 +349,12 @@ h2 {
 
 .modal-cancel .button-yes {
     width: 30%;
-    background-color: var(--black);
-    color: var(--orange);
+    background-color: var(--dark-navy-blue);
+    color: var(--white);
     font-size: 18px;
     font-weight: 500;
     padding: 12px;
-    border: 1px solid var(--orange);
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -385,17 +368,19 @@ h2 {
 
 .modal-cancel .button-not {
     width: 30%;
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--black);
     font-size: 18px;
     font-weight: 500;
     padding: 12px;
-    border: none;
+    border: 1px solid var(--black);
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
 }
 
 .modal-cancel .button-not:hover {
-    box-shadow: 0 0 10px 1px var(--orange);
+    background-color: var(--navy-blue);
+    border-color: var(--navy-blue);
+    color: var(--white);
 }

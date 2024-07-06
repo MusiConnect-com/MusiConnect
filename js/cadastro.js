@@ -1,11 +1,4 @@
 
-const buttonLogin = document.getElementById("button-login")
-
-buttonLogin.onclick = function (){
-    window.location.href = "/Login/Code/Login.html";
-}
-
-
 //validações do formulário
 // Adiciona a lógica de redirecionamento após o envio do formulário
 const form = document.getElementById("form");
@@ -21,7 +14,7 @@ form.addEventListener("submit", (event) =>{
     comparePassword();
 
     if (isFormValid()) {
-        window.location.href = "/Objetivo/Code/Objetivo.html";
+        window.location.href = "/html/objetivo.html";
     }
 });
 

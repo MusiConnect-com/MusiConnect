@@ -430,7 +430,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--light-grey);
+    background-color: var(--dark-navy-blue);
     padding: 100px 0 100px 0;
     width: 100%;
     height: auto;
@@ -549,7 +549,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: var(--white);
+    background-color: var(--light-grey);
     box-shadow: 0 0 4px 1px var(--black40);
     padding: 20px 20px 20px 20px;
 }
@@ -645,7 +645,7 @@ main {
 }
 
 .contracts-item .content .btns .cancel {
-    background-color: var(--white);
+    background-color: var(--light-grey);
 }
 
 .contracts-item .content .btns .cancel:hover {
@@ -654,8 +654,8 @@ main {
 }
 
 .contracts-item .content .btns .confirmed, .confirm {
-    background-color: var(--navy-blue);
-    border-color: solid var(--navy-blue) !important;
+    background-color: var(--dark-navy-blue);
+    border-color: solid var(--dark-navy-blue) !important;
     color: var(--white);
 }
 
@@ -673,7 +673,7 @@ main {
     justify-content: center;
     padding: 50px 0 100px 0;
     width: 100%; 
-    background-color: var(--navy-blue);
+    background-color: var(--light-grey);
 }
 
 /* Style title anuncios */
@@ -685,7 +685,7 @@ main {
 }
 
 .section-3 .title h1 {
-    color: var(--white);
+    color: var(--black);
     font-size: 40px;
     font-weight: 500;
     margin-top: 50px;
@@ -701,7 +701,7 @@ main {
 }
 
 .title .see-all p {
-    color: var(--white);
+    color: var(--black);
     text-decoration: underline;
     cursor: pointer;
     transition: .3s;
@@ -709,7 +709,7 @@ main {
 
 #arrow-see-all {
     transition: .3s;
-    color: var(--white);
+    color: var(--black);
 }
 
 .title .see-all p:hover + #arrow-see-all, .title .see-all p:hover {
@@ -757,6 +757,7 @@ main {
     border: none;
     border-radius: 5px;
     background-color: var(--white);
+    box-shadow: 0 0 1px 1px var(--black40);
     cursor: pointer;
     transition: all .3s ease;
 }
@@ -810,7 +811,7 @@ main {
 /*Style button-ADS*/
 
 .ad-item button {
-    background-color: var(--navy-blue);
+    background-color: var(--dark-navy-blue);
     color: var(--white);
     border: none;
     border-radius: 5px;

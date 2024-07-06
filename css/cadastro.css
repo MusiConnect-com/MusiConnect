@@ -8,12 +8,11 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    background-color: var(--light-apricot);
+    background-color: var(--navy-blue);
     height: 100vh;
 }
 
 /*Style main*/
-
 main{
     display: flex;
     justify-content: space-between;
@@ -41,15 +40,39 @@ main{
     max-width: 400px;
     overflow: auto;
     text-align: center;
-
+    border-radius: 5px;
     box-sizing: border-box;
     max-height: 100%;
 }
 
 .card h2 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     cursor: default;
     font-weight: 500;
+}
+
+.card a {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--orange);
+    text-decoration: none;
+    outline: none !important;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.card a:focus {
+    outline: none;
+}
+
+.card a:active{
+    outline: none;
+    border: none;
+}
+
+.card a:hover{
+    text-decoration:underline;
 }
 
 .card form {
@@ -71,35 +94,24 @@ main{
     padding: 12px;
     outline: none;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    background-color: var(--white);
+    border: 1px solid var(--light-grey);
+    color: var(--black);
     box-sizing: border-box;
     transition: .3s;
 }
 
-.card input:hover {
-    border-color: var(--textt);
-}
-
-.card input:focus {
-    border-color: var(--black);
-    box-shadow: 0 0 1px 4px var(--black25);
-}
-
-.card input:not(:focus) {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    font-weight: 100;
+.card input:focus{
+    border-color: var(--orange);
 }
 
 .card button {
-    background-color: var(--black);
+    background-color: var(--dark-navy-blue);
     font-size: 18px;
     font-weight: 500;
     text-align: center;
     text-transform: uppercase;
-    color: var(--orange);
-
+    color: var(--white);
     margin-bottom: 10px;
     width: 100%;
     padding: 12px;
@@ -117,7 +129,7 @@ main{
 
 .card p {
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 10px;
     cursor: default;
 }
 

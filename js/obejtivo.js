@@ -23,10 +23,15 @@ function validateSelection() {
     if (musicOption.checked || contractorOption.checked) {
         removeError();
         if (musicOption.checked) {
-            selectMusic.style.border = "1px solid #202020";
-        } 
+            selectMusic.classList.add("box-checked");
+        }else {
+            selectMusic.classList.remove("box-checked");
+        }
+
         if (contractorOption.checked) {
-            selectContractor.style.border = "1px solid #202020";
+            selectContractor.classList.add("box-checked");
+        }else {
+            selectContractor.classList.remove("box-checked");
         }
         return true;
     } else {
@@ -43,9 +48,9 @@ buttonConfirm.addEventListener("click", function(event) {
         const contractorOption = document.getElementById('contractor');
         
         if (musicOption.checked) {
-            window.location.href = "/Home-Musico/Code/HomeMusico.html";
+            window.location.href = "/html/home-musico.html";
         } else if (contractorOption.checked) {
-            window.location.href = "/Home-Contratante/Code/HomeContratante.html";
+            window.location.href = "/html/home-contratante.html";
         }
     }
 });

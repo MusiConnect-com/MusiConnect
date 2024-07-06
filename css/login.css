@@ -87,7 +87,7 @@ main{
 }
 
 .card button {
-    background-color: var(--navy-blue2);
+    background-color: var(--dark-navy-blue);
     font-size: 18px;
     font-weight: 500;
     text-align: center;
@@ -118,6 +118,17 @@ main{
 .card p a {
     color: var(--orange);
     text-decoration: none;
+    outline: none !important;
+    border: none;
+}
+
+.card p a:focus {
+    outline: none;
+}
+
+.card p a:active{
+    outline: none;
+    border: none;
 }
 
 .card p a:hover{
