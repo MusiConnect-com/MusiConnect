@@ -12,7 +12,6 @@ offArrow();
 function updateAds(){
     const deslocamento = - (adAtual) * 330;
     ad.style.transform = `translateX(${deslocamento}px)`;
-    console.log(deslocamento);
     offArrow();
 }
 
@@ -53,6 +52,4 @@ rightArrow.addEventListener("click", function(){
         adAtual++;
         updateAds();
     }
-    console.log(adAtual);
-    console.log(adFinal);
 } )
