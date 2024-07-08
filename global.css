@@ -37,7 +37,7 @@ body, button, a, h1, h2, h3, p {
 }
 
 input:focus{
-    border-color: var(--orange);
+    border-color: var(--orange) !important;
     box-shadow: 0 0 1px 1px var(--orange);
     font-family: "Poppins", sans-serif;
     font-style: normal;

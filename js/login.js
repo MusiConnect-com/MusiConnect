@@ -16,10 +16,10 @@ form.addEventListener("submit", (event) =>{
             clearField(1);
         }
         else if (loginMusico()){
-            window.location.href = "/Home-Musico/Code/HomeMusico.html";
+            window.location.href = "/html/home-musico.html";
         } 
         else if (loginContratante()){
-            window.location.href = "/Home-Contratante/Code/HomeContratante.html";
+            window.location.href = "/html/home-contratante.html";
         }
         
         

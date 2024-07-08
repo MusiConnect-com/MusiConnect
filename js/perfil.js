@@ -6,7 +6,7 @@ const overlay2 = document.getElementById("overlay2");
 const leave = document.getElementById("leave");
 
 leave.addEventListener("click", function() {
-    window.location.href = "/Login/Code/Login.html"
+    window.location.href = "/html/login.html"
 });
 
 function openProfileList(){

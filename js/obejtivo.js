@@ -85,6 +85,6 @@ buttonNot.onclick = function() {
 
 buttonYes.onclick = function() {
     modalCancel.style.display = "none"
-    window.location.href = "/Cadastro/Code/Cadastro.html";
+    window.location.href = "/html/cadastro.html";
 }
 

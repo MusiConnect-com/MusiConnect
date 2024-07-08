@@ -33,7 +33,7 @@ contractsAtivos.forEach((contracts, i) => {
         let displayStyle = window.getComputedStyle(alertSpan[i]).display;
         if (displayStyle === "flex") {
             modalConfirm.dataset.currentIndex = i; 
-            modalConfirm.style.display = "block";
+            modalConfirm.style.display = "flex";
             overlay3.style.display = "block";
         }
     });
@@ -43,7 +43,7 @@ btnNot.addEventListener("click", function () {
     let i = modalConfirm.dataset.currentIndex; 
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirm).display;
-    if (displayStyleAlert === "flex" && displayStyleModal === "block") {
+    if (displayStyleAlert === "flex" && displayStyleModal === "flex") {
         modalConfirm.style.display = "none";
         overlay3.style.display = "none";
     }
@@ -53,9 +53,9 @@ btnYes.addEventListener("click", function () {
     let i = modalConfirm.dataset.currentIndex; 
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirm).display;
-    if (displayStyleAlert === "flex" && displayStyleModal === "block") {
+    if (displayStyleAlert === "flex" && displayStyleModal === "flex") {
         modalConfirm.style.display = "none";
-        modalConfirmed.style.display = "block";
+        modalConfirmed.style.display = "flex";
     }
 });
 
@@ -63,7 +63,7 @@ btnOk.addEventListener("click", function () {
     let i = modalConfirm.dataset.currentIndex; 
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirmed).display;
-    if (displayStyleAlert === "flex" && displayStyleModal === "block") {
+    if (displayStyleAlert === "flex" && displayStyleModal === "flex") {
         modalConfirmed.style.display = "none";
         alertSpan[i].style.display = "none";
         overlay3.style.display = "none";
@@ -75,7 +75,7 @@ overlay3.addEventListener("click", function(){
     let i = modalConfirm.dataset.currentIndex;
     let displayStyleAlert = window.getComputedStyle(alertSpan[i]).display;
     let displayStyleModal = window.getComputedStyle(modalConfirmed).display; 
-    if (displayStyleAlert === "flex" && displayStyleModal === "block"){
+    if (displayStyleAlert === "flex" && displayStyleModal === "flex"){
         modalConfirmed.style.display = "none";
         alertSpan[i].style.display = "none";
         overlay3.style.display = "none";

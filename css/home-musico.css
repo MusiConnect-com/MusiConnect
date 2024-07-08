@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--white);
+    background-color: var(--light-grey);
     min-height: 100vh;
     margin: 0;
 }
@@ -35,7 +35,6 @@ header {
     max-height: 90px;
     width: 100%;
     z-index: 1001;
-    border-bottom: 1px solid transparent;
     position: fixed;
     top: 0;
 }
@@ -67,7 +66,6 @@ footer h3{
 }
 
 /* Style nav Header */
-
 .logo{
     width: 200px;
     height: 200px;
@@ -219,13 +217,13 @@ footer h3{
     border-radius: 100%;
     width: 50px;
     height: 50px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: border-color .4s ease;
+    transition: border-color .3s ease;
 }
 
 .profile-button img:hover {
-    border-color:var(--black);
+    border-color:var(--orange);
 }
 
 header .profile-list {
@@ -256,11 +254,11 @@ header .profile-list {
 .profile-list .content-top {
     display: flex;
     justify-content: space-between;
-    
 }
 
 .profile-list .content-top img {
     border-radius: 100%;
+    border: 2px solid var(--orange);
     width: 40px;
     height: 40px;
     cursor: default;
@@ -330,6 +328,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 50px 0 100px 0;
     gap: 20px;
     width: 100%;
     background-color: var(--light-grey);
@@ -342,7 +341,6 @@ main {
     justify-content: left;
     flex-direction: row;
     width: 95%;
-    padding: 50px 0 100px 0;
     cursor: default;
 }
 
@@ -430,8 +428,8 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-navy-blue);
-    padding: 100px 0 100px 0;
+    background-color: var(--navy-blue);
+    padding: 50px 0 100px 0;
     width: 100%;
     height: auto;
 }
@@ -462,6 +460,10 @@ main {
 
 .contracts .modal-confirm, .modal-confirmed {
     display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
     position: fixed;
     z-index: 1001;
     transform: translate(400px, -650px);
@@ -483,14 +485,18 @@ main {
     transform: translate(450px, -650px);
 }
 
+.contracts .btns {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
 .contracts .modal-confirm button, .modal-confirmed button {
     font-size: 16px;
     font-weight: 500;
-    border: 1px solid var(--black);
+    border: none;
     border-radius: 5px;
-    background-color: var(--white);
-    margin-top: 30px;
-    margin-right: 30px;
+    background-color: var(--light-grey);
     width: 80px;
     height: 40px;
     cursor: pointer;
@@ -509,7 +515,6 @@ main {
 
 .yes-confirm:hover, .btn-ok:hover {
     background-color: var(--orange) !important;
-    border-color: solid var(--orange) !important;
     color: var(--white);
 }
 
@@ -528,7 +533,6 @@ main {
     align-items: center;
     border: none;
     background-color: var(--red);
-    box-shadow: 0 0 1px 1px var(--black40);
     width: 100%;
     height: 45px;
 }
@@ -552,8 +556,7 @@ main {
     flex-direction: column;
     gap: 20px;
     border-radius: 5px;
-    background-color: var(--light-grey);
-    box-shadow: 0 0 1px 1px var(--black40);
+    background-color: var(--dark-navy-blue);
     padding: 20px 20px 20px 20px;
 }
 
@@ -579,6 +582,8 @@ main {
 .info-contractor p {
     font-size: 20px;
     font-weight: 500;
+    color: var(--white);
+    transition: .3s;
 }
 
 .info-contractor p:hover {
@@ -593,6 +598,7 @@ main {
 }
 
 .info-contractor div .bi-chat-fill, .bi-chat{
+    color: var(--white);
     font-size: 30px;
 }
 
@@ -620,6 +626,7 @@ main {
 
 .info p {
     font-size: 14px;
+    color: var(--white);
 }
 
 .info .value {
@@ -639,7 +646,7 @@ main {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    border: 1px solid var(--black);
+    border: none;
     border-radius: 5px;
     width: 120px;
     height: 40px;
@@ -648,7 +655,8 @@ main {
 }
 
 .contracts-item .content .btns .cancel {
-    background-color: var(--light-grey);
+    background-color: var(--dark-navy-blue);
+    color: var(--white);
 }
 
 .contracts-item .content .btns .cancel:hover {
@@ -657,14 +665,12 @@ main {
 }
 
 .contracts-item .content .btns .confirmed, .confirm {
-    background-color: var(--dark-navy-blue);
-    border-color: solid var(--dark-navy-blue) !important;
+    background-color: var(--navy-blue);
     color: var(--white);
 }
 
 .contracts-item .content .btns .confirmed, .confirm:hover {
     background-color: var(--orange);
-    border-color: solid var(--orange) !important;
     color: var(--white);
 }
 

@@ -76,7 +76,7 @@ main{
     outline: none;
     border-radius: 5px;
     background-color: var(--white);
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--black40);
     color: var(--black);
     box-sizing: border-box;
     transition: .5s;
