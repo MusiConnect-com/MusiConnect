@@ -42,8 +42,8 @@ searchIcon.addEventListener("click", function(){
     }
 });
 
-iconClose.addEventListener("click", closeSearch());
-overlay1.addEventListener("click", closeSearch());
+iconClose.addEventListener("click", closeSearch);
+overlay1.addEventListener("click", closeSearch);
 
 searchInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {

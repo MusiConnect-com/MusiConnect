@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <script src="Anuncios.js" defer></script>
+    <link rel="stylesheet" href="/css/anuncios.css">
+    <script src="/js/perfil.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
-    <link rel="stylesheet" href="../Styles/Anuncios.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -15,31 +15,30 @@
 </head>
 <body>
     <!--OVERLAY-->
-    <div class="overlay"></div>
+    <div id="overlay1" class="overlay"></div>
+    <div id="overlay2" class="overlay"></div>
+    <div id="overlay3" class="overlay"></div>
     <!--FIM OVERLAY-->
     <!--CABEÇALHO-->
     <header>
         <div class="content">
-            <div class="logo">
-                <a href="/Home-Musico/Code/HomeMusico.html"><img src="../Img/Logo3-Photoroom.png-Photoroom-menor.png" width="30px" height="30px" alt=""></a>
-            </div>
-    
+            <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
-                    <li class="nav-active"><a href="/Anúncios/Code/Anuncios.html">Buscar Anúncios</a></li>
+                    <li class="nav-active"><a href="/html/anuncios.html">Buscar Anúncios</a></li>
                     <li><a href="#">Meus Contratos</a></li>
-                    <li><a href="/Home-Musico/Code/HomeMusico.html">Home</a></li>
+                    <li><a href="/html/home-musico.html">Home</a></li>
                 </ul>
             </nav>
 
             <div class="profile">
                 <div class="profile-button" id="profile-button">
-                    <img src="../Img/Victor Vidal.png" alt="">
+                    <img src="/img/victor-vidal.png" alt="">
                 </div>
     
                 <ul class="profile-list" id="profile-list">
                     <div class="content-top">
-                        <img src="../Img/Victor Vidal.png" alt="">
+                        <img src="/img/victor-vidal.png" alt="">
                         <p>Victor Vidal</p>
                         <div>
                             <i id="close-profile-list" class="bi bi-x"></i>
@@ -49,7 +48,7 @@
                     <div class="content-bottom">
                         <li class="profile-list-items"><a href="">Meu Perfil</a></li>
                         <li class="profile-list-items"><a href="">Configurações</a></li>
-                        <li id="leave" class="profile-list-items"><a href="/Login/Code/Login.html">Sair</a></li>
+                        <li id="leave" class="profile-list-items"><a href="/html/login.html">Sair</a></li>
                     </div>
                 </ul>
             </div> 
@@ -59,16 +58,10 @@
     <!--MAIN-->
     <main>
         <div class="search">
-            <div class="palavra-chave">
-                <input id="keyword" type="text" placeholder="Palavra-chave">
-            </div>
-
-            <div class="local">
-                <input type="text" placeholder="Local">
-            </div>
-
-            <div class="button-search" id="button-search">
-                <button type="button">Pesquisar</button>
+            <div class="search-input">
+                <input type="text" placeholder="Ex : Bar da esquina">
+                <input type="text" placeholder="Ex : Campo Grande">
+                <button class="button-search" type="button"><i class="bi bi-search"></i></button>
             </div>
         </div>
         <!--FILTROS-->
@@ -182,8 +175,8 @@
         <!--FIM FILTROS-->
         <!--ANÚNCIOS-->
         <div class="ads">
-            <div class="ad">
-                <img src="../Img/Estabelecimento 1.png" alt="">
+            <div class="ad-item">
+                <img src="/img/estabelecimento.png" alt="">
 
                 <div class="info">
                     <h2>Restaurante Carioca</h2>
@@ -196,8 +189,8 @@
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
-            <div class="ad">
-                <img src="../Img/Casamento 1.png" alt="">
+            <div class="ad-item">
+                <img src="/img/casamento.png" alt="">
 
                 <div class="info">
                     <h2>Meu Casamento</h2>
@@ -211,8 +204,8 @@
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
-            <div class="ad">
-                <img src="../Img/Estabelecimento 2.png" alt="">
+            <div class="ad-item">
+                <img src="/img/cultural.png" alt="">
 
                 <div class="info">
                     <h2>Cultural</h2>
@@ -226,8 +219,8 @@
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
-            <div class="ad">
-                <img src="../Img/festa-15-anos.webp" alt="">
+            <div class="ad-item">
+                <img src="/img/festa-15-anos.webp" alt="">
 
                 <div class="info">
                     <h2>Meus 15 anos</h2>
@@ -241,8 +234,8 @@
                 <button class="button-want" type="button">EU QUERO</button>
             </div>
 
-            <div class="ad">
-                <img src="../Img/CaféMostarda.jpg" alt="">
+            <div class="ad-item">
+                <img src="/img/cafe-mostarda.jpg" alt="">
 
                 <div class="info">
                     <h2>Café Mostarda</h2>
@@ -255,6 +248,11 @@
             </div>
         </div>
         <!--FIM ANÚNCIOS-->
+        <!--RODAPÉ-->
+        <footer>
+            <h3>@ MusicConnect</h3>
+        </footer>
+        <!--FIM RODAPÉ-->
     </main>
     <!--FIM MAIN-->
 </body>
