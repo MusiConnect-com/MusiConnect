@@ -10,6 +10,19 @@ function saveQuery() {
     localStorage.setItem("searchQuery", query);
 }
 
+function closeSearch() {
+    if(searchHeader.classList.contains("open-search")){
+        searchHeader.classList.remove("open-search");
+        overlay1.style.display = "none";
+        searchInput.value = "";
+        searchInput.blur();
+        setTimeout(() => {
+            searchHeader.style.display = "none";
+            searchIcon.classList.remove("open-search");
+        }, 300);
+    }
+}
+
 adsSearch.addEventListener("click", function(){
     localStorage.removeItem('searchQuery');
 });
@@ -25,41 +38,12 @@ searchIcon.addEventListener("click", function(){
         }, 300);
     }
     else {
-        searchHeader.classList.remove("open-search");
-        overlay1.style.display = "none";
-        searchInput.value = "";
-        searchInput.blur();
-        setTimeout(() => {
-            searchHeader.style.display = "none";
-            searchIcon.classList.remove("open-search");
-        }, 300);
+        closeSearch();
     }
 });
 
-iconClose.addEventListener("click", function(){
-    if(searchHeader.classList.contains("open-search")){
-        searchHeader.classList.remove("open-search");
-        overlay1.style.display = "none";
-        searchInput.value = "";
-        searchInput.blur();
-        setTimeout(() => {
-            searchHeader.style.display = "none";
-            searchIcon.classList.remove("open-search");
-        }, 300);
-    }
-})
-
-overlay1.addEventListener("click", function(){
-    if(searchHeader.classList.contains("open-search")){
-        searchHeader.classList.remove("open-search");
-        overlay1.style.display = "none";
-        searchInput.value = "";
-        setTimeout(() => {
-            searchHeader.style.display = "none";
-            searchIcon.classList.remove("open-search");
-        }, 300);
-    }
-});
+iconClose.addEventListener("click", closeSearch());
+overlay1.addEventListener("click", closeSearch());
 
 searchInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {

@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 });
 
-
-
 //Menu perfil
 const profileButton = document.querySelector(".profile-button");
 const profileList = document.querySelector(".profile-list");

@@ -6,6 +6,7 @@
     <title>MusicConnect</title>
     <link rel="stylesheet" href="/css/home-contratante.css">
     <script src="/js/perfil.js" defer></script>
+    <script src="/js/pesquisar-contratante.js" defer></script>
     <script src="/js/contratos-ativos.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +26,14 @@
             <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
-                    <li><a href="">Buscar Músicos</a></li>
+                    <li><i id="search-icon" class="bi bi-search"></i>
+                        <div class="search-header">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Ex : Bar da esquina" autofocus>
+                            <i id="icon-close" class="bi bi-x"></i>
+                        </div>
+                    </li>
+                    <li id="profiles-search"><a href="">Buscar Músicos</a></li>
                     <li><a href="">Meus Contratos</a></li>
                     <li><a href="">Anunciar</a></li>
                     <li class="nav-active"><a href="/html/home-contratante.html">Home</a></li>
