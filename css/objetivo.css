@@ -151,26 +151,29 @@ h2 {
 }
 
 
-.button-help button{
-    background-color: var(--dark-navy-blue);
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    color: var(--white);
+.button-help i::before{
+    font-size: 40px;
+    color: var(--dark-grey);
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    padding: 12px 15px;
-    width: 100%;
     text-align: center;
-    transition: .3s;
     box-sizing: border-box;
-    
 }
 
-.button-help button:hover {
-    background-color: var(--orange);
-    color: var(--white);
+.button-help .bi-question-square-fill {
+    display: none;
+}
+
+.button-help:hover .bi-question{
+    display: none;
+}
+
+.button-help:hover .bi-question-square-fill{
+    display: block;
+}
+
+.button-help:hover .bi-question-square-fill::before{
+    color: var(--orange);
 }
 
 .button-cancel {
