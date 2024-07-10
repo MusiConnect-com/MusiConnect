@@ -6,6 +6,7 @@
     <title>MusicConnect</title>
     <link rel="stylesheet" href="/css/anuncios-musico.css">
     <script src="/js/perfil.js" defer></script>
+    <script src="/js/pesquisar-musico.js" defer></script>
     <script src="/js/filtros.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
@@ -26,7 +27,14 @@
             <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
-                    <li class="nav-active"><a href="/html/anuncios.html">Buscar Anúncios</a></li>
+                    <li><i id="search-icon" class="bi bi-search"></i>
+                        <div class="search-header">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Ex : Bar da esquina" autofocus>
+                            <i id="icon-close" class="bi bi-x"></i>
+                        </div>
+                    </li>
+                    <li id="ads-search" class="nav-active"><a href="/html/anuncios.html">Buscar Anúncios</a></li>
                     <li><a href="#">Meus Contratos</a></li>
                     <li><a href="/html/home-musico.html">Home</a></li>
                 </ul>
