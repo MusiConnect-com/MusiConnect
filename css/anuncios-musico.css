@@ -238,7 +238,7 @@ main {
 .section-1 {
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    padding: 50px 0 0 0;
     width: 95%;
 }
 
@@ -258,7 +258,7 @@ main {
 }
 
 .search-input input {
-    background-color: var(--light-grey);
+    background-color: var(--white);
     padding: 0px 0px 0px 10px;
     border-radius: 5px 0 0 5px;
     border: 1px solid var(--black40);
@@ -384,7 +384,7 @@ main {
     justify-content: center;
     flex-direction: row;
     width: 95%;
-    margin-top: 50px;
+    padding: 50px 0 100px 0;
 }
 
 /*Style filters*/
@@ -558,6 +558,7 @@ main {
     overflow: auto;
     border: none;
     border-radius: 5px;
+    text-decoration: none;
     background-color: var(--white);
     box-shadow: 0 0 1px 1px var(--black40);
     cursor: pointer;
@@ -579,14 +580,15 @@ main {
     overflow: hidden;
 }
 
-/* @media (max-width: 1000px) {
+@media (max-width: 1000px) {
     .ad-item .img-ad {
         width: 200px;
     }
-    .info-ad {
-        width: 100%;
+
+    .ad-item .info-ad{
+        width: 68%;
     }
-} */
+}
 
 .ad-item img{
     width: 100%;
@@ -596,12 +598,10 @@ main {
 }
 
 /*Style informações anuncio*/
-
 .info-ad{
-    font-size: 13px;
-    padding: 20px 0 20px 15px;
+    padding: 20px 15px;
     word-wrap: break-word;
-    width: 50%;
+    width: 60%;
     height: 100%;
     transition: .3s;
 }
@@ -612,7 +612,7 @@ main {
 
 .value-ad {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 10px;
 }
 
@@ -624,6 +624,7 @@ main {
 }
 
 .local-ad {
+    font-size: 13px;
     font-weight: 300;
     font-style: italic;
 }
