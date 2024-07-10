@@ -296,18 +296,15 @@ header .profile-list {
     padding: 10px 10px;
     transition: .3s;
     border-radius: 5px;
+    color: var(--white);
+    width: 100%;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .profile-list-items:hover{
     background-color: var(--orange);
     transition: .3s;
-}
-
-.profile-list-items a{
-    color: var(--white);
-    width: 100%;
-    text-decoration: none;
-    font-weight: 500;
 }
 
 
@@ -403,7 +400,7 @@ main {
 }
 
 .search-input input {
-    background-color: var(--light-grey);
+    background-color: var(--white);
     padding: 0px 0px 0px 10px;
     border-radius: 5px 0 0 5px;
     border: 1px solid var(--black40);
@@ -779,6 +776,10 @@ main {
     border-radius: 5px;
 }
 
+.profiles-items:hover {
+    box-shadow: 0 0 10px 1px var(--black40);
+}
+
 .profiles-items:hover .content-text a {
     background-color: var(--orange);
     color: var(--white);
@@ -810,7 +811,7 @@ main {
     flex-direction: column;
     background-color: var(--white);
     padding: 20px;
-    width: 908px;
+    width: 69%;
     height: 100%;
     transition: .3s ease;
 }

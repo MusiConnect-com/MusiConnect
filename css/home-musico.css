@@ -297,20 +297,16 @@ header .profile-list {
     padding: 10px 10px;
     transition: .3s;
     border-radius: 5px;
-}
-
-.profile-list-items:hover{
-    background-color: var(--orange);
-    transition: .3s;
-}
-
-.profile-list-items a{
     color: var(--white);
     width: 100%;
     text-decoration: none;
     font-weight: 500;
 }
 
+.profile-list-items:hover{
+    background-color: var(--orange);
+    transition: .3s;
+}
 
 /*Style main*/
 main {
@@ -375,7 +371,7 @@ main {
 }
 
 .search-input input {
-    background-color: var(--light-grey);
+    background-color: var(--white);
     padding: 0px 0px 0px 10px;
     border-radius: 5px 0 0 5px;
     border: 1px solid var(--black40);
@@ -774,17 +770,28 @@ main {
 }
 
 .ad-item:hover {
-    transform: translateY(-10px);
+    box-shadow: 0 0 10px 1px var(--black40);
 }
 
-.ad-item:hover button{
-    background-color: var(--orange);
-    color: var(--white);
-    transition: .3s;
+.ad-item:hover img {
+    transform: scale(1.1);
 }
 
 
 /*Style info-ADS*/
+
+.ad-item .img-ad {
+    width: 310px;
+    height: 225px;
+    overflow: hidden;
+}
+
+.ad-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s ease;
+}
 
 .ad-item h2 {
     padding: 0px 0px 10px 0px;
@@ -792,30 +799,24 @@ main {
     height: 30%;
 }
 
-.ad-item img{
-    width: 100%;
-    max-height: 50%;
-}
-
-.ad-item .info-ad{
-    font-size: 13px;
+.info-ad{
     padding: 15px;
     word-wrap: break-word;
     width: 100%;
     height: 50%;
 }
 
-.ad-item .value-ad {
+.value-ad {
     font-size: 20px;
     font-weight: 500;
     height: 50%;
     padding: 10px 0 0 0;
 }
 
-.ad-item .local-ad {
+.local-ad {
     font-style: italic;
     height: 20%;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
 }
 

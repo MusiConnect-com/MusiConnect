@@ -3,11 +3,7 @@ const profileList = document.querySelector(".profile-list");
 const profileItems = document.querySelectorAll(".profile-list-items");
 const buttonClose = document.getElementById("close-profile-list");
 const overlay2 = document.getElementById("overlay2");
-const leave = document.getElementById("leave");
 
-leave.addEventListener("click", function() {
-    window.location.href = "/html/login.html"
-});
 
 function openProfileList(){
     if (profileList.classList.contains("open-profile")){

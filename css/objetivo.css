@@ -8,7 +8,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    background-color: var(--navy-blue);
+    background-color: var(--light-grey);
     height: 100vh;
 }
 
@@ -28,7 +28,7 @@ main {
     padding: 20px;
     width: 60vw;
     height: 60vh;
-    box-shadow: 0 0 10px 1px var(--black25);
+    box-shadow: 0 0 1px 1px var(--black40);
     border-radius: 5px;
     display: flex;
     align-items: center;
