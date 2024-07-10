@@ -58,5 +58,5 @@ searchInput.addEventListener("keydown", function(event) {
 
 function performSearch() {
     saveQuery()
-    window.location.href = "/Anúncios/Code/Anuncios.html"
+    window.location.href = "/html/anuncios-musico.html"
 }

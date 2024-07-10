@@ -6,6 +6,7 @@
     <title>MusicConnect</title>
     <link rel="stylesheet" href="/css/anuncios-musico.css">
     <script src="/js/perfil.js" defer></script>
+    <script src="/js/filtros.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +62,7 @@
         <section class="section-1">
             <div class="search">
                 <div class="search-input">
-                    <input type="text" placeholder="Ex : Bar da esquina">
+                    <input type="text" placeholder="Ex : Bar da esquina" id="keyword">
                     <input type="text" placeholder="Ex : Campo Grande">
                     <button class="button-search" type="button"><i class="bi bi-search"></i></button>
                 </div>
@@ -226,5 +227,22 @@
         <!--FIM RODAPÉ-->
     </main>
     <!--FIM MAIN-->
+
+    <script>
+        // mask input
+        $('#minimum-value').mask("#.##0,00", {reverse: true});
+        $('#maximum-value').mask("#.##0,00", {reverse: true});
+
+        //iniciando a pagina com pesquisa
+        document.addEventListener("DOMContentLoaded", function(){
+            const query = localStorage.getItem("searchQuery");
+            if (query){
+                const queryInput = document.getElementById("keyword");
+                queryInput.value = query;
+                queryInput.focus();
+            }
+        });
+
+    </script>
 </body>
 </html>

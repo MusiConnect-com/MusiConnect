@@ -1,42 +1,4 @@
 
-//mask input
-
-$('#minimum-value').mask("#.##0,00", {reverse: true});
-$('#maximum-value').mask("#.##0,00", {reverse: true});
-
-document.addEventListener("DOMContentLoaded", function(){
-    const query = localStorage.getItem("searchQuery");
-    if (query){
-        const queryInput = document.getElementById("keyword");
-        queryInput.value = query;
-        queryInput.focus();
-    }
-});
-
-//Filtros de busca
-const buttonFilters = document.querySelector(".button-filters");
-const filtersList = document.querySelector(".filters-list");
-const buttonFilter = document.querySelector(".button-filter");
-
-function openFiltersList() {
-    if (filtersList.classList.contains("open-filters")){
-        filtersList.style.display = "none";
-        filtersList.classList.remove("open-filters")
-        buttonFilters.classList.remove("open-filters")
-    } else {
-        filtersList.style.display = "flex";
-        filtersList.classList.add("open-filters")
-        buttonFilters.classList.add("open-filters")
-    }
-};
-
-buttonFilters.addEventListener("click", openFiltersList)
-buttonFilter.addEventListener("click", function() {
-    filtersList.style.display = "none";
-    filtersList.classList.remove("open-filters")
-    buttonFilters.classList.remove("open-filters")
-});
-
 //limpar filtros de busca
 const filterBox = document.querySelectorAll(".filter-box")
 const buttonClean = document.querySelector(".button-clean")
@@ -80,7 +42,7 @@ order.forEach(order => {
             orderList.classList.remove("open-order")
             select.classList.remove("open-order")
         } else {
-            orderList.style.display = "block"
+            orderList.style.display = "flex"
             orderList.classList.add("open-order")
             select.classList.add("open-order")
         }
