@@ -616,7 +616,7 @@ main {
     cursor: pointer;
 }
 
-.info {
+.info-contract {
     display: flex;
     align-items: left;
     flex-direction: column;
@@ -624,12 +624,12 @@ main {
     width: 100%;
 }
 
-.info p {
+.info-contract p {
     font-size: 14px;
     color: var(--white);
 }
 
-.info .value {
+.info-contract .value-contract {
     font-size: 20px;
     font-weight: 500;
 }
@@ -795,7 +795,7 @@ main {
     max-height: 50%;
 }
 
-.ad-item .info{
+.ad-item .info-ad{
     font-size: 13px;
     padding: 15px;
     word-wrap: break-word;
@@ -803,14 +803,14 @@ main {
     height: 50%;
 }
 
-.ad-item .value {
+.ad-item .value-ad {
     font-size: 20px;
     font-weight: 500;
     height: 50%;
     padding: 10px 0 0 0;
 }
 
-.ad-item .local {
+.ad-item .local-ad {
     font-style: italic;
     height: 20%;
     font-size: 12px;
@@ -818,8 +818,7 @@ main {
 }
 
 /*Style button-ADS*/
-
-.ad-item button {
+.ad-item button{
     background-color: var(--dark-navy-blue);
     color: var(--white);
     border: none;
@@ -827,7 +826,6 @@ main {
     text-align: center;
     height: 20%;
     width: 90%;
-    padding: 0px 30px;
     cursor: pointer;
     transition: .3s;
     font-size: 18px;
