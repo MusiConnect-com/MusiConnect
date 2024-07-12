@@ -344,7 +344,8 @@ main {
     border: none;
     font-size: 14px;
     font-weight: 500;
-    background-color: var(--orange);
+    background-color: var(--orange
+    );
     color: var(--white);
     cursor: pointer;
     transition: .3s ease;
