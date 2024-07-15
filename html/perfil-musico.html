@@ -156,12 +156,20 @@
                             </div>
                             <div class="contracts-right"><h3>R$400,00</h3></div>
                         </li>
+                        <li class="contracts">
+                            <div class="contracts-left">
+                                <h3><a href="">Bar de Esquina</a></h3>
+                                <p>Pagode e muita alegria</p>
+                                <span>Fechado</span>
+                            </div>
+                            <div class="contracts-right"><h3>R$200,00</h3></div>
+                        </li>
                     </ul>
                 </div>
             </section>
             <!--FIM SEÇÃO CONTRATOS-->
             <!--SEÇÃO HABILIDADES-->
-            <section>
+            <section id="section-skills">
                 
             </section>
             <!--FIM SEÇÃO HABILIDADES-->
@@ -169,5 +177,27 @@
         <!--FIM PERFIL-->
     </main>
     <!--FIM MAIN-->
+    <script>
+        const spans = document.querySelectorAll(".contracts span");
+
+        spans.forEach((span)=> {
+            const status = span.textContent;
+
+            switch (status) {
+                case "Aberto":
+                    span.style.color = "#008000"
+                    break;
+                case "Em andamento":
+                    span.style.color = "#FFD700"
+                    break;
+                case "Fechado":
+                    span.style.color = "#FF0000"
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
 </body>
 </html>
