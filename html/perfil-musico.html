@@ -9,6 +9,7 @@
     <!--SCRIPT-->
     <script src="/js/perfil.js" defer></script>
     <script src="/js/pesquisar-musico.js" defer></script>
+    <script src="/js/secoes-perfil.js" defer></script>
     <!--FONTE-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,9 +69,9 @@
     <!--MAIN-->
     <main>
         <!--NAVEGAÇÃO-->
-        <nav class="nav-perfil">
+        <nav class="nav-perfil" id="nav-perfil">
             <ul>
-                <li id="overview"><span>Visão Geral</span></li>
+                <li class="selected"><span>Visão Geral</span></li>
                 <li><span>Contratos</span></li>
                 <li><span>Habilidades</span></li>
                 <li><span>Videos</span></li>
@@ -103,7 +104,7 @@
                 </div>
             </div>
             <!--SEÇÃO VISÃO GERAL-->
-            <section id="section-overview" class="sections">
+            <section id="section-overview" class="active">
                 <div class="section-overview">
                     <div class="section-overview-personal-datas">
                         <h3>Dados Pessoais</h3>
@@ -136,7 +137,7 @@
             </section>
             <!--FIM SEÇÃO VISÃO GERAL-->
             <!--SEÇÃO CONTRATOS-->
-            <section id="section-contracts" class="sections">
+            <section id="section-contracts">
                 <div class="section-contracts">
                     <ul>
                         <li class="contracts">

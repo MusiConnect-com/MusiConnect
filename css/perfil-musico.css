@@ -320,9 +320,10 @@ main {
     border-bottom: 2px solid transparent;
     box-shadow: 0 1px 0px 0px transparent;
     padding: 10px 0 10px 0;
+    transition: border-bottom .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
-#overview {
+.nav-perfil ul li.selected {
     border-bottom: 2px solid var(--orange);
     box-shadow: 0 1px 0px 0px var(--orange);
 }
@@ -420,13 +421,22 @@ main {
 }
 
 /*Style seções*/
-.sections {
-    display: flex;
+.info-perfil section {
+    display: none;
     justify-content: left;
     flex-direction: column;
     margin-bottom: 50px;
     gap: 40px;
     width: 60%;
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.5s ease, height 0.5s ease;
+}
+
+.info-perfil section.active {
+    display: flex;
+    opacity: 1;
+    height: auto;
 }
 
 .sections h3 {
@@ -435,10 +445,6 @@ main {
 }
 
 /*Style seção visão geral*/
-#section-overview {
-    
-}
-
 .section-overview {
     display: flex;
     justify-content: left;
@@ -485,13 +491,14 @@ main {
 }
 
 /*Style seção contratos*/
-#section-contracts {
-    display: none;
+.section-contracts {
+    width: 100%;
 }
 
 .section-contracts ul {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+    width: 100%;
     gap: 40px;
 }
 
