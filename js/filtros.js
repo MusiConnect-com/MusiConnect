@@ -28,39 +28,36 @@ buttonClean.addEventListener("click", function(){
 });
 
 //Ordem de busca
-const order = document.querySelectorAll(".order");
+const order = document.querySelector(".order");
+const select = order.querySelector(".select");
+const selected = order.querySelector(".selected");
+const orderList = order.querySelector(".order-list");
+const options = order.querySelectorAll(".order-list li");
 
-order.forEach(order => {
-    const select = order.querySelector(".select");
-    const selected = order.querySelector(".selected");
-    const orderList = order.querySelector(".order-list");
-    const options = order.querySelectorAll(".order-list li");
+select.addEventListener("click", function(){
+    if(orderList.classList.contains("open-order")) {
+        orderList.style.display = "none"
+        orderList.classList.remove("open-order")
+        select.classList.remove("open-order")
+    } else {
+        orderList.style.display = "flex"
+        orderList.classList.add("open-order")
+        select.classList.add("open-order")
+    }
+    
+});
 
-    select.addEventListener("click", function(){
-        if(orderList.classList.contains("open-order")) {
-            orderList.style.display = "none"
-            orderList.classList.remove("open-order")
-            select.classList.remove("open-order")
-        } else {
-            orderList.style.display = "flex"
-            orderList.classList.add("open-order")
-            select.classList.add("open-order")
-        }
-        
-    });
+options.forEach(option => {
+    option.addEventListener("click", function(){
+        selected.innerText = option.innerText;
+        orderList.style.display = "none"
+        orderList.classList.remove("open-order")
+        select.classList.remove("open-order")
 
-    options.forEach(option => {
-        option.addEventListener("click", function(){
-            selected.innerText = option.innerText;
-            orderList.style.display = "none"
-            orderList.classList.remove("open-order")
-            select.classList.remove("open-order")
-
-            options.forEach(option => {
-                option.classList.remove("active")
-            });
-
-            option.classList.add("active")
+        options.forEach(option => {
+            option.classList.remove("active")
         });
+
+        option.classList.add("active")
     });
 });

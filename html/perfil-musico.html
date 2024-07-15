@@ -104,7 +104,7 @@
                 </div>
             </div>
             <!--SEÇÃO VISÃO GERAL-->
-            <section id="section-overview" class="active">
+            <section id="section-overview">
                 <div class="section-overview">
                     <div class="section-overview-personal-datas">
                         <h3>Dados Pessoais</h3>
@@ -137,10 +137,39 @@
             </section>
             <!--FIM SEÇÃO VISÃO GERAL-->
             <!--SEÇÃO CONTRATOS-->
-            <section id="section-contracts">
+            <section id="section-contracts" class="active">
                 <div class="section-contracts">
-                    <ul>
-                        <li class="contracts">
+                    <div class="section-search-contracts">
+                        <input type="text" placeholder="Encontre o contrato">
+                        <div class="order-status">
+                            <div class="select">
+                                <span class="selected">Status</span>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+    
+                            <ul class="order-list-status">
+                                <li>Todos</li>
+                                <li>Aberto</li>
+                                <li>Em andamento</li>
+                                <li>Fechado</li>
+                            </ul>
+                        </div>
+
+                        <div class="order-value">
+                            <div class="select">
+                                <span class="selected">Valor</span>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+    
+                            <ul class="order-list-value">
+                                <li>Todos</li>
+                                <li>Maior valor</li>
+                                <li>Menor valor</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="contracts">
+                        <li class="contract-item">
                             <div class="contracts-left">
                                 <h3><a href="">Casamento Buenos</a></h3>
                                 <p>Vamos nos casar e queremos um musico sertanejo para a festa!</p>
@@ -148,7 +177,7 @@
                             </div>
                             <div class="contracts-right"><h3>R$2.800,00</h3></div>
                         </li>
-                        <li class="contracts">
+                        <li class="contract-item">
                             <div class="contracts-left">
                                 <h3><a href="">Bar do Zé</a></h3>
                                 <p>Preciso de um musico ao vivo para o dia 18/05</p>
@@ -156,7 +185,7 @@
                             </div>
                             <div class="contracts-right"><h3>R$400,00</h3></div>
                         </li>
-                        <li class="contracts">
+                        <li class="contract-item">
                             <div class="contracts-left">
                                 <h3><a href="">Bar de Esquina</a></h3>
                                 <p>Pagode e muita alegria</p>
@@ -178,7 +207,7 @@
     </main>
     <!--FIM MAIN-->
     <script>
-        const spans = document.querySelectorAll(".contracts span");
+        const spans = document.querySelectorAll(".contract-item span");
 
         spans.forEach((span)=> {
             const status = span.textContent;
