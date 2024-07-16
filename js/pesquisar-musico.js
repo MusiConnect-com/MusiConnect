@@ -35,7 +35,7 @@ searchIcon.addEventListener("click", function(){
             searchHeader.classList.add("open-search");
             overlay1.style.display = "block";
             searchInput.focus();
-        }, 300);
+        }, 10);
     }
     else {
         closeSearch();
