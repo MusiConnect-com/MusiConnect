@@ -23,6 +23,10 @@ body {
     z-index: 1002;
 }
 
+#overlay3 {
+    background-color: transparent;
+}
+
 /* Style Header */
 header {
     display: flex;
@@ -540,7 +544,7 @@ main {
     background-color: var(--navy-blue);
     color: var(--white);
     position: absolute;
-    z-index: 999;
+    z-index: 1003;
 }
 
 .order-list.open-order {

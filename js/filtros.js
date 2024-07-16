@@ -33,16 +33,19 @@ const select = order.querySelector(".select");
 const selected = order.querySelector(".selected");
 const orderList = order.querySelector(".order-list");
 const options = order.querySelectorAll(".order-list li");
+const overlay3 = document.getElementById("overlay3");
 
 select.addEventListener("click", function(){
     if(orderList.classList.contains("open-order")) {
-        orderList.style.display = "none"
-        orderList.classList.remove("open-order")
-        select.classList.remove("open-order")
+        orderList.style.display = "none";
+        overlay3.style.display = "none";
+        orderList.classList.remove("open-order");
+        select.classList.remove("open-order");
     } else {
-        orderList.style.display = "flex"
-        orderList.classList.add("open-order")
-        select.classList.add("open-order")
+        orderList.style.display = "flex";
+        overlay3.style.display = "block";
+        orderList.classList.add("open-order");
+        select.classList.add("open-order");
     }
     
 });
@@ -50,14 +53,22 @@ select.addEventListener("click", function(){
 options.forEach(option => {
     option.addEventListener("click", function(){
         selected.innerText = option.innerText;
-        orderList.style.display = "none"
-        orderList.classList.remove("open-order")
-        select.classList.remove("open-order")
+        orderList.style.display = "none";
+        overlay3.style.display = "none";
+        orderList.classList.remove("open-order");
+        select.classList.remove("open-order");
 
         options.forEach(option => {
-            option.classList.remove("active")
+            option.classList.remove("active");
         });
 
-        option.classList.add("active")
+        option.classList.add("active");
     });
+});
+
+overlay3.addEventListener("click", function(){
+    orderList.style.display = "none";
+    overlay3.style.display = "none";
+    orderList.classList.remove("open-order");
+    select.classList.remove("open-order");
 });
