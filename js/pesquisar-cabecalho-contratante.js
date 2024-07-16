@@ -2,7 +2,7 @@ const searchIcon = document.getElementById("search-icon");
 const iconClose = document.getElementById("icon-close");
 const searchHeader = document.querySelector(".search-header");
 const searchInput = document.querySelector(".search-header input");
-const adsSearch = document.getElementById("ads-search");
+const profilesSearch = document.getElementById("profiles-search");
 const overlay1 = document.getElementById("overlay1");
 
 function saveQuery() {
@@ -23,7 +23,7 @@ function closeSearch() {
     }
 }
 
-adsSearch.addEventListener("click", function(){
+profilesSearch.addEventListener("click", function(){
     localStorage.removeItem('searchQuery');
 });
 
@@ -58,5 +58,5 @@ searchInput.addEventListener("keydown", function(event) {
 
 function performSearch() {
     saveQuery()
-    window.location.href = "/html/anuncios-musico.html"
+    window.location.href = ""
 }

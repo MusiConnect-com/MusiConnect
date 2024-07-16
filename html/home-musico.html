@@ -6,7 +6,7 @@
     <title>MusicConnect</title>
     <link rel="stylesheet" href="/css/home-musico.css">
     <script src="/js/perfil.js" defer></script>
-    <script src="/js/pesquisar-musico.js" defer></script>
+    <script src="/js/pesquisar-cabecalho-musico.js" defer></script>
     <script src="/js/contratos-ativos.js" defer></script>
     <script src="/js/rolagem-ads.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
@@ -27,13 +27,7 @@
             <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
-                    <li><i id="search-icon" class="bi bi-search"></i>
-                        <div class="search-header">
-                            <i class="bi bi-search"></i>
-                            <input type="text" placeholder="Ex : Bar da esquina" autofocus>
-                            <i id="icon-close" class="bi bi-x"></i>
-                        </div>
-                    </li>
+                    <li><i id="search-icon" class="bi bi-search"></i></li>
                     <li id="ads-search"><a href="/html/anuncios-musico.html">Buscar Anúncios</a></li>
                     <li><a href="#">Meus Contratos</a></li>
                     <li class="nav-active"><a href="/html/home-musico.html">Home</a></li>
@@ -44,26 +38,34 @@
                 <div class="profile-button" id="profile-button">
                     <img src="/img/victor-vidal.png" alt="">
                 </div>
-    
-                <ul class="profile-list" id="profile-list">
-                    <div class="content-top">
-                        <img src="/img/victor-vidal.png" alt="">
-                        <p>Victor Vidal</p>
-                        <div>
-                            <i id="close-profile-list" class="bi bi-x"></i>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-bottom">
-                        <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a></li>
-                        <a class="profile-list-items" href="">Configurações</a></li>
-                        <a class="profile-list-items" href="/html/login.html">Sair</a></li>
-                    </div>
-                </ul>
             </div> 
         </div>
     </header>
     <!--FIM CABEÇALHO-->
+    <!--PESQUISAR NO CABEÇALHO-->
+    <div class="search-header">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Ex : Bar da esquina" autofocus>
+        <i id="icon-close" class="bi bi-x"></i>
+    </div>
+    <!--FIM PESQUISAR NO CABEÇALHO-->
+    <!--PERFIL CABEÇALHO-->
+    <div class="profile-list" id="profile-list">
+        <div class="content-top">
+            <img src="/img/victor-vidal.png" alt="">
+            <p>Victor Vidal</p>
+            <div>
+                <i id="close-profile-list" class="bi bi-x"></i>
+            </div>
+        </div>
+        <hr>
+        <div class="content-bottom">
+            <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a></li>
+            <a class="profile-list-items" href="">Configurações</a></li>
+            <a class="profile-list-items" href="/html/login.html">Sair</a></li>
+        </div>
+    </div>
+    <!--FIM PERFIL CABEÇALHO-->
     <!--MAIN-->
     <main>
         <!--SEÇÃO 1-->

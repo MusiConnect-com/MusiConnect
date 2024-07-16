@@ -8,7 +8,7 @@ const overlay2 = document.getElementById("overlay2");
 function openProfileList(){
     if (profileList.classList.contains("open-profile")){
         profileList.classList.remove("open-profile");
-        overlayProfile.style.display = "none";
+        overlay2.style.display = "none";
         setTimeout(() => {
             profileList.style.display = "none";
         }, 300);
@@ -21,30 +21,9 @@ function openProfileList(){
     }
 }
 profileItems.forEach(items => {
-    items.addEventListener("click", function() {
-        profileList.classList.remove("open-profile");
-        overlay2.style.display = "none";
-        setTimeout(() => {
-            profileList.style.display = "none";
-        }, 300);
-    })
-})
+    items.addEventListener("click", openProfileList);
+});
 
-overlay2.addEventListener("click", function() {
-    profileList.classList.remove("open-profile");
-    overlay2.style.display = "none";
-    setTimeout(() => {
-        profileList.style.display = "none";
-    }, 300);
-})
-
-buttonClose.addEventListener("click", function(){
-    profileList.classList.remove("open-profile");
-    overlay2.style.display = "none";
-    setTimeout(() => {
-        profileList.style.display = "none";
-    }, 300);
-})
-
-
+overlay2.addEventListener("click", openProfileList);
+buttonClose.addEventListener("click", openProfileList);
 profileButton.addEventListener("click", openProfileList);
