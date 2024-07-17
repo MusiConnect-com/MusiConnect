@@ -107,7 +107,7 @@
                 </div>
             </div>
             <!--SEÇÃO VISÃO GERAL-->
-            <section id="section-overview" class="active">
+            <section id="section-overview">
                 <div class="section-overview">
                     <div class="section-overview-personal-datas">
                         <h3>Dados Pessoais</h3>
@@ -151,7 +151,7 @@
                             </div>
     
                             <ul class="order-list">
-                                <li>Todos</li>
+                                <li class="active">Todos</li>
                                 <li>Aberto</li>
                                 <li>Em andamento</li>
                                 <li>Fechado</li>
@@ -165,7 +165,7 @@
                             </div>
     
                             <ul class="order-list">
-                                <li>Todos</li>
+                                <li class="active">Todos</li>
                                 <li>Maior valor</li>
                                 <li>Menor valor</li>
                             </ul>
@@ -178,7 +178,7 @@
                                 <p>Vamos nos casar e queremos um musico sertanejo para a festa!</p>
                                 <span>Aberto</span>
                             </div>
-                            <div class="contracts-right"><h3>R$2.800,00</h3></div>
+                            <h3>R$2.800,00</h3>
                         </li>
                         <li class="contract-item">
                             <div class="contracts-left">
@@ -186,7 +186,7 @@
                                 <p>Preciso de um musico ao vivo para o dia 18/05</p>
                                 <span>Em andamento</span>
                             </div>
-                            <div class="contracts-right"><h3>R$400,00</h3></div>
+                            <h3>R$400,00</h3>
                         </li>
                         <li class="contract-item">
                             <div class="contracts-left">
@@ -194,15 +194,69 @@
                                 <p>Pagode e muita alegria</p>
                                 <span>Fechado</span>
                             </div>
-                            <div class="contracts-right"><h3>R$200,00</h3></div>
+                            <h3>R$200,00</h3>
                         </li>
                     </ul>
                 </div>
             </section>
             <!--FIM SEÇÃO CONTRATOS-->
             <!--SEÇÃO HABILIDADES-->
-            <section id="section-skills">
-                
+            <section id="section-skills" class="active">
+                <div class="section-skills">
+                    <div class="skills-add">
+                        <div class="skills-add-header">
+                            <h3>Adicionar Habilidades</h3>
+                            <i id="close-add-skills" class="bi bi-x"></i>
+                        </div>
+    
+                        <div class="skills-add-body">
+                            <label for="skill-input">Habilidade*</label>
+                            <input id="skill-input" type="text" placeholder="Ex: Cantar">
+                            <label for="level">Nível*</label>
+
+                            <div class="level-dropdown">
+                                <div class="level-dropdown-btn">
+                                    <span class="selected">Iniciante</span>
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </div>
+
+                                <ul class="level-dropdown-list">
+                                    <li class="active">Iniciante</li>
+                                    <li>Intermediário</li>
+                                    <li>Avançado</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <div class="skills-add-footer">
+                            <button type="button">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="skills-header">
+                        <h3>Habilidades</h3>
+                        <i class="bi bi-plus-lg"></i>
+                    </div>
+
+                    <ul class="skills">
+                        <li class="skill-item">
+                            <div class="skill-details">
+                                <h4>Violão</h4>
+                                <p>Nível: <span>Avançado</span></p>
+                            </div>
+                            <i class="bi bi-pen"></i>
+                        </li>
+
+                        <li class="skill-item">
+                            <div class="skill-item-left">
+                                <h4>Cantar</h4>
+                                <p>Nível: <span>Intermediário</span></p>
+                            </div>
+                            <i class="bi bi-pen"></i>
+                        </li>
+
+                    </ul>
+                </div>
             </section>
             <!--FIM SEÇÃO HABILIDADES-->
         </section>
