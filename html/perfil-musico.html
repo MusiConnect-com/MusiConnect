@@ -10,6 +10,7 @@
     <script src="/js/perfil.js" defer></script>
     <script src="/js/pesquisar-cabecalho-musico.js" defer></script>
     <script src="/js/secoes-perfil.js" defer></script>
+    <script src="/js/skills-add.js" defer></script>
     <script src="/js/secao-contratos.js" defer></script>
     <!--FONTE-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +24,7 @@
     <div id="overlay1" class="overlay"></div>
     <div id="overlay2" class="overlay"></div>
     <div id="overlay3" class="overlay"></div>
+    <div id="overlay4" class="overlay"></div>
     <!--FIM OVERLAY-->
     <!--CABEÇALHO-->
     <header>
@@ -203,24 +205,24 @@
             <!--SEÇÃO HABILIDADES-->
             <section id="section-skills" class="active">
                 <div class="section-skills">
-                    <div class="skills-add">
+                    <div class="skills-add" id="skills-add">
                         <div class="skills-add-header">
                             <h3>Adicionar Habilidades</h3>
                             <i id="close-add-skills" class="bi bi-x"></i>
                         </div>
     
                         <div class="skills-add-body">
-                            <label for="skill-input">Habilidade*</label>
-                            <input id="skill-input" type="text" placeholder="Ex: Cantar">
+                            <label id="label-skill-input" for="skill-input">Habilidade*</label>
+                            <input id="skill-input" type="text" placeholder="Ex: Cantar" oninput="validateSkills()">
                             <label for="level">Nível*</label>
 
-                            <div class="level-dropdown">
-                                <div class="level-dropdown-btn">
+                            <div id="level-dropdown" class="level-dropdown">
+                                <div id="level-dropdown-btn" class="level-dropdown-btn">
                                     <span class="selected">Iniciante</span>
                                     <i class="bi bi-caret-down-fill"></i>
                                 </div>
 
-                                <ul class="level-dropdown-list">
+                                <ul id="level-dropdown-list" class="level-dropdown-list">
                                     <li class="active">Iniciante</li>
                                     <li>Intermediário</li>
                                     <li>Avançado</li>
@@ -229,13 +231,13 @@
                         </div>
     
                         <div class="skills-add-footer">
-                            <button type="button">Adicionar</button>
+                            <button id="btn-skills-add" type="button">Adicionar</button>
                         </div>
                     </div>
 
                     <div class="skills-header">
                         <h3>Habilidades</h3>
-                        <i class="bi bi-plus-lg"></i>
+                        <i id="i-open-skill-add" class="bi bi-plus-lg"></i>
                     </div>
 
                     <ul class="skills">
@@ -251,6 +253,14 @@
                             <div class="skill-item-left">
                                 <h4>Cantar</h4>
                                 <p>Nível: <span>Intermediário</span></p>
+                            </div>
+                            <i class="bi bi-pen"></i>
+                        </li>
+
+                        <li id="new-skill-item" class="skill-item">
+                            <div class="skill-item-left">
+                                <h4></h4>
+                                <p>Nível: <span></span></p>
                             </div>
                             <i class="bi bi-pen"></i>
                         </li>

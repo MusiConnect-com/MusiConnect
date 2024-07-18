@@ -641,7 +641,9 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 1px 1px var(--black40);
     width: 30%;
+    left: 35%;
     opacity: 0;
+    z-index: 1003;
     transition: opacity .3s ease;
 }
 
@@ -699,18 +701,24 @@ main {
 }
 
 .level-dropdown-btn {
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
     position: relative;
-    box-shadow: 0 0 1px 1px var(--black40);
+    border: 1px solid var(--black40);
     border-radius: 5px;
     padding: 5px 5px 5px 10px;
+    width: 40%;
     cursor: pointer;
     transition: .3s;
 }
 
 .level-dropdown-btn.open-dropdown {
-    border-color: var(--orange);
-    box-shadow: 0 0 1px 1px var(--orange);
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+}
+
+.level-dropdown-btn .selected {
+    padding: 0 10px 0 10px ;
 }
 
 .level-dropdown-btn.open-dropdown .bi-caret-down-fill {
@@ -724,21 +732,23 @@ main {
 }
 
 .level-dropdown-list {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 40%;
     background-color: var(--white);
     border-radius: 5px;
-    box-shadow: 0 0 1px 1px var(--black40);
+    border: 1px solid var(--black40);
     position: absolute;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 0 10px 10px 10px;
     opacity: 0;
     transition: opacity .3s ease;
 }
 
 .level-dropdown-list.open-dropdown {
     opacity: 1;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
 }
 
 .level-dropdown-list li {
@@ -817,6 +827,10 @@ main {
     box-shadow: 0 0 1px 1px var(--black40);
     border-radius: 5px;
     padding: 10px;
+}
+
+#new-skill-item {
+    display: none;
 }
 
 .skill-item-details h4{
