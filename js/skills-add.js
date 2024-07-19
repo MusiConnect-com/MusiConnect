@@ -44,6 +44,7 @@ function resetSkillAdd(){
     skillInput.value = "";
     labelInput.style.color = "#333333";
     skillInput.style.border = "1px solid #00000040"
+    closeDropdown();
 
 }
 
@@ -53,7 +54,8 @@ btnAdd.addEventListener("click", validateSkills)
 //dropdown nível
 const levelDropdownBtn = document.getElementById("level-dropdown-btn");
 const dropdownList = document.getElementById("level-dropdown-list");
-const dropdownItem = document.getElementById("level-dropdown-list li");
+const dropdownItem = document.querySelectorAll(".level-dropdown-list li");
+const selectedLevel = document.getElementById("selected-level");
 
 function openDropdown() {
     if (!dropdownList.classList.contains("open-dropdown")){
@@ -75,5 +77,20 @@ function closeDropdown(){
     }
 }
 
-levelDropdownBtn.onclick = openDropdown;
-skillAdd.onclick = 
+function toggleLevel(event){
+    selectedLevel.innerText = event.innerText;
+    closeDropdown();
+    dropdownItem.forEach(item =>{
+        item.classList.remove("active");
+    })
+    event.classList.add("active");
+}
+
+levelDropdownBtn.onclick = function(){
+    if(dropdownList.classList.contains("open-dropdown")){
+        closeDropdown();
+    }
+    else {
+        openDropdown();
+    }
+};
