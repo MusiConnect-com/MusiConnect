@@ -1,3 +1,5 @@
+
+//Abrir adicionar habilidade
 const openAdd = document.getElementById("i-open-skill-add");
 const closeAdd = document.getElementById("close-add-skills");
 const skillAdd = document.getElementById("skills-add");
@@ -44,7 +46,7 @@ function resetSkillAdd(){
     skillInput.value = "";
     labelInput.style.color = "#333333";
     skillInput.style.border = "1px solid #00000040"
-    closeDropdown();
+    resetDropdown();
 
 }
 
@@ -77,13 +79,14 @@ function closeDropdown(){
     }
 }
 
-function toggleLevel(event){
-    selectedLevel.innerText = event.innerText;
+function resetDropdown(){
     closeDropdown();
+    selectedLevel.innerText = dropdownItem[0].innerText;
     dropdownItem.forEach(item =>{
         item.classList.remove("active");
     })
-    event.classList.add("active");
+    dropdownItem[0].classList.add("active");
+
 }
 
 levelDropdownBtn.onclick = function(){
@@ -94,3 +97,14 @@ levelDropdownBtn.onclick = function(){
         openDropdown();
     }
 };
+
+dropdownItem.forEach(item => {
+    item.addEventListener("click", function(){
+        selectedLevel.innerText = item.innerText;
+        closeDropdown();
+        dropdownItem.forEach(item =>{
+            item.classList.remove("active");
+        })
+        item.classList.add("active");
+    })
+})

@@ -706,7 +706,8 @@ main {
     position: relative;
     border: 1px solid var(--black40);
     border-radius: 5px;
-    padding: 5px 5px 5px 10px;
+    padding: 5px 10px;
+    user-select: none;
     width: 40%;
     cursor: pointer;
     transition: .3s;
@@ -715,11 +716,6 @@ main {
 .level-dropdown-btn.open-dropdown {
     border-bottom: 1px solid transparent;
     border-radius: 5px 5px 0 0;
-}
-
-.level-dropdown-btn .selected-level {
-    padding: 0 10px 0 10px ;
-    user-select: none;
 }
 
 .level-dropdown-btn.open-dropdown .bi-caret-down-fill {
@@ -736,11 +732,12 @@ main {
     display: flex;
     flex-direction: column;
     width: 40%;
+    overflow: hidden;
     background-color: var(--white);
     border-radius: 0 0 5px 5px;
     border: 1px solid var(--black40);
+    border-bottom: none;
     position: absolute;
-    
     opacity: 0;
     transition: opacity .3s ease;
 }
@@ -750,14 +747,14 @@ main {
 }
 
 .level-dropdown-list li {
-    border: 1px solid var(--black40);
-    padding: 9px;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid var(--black40);
+    width: 100%;
+    padding: 5px 10px;
+    overflow: hidden;
     cursor: pointer;
     transition: .3s;
-}
-
-.level-dropdown-list li:hover {
-    
 }
 
 .level-dropdown-list li.active {
