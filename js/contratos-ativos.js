@@ -32,7 +32,7 @@ contractsAtivos.forEach((contracts, i) => {
     btnConfirm[i].addEventListener("click", function () {
         let displayStyle = window.getComputedStyle(alertSpan[i]).display;
         if (displayStyle === "flex") {
-            modalConfirm.dataset.currentIndex = i; 
+            modalConfirm.dataset.currentIndex = i;
             modalConfirm.style.display = "flex";
             overlay3.style.display = "block";
         }
