@@ -15,13 +15,13 @@ options.forEach((option, i) => {
         });
         const activeSection = sections[i];
         
-        activeSection.style.display = 'flex';
+        activeSection.style.display = "flex";
         activeSection.offsetHeight;
         activeSection.classList.add("active");
         
         sections.forEach(section => {
-            if (!section.classList.contains('active')) {
-                section.style.display = 'none';
+            if (!section.classList.contains("active")) {
+                section.style.display = "none";
             }
         });
     });
