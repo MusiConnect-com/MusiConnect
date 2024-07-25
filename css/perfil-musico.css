@@ -821,12 +821,19 @@ main {
     display: none;
 }
 
-.skill-item-details h4{
-    font-weight: 450;
+.skill-details h4{
+    display: inline;
+    font-weight: 500;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
-.skill-item-details p {
+.skill-details h4:hover {
+    color: var(--orange);
+    text-decoration: underline;
+}
+
+.skill-details p {
     font-size: 14px;
     margin-left: 5px;
 }
@@ -948,11 +955,6 @@ h1 {
     border: 1px solid var(--black40);
     overflow: hidden;
     width: 70%;
-    transition: transform .3s;
-}
-
-#section-media-photo li:hover {
-    transform: translateY(-5px);
 }
 
 .photo-header {
@@ -984,11 +986,6 @@ h1 {
     border-radius: 5px;
     border: 1px solid var(--black40);
     overflow: hidden;
-    transition: transform 0.3s;
-}
-
-#section-media-video li:hover {
-    transform: translateY(-5px);
 }
 
 #section-media-video li video {

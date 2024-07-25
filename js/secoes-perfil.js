@@ -6,15 +6,15 @@ options.forEach((option, i) => {
 
     option.addEventListener("click", function(){
         optionsList.forEach(optionList => {
-            optionList.classList.remove("selected")
+            optionList.classList.remove("selected");
         });
-        optionsList[i].classList.add("selected")
+        optionsList[i].classList.add("selected");
 
         sections.forEach(section => {
             section.classList.remove("active");
         });
+
         const activeSection = sections[i];
-        
         activeSection.style.display = "flex";
         activeSection.offsetHeight;
         activeSection.classList.add("active");
@@ -26,3 +26,28 @@ options.forEach((option, i) => {
         });
     });
 })
+
+//navegar para mídia
+function moveMedia(){
+    const optionsList = document.querySelectorAll(".nav-perfil ul li");
+
+    optionsList.forEach(optionList => {
+        optionList.classList.remove("selected");
+    });
+    optionsList[3].classList.add("selected");
+
+    sections.forEach(section => {
+        section.classList.remove("active");
+    });
+
+    const activeSection = sections[3];
+    activeSection.style.display = "flex";
+    activeSection.offsetHeight;
+    activeSection.classList.add("active");
+
+    sections.forEach(section => {
+        if (!section.classList.contains("active")) {
+            section.style.display = "none";
+        }
+    });
+}

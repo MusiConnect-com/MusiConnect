@@ -202,6 +202,27 @@
                         </li>
                     </ul>
                 </div>
+                <script>
+                    const spans = document.querySelectorAll(".contract-item span");
+            
+                    spans.forEach((span)=> {
+                        const status = span.textContent;
+            
+                        switch (status) {
+                            case "Aberto":
+                                span.style.color = "#008000"
+                                break;
+                            case "Em andamento":
+                                span.style.color = "#FFD700"
+                                break;
+                            case "Fechado":
+                                span.style.color = "#FF0000"
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+                </script>
             </section>
             <!--FIM SEÇÃO CONTRATOS-->
             <!--SEÇÃO HABILIDADES-->
@@ -268,6 +289,16 @@
                         </li>
 
                     </ul>
+
+                    <script>
+                        const titlesSkill = document.querySelectorAll(".skill-details h4");
+                        titlesSkill.forEach(title =>{
+                            title.addEventListener("click", function(){
+                                moveMedia();
+                                moveVideos();
+                            });
+                        });
+                    </script>
                 </div>
             </section>
             <!--FIM SEÇÃO HABILIDADES-->
@@ -352,27 +383,6 @@
         <!--FIM PERFIL-->
     </main>
     <!--FIM MAIN-->
-    <script>
-        const spans = document.querySelectorAll(".contract-item span");
-
-        spans.forEach((span)=> {
-            const status = span.textContent;
-
-            switch (status) {
-                case "Aberto":
-                    span.style.color = "#008000"
-                    break;
-                case "Em andamento":
-                    span.style.color = "#FFD700"
-                    break;
-                case "Fechado":
-                    span.style.color = "#FF0000"
-                    break;
-                default:
-                    break;
-            }
-        });
-    </script>
 
 </body>
 </html>

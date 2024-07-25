@@ -23,3 +23,24 @@ navLinks.forEach((links, i)=>{
         });
     });
 });
+
+//navegar para vídeos
+function moveVideos(){
+    navLinks.forEach(links =>{
+        links.classList.remove("selected");
+    });
+    navLinks[1].classList.add("selected");
+    
+    subsections.forEach(section =>{
+        section.removeAttribute("id");
+    });
+
+    const activeSubSection = subsections[1];
+    activeSubSection.setAttribute("id", "active");
+
+    subsections.forEach(section =>{
+        if (section.getAttribute("id") !== "active"){
+            section.removeAttribute("id");
+        }
+    });
+}
