@@ -24,6 +24,27 @@ navLinks.forEach((links, i)=>{
     });
 });
 
+//reset subseções
+function resetSubSections(){
+    navLinks.forEach(links =>{
+        links.classList.remove("selected");
+    });
+    navLinks[0].classList.add("selected");
+    
+    subsections.forEach(section =>{
+        section.removeAttribute("id");
+    });
+
+    const activeSubSection = subsections[0];
+    activeSubSection.setAttribute("id", "active");
+
+    subsections.forEach(section =>{
+        if (section.getAttribute("id") !== "active"){
+            section.removeAttribute("id");
+        }
+    });
+}
+
 //navegar para vídeos
 function moveVideos(){
     navLinks.forEach(links =>{
