@@ -111,7 +111,7 @@
                 </div>
             </div>
             <!--SEÇÃO VISÃO GERAL-->
-            <section id="section-overview" class="active">
+            <section id="section-overview">
                 <div class="section-overview">
                     <div class="section-overview-personal-datas">
                         <h3>Dados Pessoais</h3>
@@ -303,13 +303,46 @@
             </section>
             <!--FIM SEÇÃO HABILIDADES-->
             <!--SEÇÃO VIDEOS-->
-            <section id="section-media">
+            <section id="section-media" class="active">
                 <div class="section-media">
+                    <!--ADICIONAR ARQUIVO-->
+                    <div class="media-add">
+                        <div class="media-add-header">
+                            <h3>Adicionar Mídia</h3>
+                            <i id="close-add-media" class="bi bi-x"></i>
+                        </div>
+    
+                        <div class="media-add-body">
+                            <label id="label-media-title" for="media-title">Título*</label>
+                            <input id="media-title" type="text" placeholder="Ex: Tocando Violão" oninput="">
+                            <label for="type-doc">Tipo do Arquivo*</label>
+
+                            <div id="type-dropdown" class="type-dropdown">
+                                <div id="type-dropdown-btn" class="type-dropdown-btn">
+                                    <span id="selected-type" class="selected-type">Foto</span>
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </div>
+
+                                <ul id="type-dropdown-list" class="type-dropdown-list">
+                                    <li class="active">Foto</li>
+                                    <li>Vídeo</li>
+                                    <li>Documento</li>
+                                </ul>
+                            </div>
+                            <label id="label-media-doc" for="media-doc">Arquivo*</label>
+                            <input type="file">
+                        </div>
+
+                        <div class="media-add-footer">
+                            <button id="btn-media-add" type="button">Adicionar</button>
+                        </div>
+                    </div>
+                    <!--FIM ADICIONAR ARQUIVO-->
                     <!--NAVEGAÇÃO SEÇÃO MÍDIA-->
                     <nav id="nav-media" class="nav-media">
                         <ul>
                             <li class="selected">Fotos</li>
-                            <li>Videos</li>
+                            <li>Vídeos</li>
                             <li>Documentos</li>
                         </ul>
                         <i id="add-media"class="bi bi-plus-lg"></i>
@@ -377,7 +410,6 @@
                         </ul>
                     </div>
                 </div>
-                
             </section>
             <!--FIM SEÇÃO VIDEOS-->
         </section>
