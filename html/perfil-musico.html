@@ -13,6 +13,7 @@
     <script src="/js/skills-add.js" defer></script>
     <script src="/js/secao-contratos.js" defer></script>
     <script src="/js/subsecoes-midia.js" defer></script>
+    <script src="/js/media-add.js" defer></script>
     <!--FONTE-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -306,15 +307,15 @@
             <section id="section-media" class="active">
                 <div class="section-media">
                     <!--ADICIONAR ARQUIVO-->
-                    <div class="media-add">
+                    <div id="media-add" class="media-add">
                         <div class="media-add-header">
                             <h3>Adicionar Mídia</h3>
                             <i id="close-add-media" class="bi bi-x"></i>
                         </div>
     
                         <div class="media-add-body">
-                            <label id="label-media-title" for="media-title">Título*</label>
-                            <input id="media-title" type="text" placeholder="Ex: Tocando Violão" oninput="">
+                            <label id="label-media-title" for="input-media-title">Título*</label>
+                            <input id="input-media-title" type="text" placeholder="Ex: Tocando Violão" oninput="">
                             <label for="type-doc">Tipo do Arquivo*</label>
 
                             <div id="type-dropdown" class="type-dropdown">
@@ -329,8 +330,8 @@
                                     <li>Documento</li>
                                 </ul>
                             </div>
-                            <label id="label-media-doc" for="media-doc">Arquivo*</label>
-                            <input type="file">
+                            <label id="label-media-doc" for="input-media-doc">Arquivo*</label>
+                            <input id="input-media-doc" type="file">
                         </div>
 
                         <div class="media-add-footer">
