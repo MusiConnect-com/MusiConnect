@@ -315,7 +315,7 @@
     
                         <div class="media-add-body">
                             <label id="label-media-title" for="input-media-title">Título*</label>
-                            <input id="input-media-title" type="text" placeholder="Ex: Tocando Violão" oninput="">
+                            <input id="input-media-title" type="text" placeholder="Ex: Tocando Violão" oninput="validateMediaTitle()">
                             <label for="type-doc">Tipo do Arquivo*</label>
 
                             <div id="type-dropdown" class="type-dropdown">
@@ -325,13 +325,14 @@
                                 </div>
 
                                 <ul id="type-dropdown-list" class="type-dropdown-list">
-                                    <li class="active">Foto</li>
-                                    <li>Vídeo</li>
-                                    <li>Documento</li>
+                                    <li class="active" onclick="setAcceptImages()">Foto</li>
+                                    <li onclick="setAcceptVideos()">Vídeo</li>
+                                    <li onclick="setAcceptDoc()" >Documento</li>
                                 </ul>
                             </div>
                             <label id="label-media-doc" for="input-media-doc">Arquivo*</label>
-                            <input id="input-media-doc" type="file">
+                            <input id="input-media-doc" type="file" accept="image/*" oninput="validateMediaFile()">
+                            <p id="message"></p>
                         </div>
 
                         <div class="media-add-footer">
