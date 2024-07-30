@@ -631,7 +631,7 @@ main {
 .skills-add {
     display: none;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     background-color: var(--white);
     border-radius: 5px;
     border: 1px solid var(--black40);
@@ -867,7 +867,7 @@ main {
 .media-add {
     display: none;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     background-color: var(--white);
     border-radius: 5px;
     border: 1px solid var(--black40);
@@ -907,6 +907,7 @@ main {
 .media-add-body {
     display: flex;
     flex-direction: column;
+    gap: 20px;
     padding: 20px;
 }
 
@@ -924,7 +925,6 @@ main {
     padding: 5px 10px;
     box-sizing: border-box;
     outline: none;
-    margin-bottom: 20px;
 }
 
 .type-dropdown {
@@ -992,10 +992,6 @@ main {
     display: none;
 }
 
-#label-media-doc {
-    margin-top: 20px;
-}
-
 .media-add-body input[type="file"]:focus{
     border: none;
     box-shadow: none;
@@ -1040,6 +1036,13 @@ main {
     text-align: right;
     padding: 20px;
     width: 100%;
+}
+
+#btn-media-delete {
+    display: none;
+    margin-right: 10px;
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
 }
 
 .media-add-footer button {
@@ -1164,6 +1167,14 @@ h1 {
 #section-media-photo li img {
     width: 100%;
     cursor: pointer;
+}
+
+#new-photo {
+    display: none !important;
+}
+
+#new-photo.add-new-photo {
+    display: flex !important;
 }
 
 /*Style midia videos*/

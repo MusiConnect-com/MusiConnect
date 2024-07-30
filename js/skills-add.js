@@ -126,7 +126,7 @@ function addNewSkill(){
 
 //editar habilidade
 const skillItem = document.querySelectorAll(".skill-item");
-const iconEdit = document.querySelectorAll(".bi-pen");
+const iconEdit = document.querySelectorAll(".skill-item .bi-pen");
 const h4SkillItem = document.querySelectorAll(".skill-item h4");
 const spanSkillItem = document.querySelectorAll(".skill-item span");
 let index = 0;

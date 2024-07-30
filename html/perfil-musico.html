@@ -314,11 +314,13 @@
                         </div>
     
                         <div class="media-add-body">
-                            <label id="label-media-title" for="input-media-title">Título*</label>
-                            <input id="input-media-title" type="text" placeholder="Ex: Tocando Violão" oninput="validateMediaTitle()">
-                            <label for="type-doc">Tipo do Arquivo*</label>
-
+                            <div class="media-title">
+                                <label id="label-media-title" for="input-media-title">Título*</label>
+                                <input id="input-media-title" type="text" placeholder="Ex: Tocando Violão" oninput="validateMediaTitle()">
+                            </div>
+                            
                             <div id="type-dropdown" class="type-dropdown">
+                                <label id="label-type" for="type-doc">Tipo do Arquivo*</label>
                                 <div id="type-dropdown-btn" class="type-dropdown-btn">
                                     <span id="selected-type" class="selected-type">Foto</span>
                                     <i class="bi bi-caret-down-fill"></i>
@@ -330,12 +332,16 @@
                                     <li onclick="setAcceptDoc()" >Documento</li>
                                 </ul>
                             </div>
-                            <label id="label-media-doc" for="input-media-doc">Arquivo*</label>
-                            <input id="input-media-doc" type="file" accept="image/*" oninput="validateMediaFile()">
-                            <p id="message"></p>
+
+                            <div class="media-file">
+                                <label id="label-media-file" for="input-media-file">Arquivo*</label>
+                                <input id="input-media-file" type="file" accept="image/*" oninput="validateMediaFile()">
+                                <p id="message"></p>
+                            </div>    
                         </div>
 
                         <div class="media-add-footer">
+                            <button id="btn-media-delete" type="button">Excluir</button>
                             <button id="btn-media-add" type="button">Adicionar</button>
                         </div>
                     </div>
@@ -351,7 +357,7 @@
                     </nav>
                     <!--FIM NAVEGAÇÃO SEÇÃO MÍDIA-->
                     <div class="subsection-media" id="active">
-                        <ul id="section-media-photo">
+                        <ul id="section-media-photo" class="section-media-photo">
                             <li>
                                 <div class="photo-header">
                                     <h1>Show ao vivo</h1>
@@ -372,6 +378,13 @@
                                     <i class="bi bi-pen"></i>
                                 </div>
                                 <img src="/img/meu-violao.jpg" alt="">
+                            </li>
+                            <li id="new-photo">
+                                <div class="photo-header">
+                                    <h1 id="new-photo-title"></h1>
+                                    <i class="bi bi-pen"></i>
+                                </div>
+                                <img id="new-photo-img" src="" alt="">
                             </li>
                         </ul>
                     </div>

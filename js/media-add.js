@@ -1,5 +1,6 @@
 // Abrir adicionar mídia
 const mediaAdd = document.getElementById("media-add");
+const mediaAddHeader = document.querySelector(".media-add-header h3");
 const btnOpenMediaAdd = document.getElementById("add-media");
 const btnCloseMediaAdd = document.getElementById("close-add-media");
 
@@ -29,9 +30,10 @@ btnCloseMediaAdd.onclick = closeMediaAdd;
 
 const labelTitle = document.getElementById("label-media-title");
 const titleInput = document.getElementById("input-media-title");
-const labelDoc = document.getElementById("label-media-doc");
-const docInput = document.getElementById("input-media-doc");
+const labelFile = document.getElementById("label-media-file");
+const fileInput = document.getElementById("input-media-file");
 const btnMediaAdd = document.getElementById("btn-media-add");
+const btnMediaDelete = document.getElementById("btn-media-delete");
 
 function validateMediaTitle(){
     if (titleInput.value == ""){
@@ -51,35 +53,43 @@ function validateMediaFile(){
     let fileType = [];
 
     if (selectedType.innerText === "Foto"){
-        fileType = [".jpg", ".jpeg", ".png"];
-        message.textContent = selectedType.innerText;
-    }else if(selectedType.innerText === "Vídeos"){
-        fileType = [".mp4", ".webm"];
-        message.textContent = selectedType.innerText;
-    }else if(selectedType.innerText === "Documentos"){
+        fileType = ["image/jpg", "image/jpeg", "image/png"];
+        message.innerText = "Formato aceito para fotos : jpg , jpeg e png";
+    }else if(selectedType.innerText === "Vídeo"){
+        fileType = ["video/mp4", "video/webm"];
+        message.innerText = "Formato aceito para vídeos : mp4 e webm";
+    }else if(selectedType.innerText === "Documento"){
         fileType = ["application/pdf", "text/plain", "application/zip"];
-        message.textContent = selectedType.innerText;
+        message.innerText = "Formato aceito para documentos : pdf , txt e zip";
     }
 
-    const file = docInput.files[0];
+    const file = fileInput.files[0];
 
     if (!file){
         message.classList.remove("open-error");
-        labelDoc.style.color = "#e63636";
-        docInput.classList.add("fake-input");
+        labelFile.style.color = "#e63636";
+        fileInput.classList.add("fake-input");
         return false;
     }
     
     if(!fileType.includes(file.type)){
         message.classList.add("open-error");
-        labelDoc.style.color = "#e63636";
-        docInput.classList.add("fake-input");
+        labelFile.style.color = "#e63636";
+        fileInput.classList.add("fake-input");
         return false;
     }else {
         message.classList.remove("open-error");
-        labelDoc.style.color = "#333333";
-        docInput.classList.remove("fake-input");
+        labelFile.style.color = "#333333";
+        fileInput.classList.remove("fake-input");
         return true;
+    }
+}
+
+function validateMediaAdd(){
+    if (validateMediaTitle() && validateMediaFile()){
+        return true;
+    }else {
+        return false;
     }
 }
 
@@ -87,28 +97,33 @@ function resetMediaAdd(){
     labelTitle.style.color = "#333333";
     titleInput.value = "";
     titleInput.style.border = "1px solid #00000040"
-    labelDoc.style.color = "#333333";
-    docInput.value = "";
-    docInput.classList.remove("fake-input");
+    labelFile.style.color = "#333333";
+    fileInput.value = "";
+    fileInput.classList.remove("fake-input");
     resetDropdownType();
     setAcceptImages();
+    mediaAddHeader.innerText = "Adicionar Mídia";
+    btnMediaAdd.innerText = "Adicionar";
+    btnMediaDelete.style.display = "none";
+    typeDropdown.style.display = "inline";
 }
 
 //accepts
 function setAcceptImages(){
-    docInput.setAttribute("accept", ".jpg, .jpeg, .png");
+    fileInput.setAttribute("accept", ".jpg, .jpeg, .png");
 }
 
 function setAcceptVideos(){
-    docInput.setAttribute("accept", ".mp4, .webm");
+    fileInput.setAttribute("accept", ".mp4, .webm");
 }
 
 function setAcceptDoc(){
-    docInput.setAttribute("accept", ".pdf, .txt, .zip");
+    fileInput.setAttribute("accept", ".pdf, .txt, .zip");
 }
 
 //dropdown tipo de arquivo
-const TypeDropdownBtn = document.getElementById("type-dropdown-btn");
+const typeDropdown = document.getElementById("type-dropdown");
+const typeDropdownBtn = document.getElementById("type-dropdown-btn");
 const dropdownListType = document.getElementById("type-dropdown-list");
 const dropdownItemType = document.querySelectorAll(".type-dropdown-list li");
 const selectedType = document.getElementById("selected-type");
@@ -117,7 +132,7 @@ function openDropdownType(){
     if(!dropdownListType.classList.contains("open-dropdown")){
         dropdownListType.style.display = "flex";
         setTimeout(() => {
-            TypeDropdownBtn.classList.add("open-dropdown");
+            typeDropdownBtn.classList.add("open-dropdown");
             dropdownListType.classList.add("open-dropdown");
         }, 10);
     }
@@ -126,7 +141,7 @@ function openDropdownType(){
 function closeDropdownType(){
     if(dropdownListType.classList.contains("open-dropdown")){
         dropdownListType.classList.remove("open-dropdown");
-        TypeDropdownBtn.classList.remove("open-dropdown");
+        typeDropdownBtn.classList.remove("open-dropdown");
         setTimeout(() => {
             dropdownListType.style.display = "none";
         }, 10);
@@ -142,7 +157,7 @@ function resetDropdownType(){
     dropdownItemType[0].classList.add("active");
 }
 
-TypeDropdownBtn.addEventListener("click", function(){
+typeDropdownBtn.addEventListener("click", function(){
     if(dropdownListType.classList.contains("open-dropdown")){
         closeDropdownType();
     }else {
@@ -152,6 +167,8 @@ TypeDropdownBtn.addEventListener("click", function(){
 
 dropdownItemType.forEach(item =>{
     item.addEventListener("click", function(){
+        fileInput.value = "";
+        validateMediaFile();
         selectedType.innerText = item.innerText;
         closeDropdownType();
         dropdownItemType.forEach(item => {
@@ -162,7 +179,64 @@ dropdownItemType.forEach(item =>{
 });
 
 
+//Adicionar nova foto
+const newPhoto = document.getElementById("new-photo");
+const newPhotoTitle = document.getElementById("new-photo-title");
+const newPhotoImg = document.getElementById("new-photo-img");
+
+function addNewPhoto(){
+
+    const file = fileInput.files[0];
+
+    if (file){
+        newPhotoTitle.innerText = titleInput.value;
+        newPhotoImg.src = URL.createObjectURL(file);
+        newPhoto.classList.add("add-new-photo");
+        closeMediaAdd();
+    }
+}
+
+//Editar nova foto
+const photos = document.querySelectorAll(".section-media-photo");
+const editPhotos = document.querySelectorAll(".photo-header .bi-pen");
+const photoTitle = document.querySelectorAll(".photo-header h1");
+const photoImg = document.querySelectorAll(".section-media-photo li img");
+let indexPhoto = 0;
+
+editPhotos.forEach((photo, i) =>{
+    photo.addEventListener("click", function(){
+        mediaAddHeader.innerText = "Editar Mídia";
+        titleInput.value = photoTitle[i].innerText;
+
+        typeDropdown.style.display = "none";
+
+        btnMediaDelete.style.display = "inline";
+        btnMediaAdd.innerText = "Editar";
+        openMediaAdd();
+        indexPhoto = i;
+    });
+});
+
+
 btnMediaAdd.addEventListener("click", function(){
-    validateMediaFile();
-    validateMediaTitle();
+    if (mediaAddHeader.innerText == "Editar Mídia"){
+        let i = indexPhoto;
+
+        if (validateMediaTitle()){
+            photoTitle[i].innerText = titleInput.value;
+        }
+
+        if (validateMediaFile()){
+            const file = fileInput.files[0];
+
+            if (file){
+                photoImg[i].src = URL.createObjectURL(file);
+            }
+        }
+        closeMediaAdd();
+    }else {
+        if (validateMediaAdd()){
+            addNewPhoto();
+        }
+    }
 });
