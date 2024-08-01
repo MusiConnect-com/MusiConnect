@@ -36,16 +36,17 @@ body, button, a, h1, h2, h3, p {
     font-weight: 100;
 }
 
-input:focus{
+input:focus, textarea:focus{
     border-color: var(--orange) !important;
     box-shadow: 0 0 1px 1px var(--orange);
     font-family: "Poppins", sans-serif;
     font-style: normal;
     font-size: 14px;
     font-weight: 100;
+    outline: none;
 }
 
-input:not(:focus) {
+input:not(:focus) , textarea:not(:focus){
     font-family: "Poppins", sans-serif;
     font-style: normal;
     font-size: 14px;
