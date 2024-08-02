@@ -1,2 +1,2 @@
-# MusicConnect
- Projeto MusicConnect do Projeto Integrador - Insted
+# MusiConnect
+ Projeto MusiConnect do Projeto Integrador - Insted
