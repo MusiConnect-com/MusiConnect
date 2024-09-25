@@ -51,3 +51,40 @@ EstadoNome VARCHAR(150) NOT NULL,
 CONSTRAINT PkEstadoUf PRIMARY KEY (EstadoUf),
 CONSTRAINT UqNomeEstado UNIQUE (EstadoNome)
 )
+
+CREATE TABLE TbTelefone (
+TelefoneId SMALLINT IDENTITY(1,1),
+UsuarioId SMALLINT NOT NULL,
+TelefoneNum CHAR(11) NOT NULL,
+
+CONSTRAINT PkTelefoneId PRIMARY KEY (TelefoneId),
+CONSTRAINT FkTelefoneUsuario FOREIGN KEY (UsuarioId) REFERENCES TbUsuario(UsuarioId),
+CONSTRAINT UqTelefoneNum UNIQUE (TelefoneNum)
+)
+
+CREATE TABLE TbHabilidade (
+HabilidadeId SMALLINT IDENTITY(1,1),
+HabilidadeNome VARCHAR(100) NOT NULL,
+HabilidadeDesc VARCHAR(255),
+
+CONSTRAINT PkHabilidadeId PRIMARY KEY (HabilidadeId),
+CONSTRAINT UqHabilidadeNome UNIQUE (HabilidadeNome)
+)
+
+CREATE TABLE TbUsuarioHabilidade (
+UsuarioId SMALLINT NOT NULL,
+HabilidadeId SMALLINT NOT NULL,
+
+CONSTRAINT PkUsuarioHabilidade PRIMARY KEY (UsuarioId, HabilidadeId),
+CONSTRAINT FkHabUsuarioId FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+CONSTRAINT FkUsuHabilidadeId FOREIGN KEY (HabilidadeId) REFERENCES TbHabilidade (HabilidadeId)
+)
+
+CREATE TABLE TbGeneroMusical (
+GeneroMuId SMALLINT IDENTITY(1,1),
+GeneroMuNome VARCHAR(100) NOT NULL,
+GeneroMuDesc VARCHAR(255),
+
+CONSTRAINT PkGeneroMuId PRIMARY KEY (GeneroMuId),
+CONSTRAINT UqGeneroMuNome UNIQUE (GeneroMuNome)
+)
