@@ -88,3 +88,95 @@ GeneroMuDesc VARCHAR(255),
 CONSTRAINT PkGeneroMuId PRIMARY KEY (GeneroMuId),
 CONSTRAINT UqGeneroMuNome UNIQUE (GeneroMuNome)
 )
+
+CREATE TABLE TbUsuarioGeneroMu (
+UsuarioId SMALLINT NOT NULL,
+GeneroMuId SMALLINT NOT NULL,
+
+CONSTRAINT PkUsuarioGeneroMusical PRIMARY KEY (UsuarioId, GeneroMuId),
+CONSTRAINT FkGeneroMusicalUsuarioId FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+CONSTRAINT FkUsuarioGeneroMusicalId FOREIGN KEY (GeneroMuId) REFERENCES TbGeneroMusical (GeneroMuId)
+)
+
+CREATE TABLE TbRedeSocial (
+RedeSocialId SMALLINT IDENTITY(1,1),
+UsuarioId SMALLINT NOT NULL,
+RedeSocialNome VARCHAR(100) NOT NULL,
+RedeSocialUrl VARCHAR(1000) NOT NULL,
+
+CONSTRAINT PkRedeSocialId PRIMARY KEY (RedeSocialId),
+CONSTRAINT FkRedeSocialUsuarioId FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId)
+)
+
+CREATE TABLE TbAnuncio (
+    AnuncioId SMALLINT IDENTITY(1,1),
+    UsuarioId SMALLINT NOT NULL,
+    AnuncioDataHora DATETIME NOT NULL,
+    AnuncioValidade DATE NOT NULL,
+    TipoEventoId SMALLINT NOT NULL,
+    AnuncioLogradouro VARCHAR(100),
+    AnuncioNumero SMALLINT,
+    AnuncioComplemento VARCHAR(150),
+    AnuncioBairro VARCHAR(100),
+    AnuncioCep CHAR(8),
+    CidadeId SMALLINT NOT NULL,
+    AnuncioDescricao VARCHAR(255),
+    AnuncioValor DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT PkAnuncioId PRIMARY KEY (AnuncioId),
+    CONSTRAINT FkAnuncioUsuarioId FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+    CONSTRAINT FkAnuncioTipoEventoId FOREIGN KEY (TipoEventoId) REFERENCES TbTipoEvento (TipoEventoId),
+    CONSTRAINT FkAnuncioCidadeId FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
+);
+
+CREATE TABLE TbAnuncioHabilidade (
+    AnuncioId SMALLINT NOT NULL,
+    HabilidadeId SMALLINT NOT NULL,
+
+    CONSTRAINT PkAnuncioHabilidadeId PRIMARY KEY (AnuncioId, HabilidadeId),
+    CONSTRAINT FkAnuncioHabilidadeAnuncioId FOREIGN KEY (AnuncioId) REFERENCES TbAnuncio (AnuncioId),
+    CONSTRAINT FkAnuncioHabilidadeHabilidadeId FOREIGN KEY (HabilidadeId) REFERENCES TbHabilidade (HabilidadeId)
+);
+
+CREATE TABLE TbAnuncioGeneroMusical (
+    AnuncioId SMALLINT NOT NULL,
+    GeneroMuId SMALLINT NOT NULL,
+
+    CONSTRAINT PkAnuncioGeneroMusicalId PRIMARY KEY (AnuncioId, GeneroMuId),
+    CONSTRAINT FkAnuncioGeneroMusicalAnuncioId FOREIGN KEY (AnuncioId) REFERENCES TbAnuncio (AnuncioId),
+    CONSTRAINT FkAnuncioGeneroMusicalGeneroId FOREIGN KEY (GeneroMuId) REFERENCES TbGeneroMusical (GeneroMuId)
+);
+
+CREATE TABLE TbContrato (
+    ContratoId SMALLINT IDENTITY(1,1),
+    UsuarioId SMALLINT NOT NULL,
+    AnuncioId SMALLINT,
+    ContratoDataHora DATETIME NOT NULL,
+    ContratoDataHoraAtividade DATETIME NOT NULL,
+    ContratoDescricaoAtividade VARCHAR(255),
+    TipoEventoId SMALLINT NOT NULL,
+    ContratoLogradouro VARCHAR(100),
+    ContratoNumero SMALLINT,
+    ContratoComplemento VARCHAR(150),
+    ContratoBairro VARCHAR(100),
+    ContratoCep CHAR(8),
+    CidadeId SMALLINT NOT NULL,
+    ContratoValor DECIMAL(10,2) NOT NULL,
+    ContratoPenalidade VARCHAR(255),
+    ContratoStatus CHAR(1) NOT NULL, 
+
+    CONSTRAINT PkContratoId PRIMARY KEY (ContratoId),
+    CONSTRAINT FkContratoUsuarioId FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+    CONSTRAINT FkContratoAnuncioId FOREIGN KEY (AnuncioId) REFERENCES TbAnuncio (AnuncioId),
+    CONSTRAINT FkContratoTipoEventoId FOREIGN KEY (TipoEventoId) REFERENCES TbTipoEvento (TipoEventoId),
+    CONSTRAINT FkContratoCidadeId FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
+);
+
+CREATE TABLE TbTipoEvento (
+    TipoEventoId SMALLINT IDENTITY(1,1),
+    TipoEventoNome VARCHAR(100) NOT NULL,
+    TipoEventoDescricao VARCHAR(255),
+
+    CONSTRAINT PkTipoEventoId PRIMARY KEY (TipoEventoId),
+    CONSTRAINT UqTipoEventoNomeId UNIQUE (TipoEventoNome)
+);
