@@ -14,7 +14,7 @@ form.addEventListener("submit", (event) =>{
     comparePassword();
 
     if (isFormValid()) {
-        window.location.href = "/html/objetivo.html";
+        window.location.href = "../objetivo.html";
     }
 });
 

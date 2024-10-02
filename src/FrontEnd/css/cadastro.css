@@ -105,6 +105,15 @@ main{
     border-color: var(--orange);
 }
 
+#nome-sobrenome {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+#nome-sobrenome input {
+    width: 50%;
+}
+
 .card button {
     background-color: var(--dark-navy-blue);
     font-size: 18px;

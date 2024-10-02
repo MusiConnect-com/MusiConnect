@@ -21,8 +21,6 @@ form.addEventListener("submit", (event) =>{
         else if (loginContratante()){
             window.location.href = "/html/home-contratante.html";
         }
-        
-        
     }
 })
 
@@ -60,8 +58,6 @@ function removePassError(index){
 function clearField(index){
     campos[index].value = "";
 }
-
-
 
 function loginMusico(){
 
