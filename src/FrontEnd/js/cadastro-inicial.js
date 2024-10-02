@@ -1,7 +1,7 @@
 
 //validações do formulário
 // Adiciona a lógica de redirecionamento após o envio do formulário
-const form = document.getElementById("form");
+const form = document.getElementById("form-cadastro");
 const campos = document.querySelectorAll(".required");
 const spans = document.querySelectorAll(".span-required");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

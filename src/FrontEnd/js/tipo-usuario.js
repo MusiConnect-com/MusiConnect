@@ -47,11 +47,11 @@ buttonConfirm.addEventListener("click", function(event) {
         const musicOption = document.getElementById('music');
         const contractorOption = document.getElementById('contractor');
         
-        if (musicOption.checked) {
-            window.location.href = "/html/home-musico.html";
-        } else if (contractorOption.checked) {
-            window.location.href = "/html/home-contratante.html";
-        }
+        // if (musicOption.checked) {
+        //     window.location.href = "/html/home-musico.html";
+        // } else if (contractorOption.checked) {
+        //     window.location.href = "/html/home-contratante.html";
+        // }
     }
 });
 

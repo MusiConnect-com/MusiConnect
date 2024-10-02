@@ -1,3 +1,11 @@
+<?php 
+// Limpa as mensagens de erro após exibi-las
+if (!empty($_SESSION['cpf_error']) || !empty($_SESSION['email_error'])) {
+    unset($_SESSION['cpf_error']);
+    unset($_SESSION['email_error']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,9 +13,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/cadastro-inicial.css">
     <link rel="stylesheet" href="../global.css">
-    <script src="../js/cadastro.js" defer></script>
+    <!-- <script src="../js/cadastro-inicial.js" defer></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -25,7 +33,10 @@
             <div class="card">
                 <h2>Sign up</h2>
                 <p>Já tem cadastro? <a href="./login.html">Faça login</a></p>
-                <form id="form">
+
+                <?php session_start(); ?>
+
+                <form action="./tipo-usuario.php" method="post" id="form-cadastro">
                     <div>
                         <div id="nome-sobrenome">
                             <input type="text" class="firt-name required" name="nome" placeholder="Nome" oninput="nameValidate()">
@@ -35,12 +46,41 @@
                     </div>
 
                     <div>
-                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()">
-                        <span class="span-required">Digite um email válido</span>
+                        <input type="text" class="cpf required" name="cpf" id="cpf" placeholder="CPF" maxlength="14" oninput="mascaraCPF(this)">
+                        <span class="span-required">Digite um CPF válido</span>
+
+                        <?php if (!empty($_SESSION['cpf_error'])): ?>
+                            <div class="error-message"><?php echo $_SESSION['cpf_error']; ?></div>
+                        <?php endif; ?>
+
+                        <script>
+                            function mascaraCPF(cpf) {
+                                // Remove caracteres que não sejam números
+                                cpf.value = cpf.value.replace(/\D/g, '');
+                                
+                                // Adiciona a máscara ao CPF
+                                cpf.value = cpf.value.replace(/(\d{3})(\d)/, '$1.$2');
+                                cpf.value = cpf.value.replace(/(\d{3})(\d)/, '$1.$2');
+                                cpf.value = cpf.value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+                                // Limita o número de caracteres
+                                if (cpf.value.length > 14) {
+                                    cpf.value = cpf.value.substring(0, 14);
+                                }
+                            }
+                        </script>
                     </div>
 
                     <div>
-                        <input type="password" class="password required" name="password" placeholder="Senha" oninput="passwordValidate()">
+                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()">
+                        <span class="span-required">Digite um email válido</span>
+                        <?php if (!empty($_SESSION['email_error'])): ?>
+                            <div class="error-message"><?php echo $_SESSION['email_error']; ?></div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div>
+                        <input type="password" class="password required" name="senha" placeholder="Senha" oninput="passwordValidate()">
                         <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
                     </div>
 
@@ -52,9 +92,9 @@
                     <button type="submit" id="button-signup">Cadastrar</button>
                 </form>
 
+
                 <p>Ao criar uma conta, você concorda com os <span>Termos de uso</span>
                     e <span>Política de Privacidade</span></p>
-                
             </div>
         </div>
     </main>

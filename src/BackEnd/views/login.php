@@ -49,3 +49,10 @@ if ($resultado && sqlsrv_has_rows($resultado)) {
 sqlsrv_free_stmt($result);
 sqlsrv_close($conn);
 ?>
+
+
+echo "<p>Nome: " . htmlspecialchars($nome) . "</p>";
+        echo "<p>Sobrenome: " . htmlspecialchars($_sobrenome) . "</p>";
+        echo "<p>Email: " . htmlspecialchars($email) . "</p>";
+        echo "<p>Senha: " . htmlspecialchars($senha) . "</p>";
+        echo "<p>Tipo usuario: " . htmlspecialchars($usuarioTipo) . "</p>";
