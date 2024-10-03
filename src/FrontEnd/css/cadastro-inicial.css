@@ -90,9 +90,10 @@ main{
 }
 
 .session-error {
+    display: block;
     font-size: 12px;
-    color: var(--red);
-    text-align: left;
+    color: var(--red) !important;
+    text-align: left !important;
     margin: 5px 0 0 5px;
 }
 
@@ -149,12 +150,12 @@ main{
     cursor: default;
 }
 
-.card p span, .session-error {
+.card p span {
     color: var(--orange);
     text-decoration: none;
 }
 
-.card p span:hover, .session-error:hover{
+.card p span:hover {
     text-decoration:underline;
     cursor: pointer;
 }

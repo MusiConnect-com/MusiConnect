@@ -1,13 +1,23 @@
+<?php
+session_start();
+
+    // if (!isset($_SESSION['UsuarioId'], $_SESSION['UsuarioTipo'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'])) {
+    //     header('Location: ../../BackEnd/views/logout.php');
+    //     exit();
+    // }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <link rel="stylesheet" href="/css/home-contratante.css">
-    <script src="/js/perfil.js" defer></script>
-    <script src="/js/pesquisar-cabecalho-contratante.js" defer></script>
-    <script src="/js/contratos-ativos.js" defer></script>
+    <link rel="stylesheet" href="../css/home-contratante.css">
+    <link rel="stylesheet" href="../global.css">
+    <script src="../js/perfil.js" defer></script>
+    <script src="../js/pesquisar-cabecalho-contratante.js" defer></script>
+    <script src="../js/contratos-ativos.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +33,7 @@
     <!--CABEÇALHO-->
     <header>
         <div class="content">
-            <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
+            <a class="logo" href=""><img src="../img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
@@ -36,7 +46,7 @@
     
             <div class="profile">
                 <div class="profile-button" id="profile-button">
-                    <img src="/img/perfil-contratante.jpg" alt="">
+                    <img src="../img/perfil-contratante.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -52,17 +62,21 @@
     <!--PERFIL CABEÇALHO-->
     <div class="profile-list" id="profile-list">
         <div class="content-top">
-            <img src="/img/perfil-contratante.jpg" alt="">
-            <p>Marcos Bueno</p>
+            <img src="../img/perfil-contratante.jpg" alt="">
+
+            <?php
+                echo "<p>" . $_SESSION['UsuarioNome'] . " " . $_SESSION['UsuarioSobrenome'] . "</p>";
+            ?>
+            
             <div>
                 <i id="close-profile-list" class="bi bi-x"></i>
             </div>
         </div>
         <hr>
         <div class="content-bottom">
-            <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a></li>
-            <a class="profile-list-items" href="">Configurações</a></li>
-            <a class="profile-list-items" href="/html/login.html">Sair</a></li>
+            <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a>
+            <a class="profile-list-items" href="">Configurações</a>
+            <a class="profile-list-items" href="../../BackEnd/views/logout.php">Sair</a>
         </div>
     </div>
     <!--FIM PERFIL CABEÇALHO-->

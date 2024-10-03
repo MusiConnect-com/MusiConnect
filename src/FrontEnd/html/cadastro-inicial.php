@@ -1,11 +1,7 @@
 <?php 
 
 session_start();
-// Limpa as mensagens de erro após exibi-las
-// if (!empty($_SESSION['cpf-error']) || !empty($_SESSION['email-error'])) {
-//     unset($_SESSION['cpf-error']);
-//     unset($_SESSION['email-error']);
-// }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,45 +30,51 @@ session_start();
         <div class="signup-right">
             <div class="card">
                 <h2>Sign up</h2>
-                <p>Já tem cadastro? <a href="./login.html">Faça login</a></p>
+                <p>Já tem cadastro? <a href="./login.php">Faça login</a></p>
 
-                <form action="./tipo-usuario.php" method="post" id="form-cadastro" onsubmit="return limparCpf()">
+                <form action="../../BackEnd/views/consultar-cpf-email.php" method="post" id="form-cadastro" onsubmit="return validarForm()">
                     <div>
                         <div id="nome-sobrenome">
-                            <input type="text" class="firt-name required" name="nome" placeholder="Nome" oninput="nameValidate()">
-                            <input type="text" class="last-name required" name="sobrenome" placeholder="Sobrenome">
+                            <input type="text" class="first-name required" name="nome" placeholder="Nome" oninput="nameValidate()" minlength="3" required>
+                            <input type="text" class="last-name required" name="sobrenome" placeholder="Sobrenome" minlength="3" required>
                         </div>
                         <span class="span-required">Nome deve ter no mínimo 3 caracteres</span>
                     </div>
 
                     <div>
-                        <input type="text" class="cpf required" name="cpf" id="cpf" placeholder="CPF" maxlength="14" oninput="mascaraCPF(this)">
+                        <input type="text" class="cpf required" name="cpf" id="cpf" placeholder="CPF" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="mascaraCPF(this)" required>
                         <span class="span-required">Digite um CPF válido</span>
 
-                        <?php if (!empty($_SESSION['cpf-error'])){
+                        <?php 
+                            if (!empty($_SESSION['cpf-error'])){
                                 echo "<span class='session-error'>" . $_SESSION['cpf-error'] . "</span>";
+
+                                unset($_SESSION['cpf-error']);
                             }
                         ?>
                     </div>
 
                     <div>
-                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()">
+                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()" required>
                         <span class="span-required">Digite um email válido</span>
 
-                        <?php if (!empty($_SESSION['email-error'])){
+                        <?php 
+                            if (!empty($_SESSION['email-error'])){
                                 echo "<span class='session-error'>" . $_SESSION['email-error'] . "</span>";
+
+                                unset($_SESSION['email-error']);
                             }
                         ?>
                     </div>
 
                     <div>
-                        <input type="password" class="password required" name="senha" placeholder="Senha" oninput="passwordValidate()">
+                        <input type="password" class="password required" name="senha" id="senha" placeholder="Senha" oninput="passwordValidate()" minlength="8" required>
                         <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
                     </div>
 
                     <div>
-                        <input type="password" class="confirm-password required" placeholder="Confirmar senha" oninput="comparePassword()">
-                        <span class="span-required">Senhas devem ser compatíveis</span>
+                        <input type="password" class="confirm-password required" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar senha" oninput="comparePassword()" minlength="8" required>
+                        <span class="span-required" id="span-senha-diferente">Senhas devem ser compatíveis</span>
                     </div>
 
                     <button type="submit" id="button-signup">Cadastrar</button>
@@ -93,15 +95,27 @@ session_start();
                                 }
                             }
 
-                            function limparCpf() {
+                            function validarForm() {
                                 // Obtém o valor do campo CPF
                                 var cpfInput = document.getElementById('cpf');
+                                var senha = document.getElementById('senha').value;
+                                var confirmSenha = document.getElementById('confirmar-senha').value;
+                                var spanSenhaDif = document.getElementById('span-senha-diferente');
 
                                 // Remove a máscara
                                 cpfInput.value = cpfInput.value.replace(/\D/g, '');
 
-                                return true;
+                                if (senha !== confirmSenha) {
+                                    spanSenhaDif.style.display = "block";
+                                    return false;
+                                } else {
+                                    spanSenhaDif.style.display = "none";
+                                    return true;
+                                }
+
+                                
                             }
+
                     </script>
                 </form>
 

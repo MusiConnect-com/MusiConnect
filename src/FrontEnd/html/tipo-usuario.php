@@ -21,17 +21,7 @@
                     <span>Você deve escolher uma das opções para continuar!</span>
                 </div>
 
-                <?php
-                    session_start();
-
-                    echo "<p>Nome: " . htmlspecialchars($_SESSION['nome']) . "</p>";
-                    echo "<p>Sobrenome: " . htmlspecialchars($_SESSION['sobrenome']) . "</p>";
-                    echo "<p>CPF: " . htmlspecialchars($_SESSION['cpf']) . "</p>";
-                    echo "<p>Email: " . htmlspecialchars($_SESSION['email']) . "</p>";
-                    echo "<p>Senha: " . htmlspecialchars($_SESSION['senha']) . "</p>";
-                ?>
-
-                <form action="../../backend/views/processar-cadastro.php" method="post" class="form-box-select" id="form-box-select">
+                <form action="../../BackEnd/views/processar-cadastro.php" method="post" class="form-box-select" id="form-box-select">
                     <label class="select-music" for="music" onclick="validateSelection()">
                         <div>
                             <input type="radio" name="tipo-usuario" id="music" value="M">

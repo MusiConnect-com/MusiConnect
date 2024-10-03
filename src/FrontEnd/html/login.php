@@ -20,10 +20,19 @@
         <div class="login-left">
             <div class="card">
                 <h2>Login</h2>
-                <span class="span-correct">Email não cadastrado!</span>
-                <span class="span-correct">Senha incorreto! Verifique e tente novamente</span>
 
-                <form class="form" id="form" action="../../BackEnd/forms/login.php" method="POST">
+                <!-- mensagem de erro -->
+                <?php 
+                    session_start();
+
+                    if (!empty($_SESSION['login-error'])){
+                        echo "<span class='login-error'>" . $_SESSION['login-error'] . "</span>";
+
+                        unset($_SESSION['login-error']);
+                    }
+                ?>
+
+                <form class="form" id="form" action="../../BackEnd/views/processar-login.php" method="POST">
                     <div>
                         <input type="email" name="email" class="email required" placeholder="E-mail" oninput="emailValidate()" required>
                         <span class="span-required">Digite um email válido</span>
@@ -38,7 +47,7 @@
                 </form>
                 
                 
-                <p>Ainda não tem uma conta? <a href="./cadastro.html">Crie uma agora!</a></p>
+                <p>Ainda não tem uma conta? <a href="./cadastro-inicial.php">Crie uma agora!</a></p>
                 <p><a href="#">Esqueceu sua senha?</a></p>
             </div>
         </div>
