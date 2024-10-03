@@ -1,32 +1,15 @@
 <?php
-// Dados para conexão no banco
-$serverNome = 'João\SQLEXPRESS';
-$dbNome = 'DbMusicConnect';
-$usuaNome = 'joao';
-$senha = 'Jo121218vi!';
 
-// Cria a conexão com o banco
-$conexao = sqlsrv_connect($serverNome, array(
-    'Database' => $dbNome,
-    'UID' => $usuaNome,
-    'PWD' => $senha
-));
+include '../../backend/views/conexao.php';
 
-// Verifica a conexão
-if ($conexao === false) {
-    die("Erro na conexão com o banco: " . print_r(sqlsrv_errors(), true));
-} else {
-    echo "Conexão bem-sucedida!";
-}
-
-// Inicia a sessão para captura de dados salvos na sessão
 session_start();
 
 // Captura os dados salvos na sessão
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_SESSION['nome'], $_SESSION['sobrenome'], $_SESSION['email'], $_SESSION['senha'])) {
+    if (isset($_SESSION['nome'], $_SESSION['sobrenome'],$_SESSION['cpf'], $_SESSION['email'], $_SESSION['senha'])) {
         $nome = $_SESSION['nome'];
         $sobrenome = $_SESSION['sobrenome'];
+        $cpf = $_SESSION['cpf'];
         $email = $_SESSION['email'];
         $senha = $_SESSION['senha'];
         $hash = password_hash($senha, PASSWORD_BCRYPT);
@@ -46,26 +29,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sqlGetSenhaId = "SELECT SenhaId FROM TbSenha WHERE SenhaHash = ?";
         $parametroGetSenhaId = array($hash);
         $resultGetSenhaId = sqlsrv_query($conexao, $sqlGetSenhaId, $parametroGetSenhaId);
-        
+
         if ($resultGetSenhaId === false) {
             die("Erro ao recuperar o ID da senha: " . print_r(sqlsrv_errors(), true));
+        } 
+
+        // Tente obter a linha e o valor da SenhaId
+        if (sqlsrv_fetch($resultGetSenhaId)) {
+            $senhaId = sqlsrv_get_field($resultGetSenhaId, 0);
         } else {
-            // Tente obter a linha e o valor da SenhaId
-            if (sqlsrv_fetch($resultGetSenhaId)) {
-                $senhaId = sqlsrv_get_field($resultGetSenhaId, 0); // Obtém o primeiro campo, que é o SenhaId
-            } else {
-                die("Erro ao recuperar o ID da senha. Nenhum resultado foi retornado.");
-            }
+            die("Erro ao recuperar o ID da senha. Nenhum resultado foi retornado.");
         }
 
         // Verifica se o ID da senha foi recuperado corretamente
         if ($senhaId === null) {
-            die("Erro ao recuperar o ID da senha.");
+            die("SenhaId é null.");
         }
 
         // Cria a inserção de novo registro na tabela usuário
-        $sqlUsuario = "INSERT INTO TbUsuario (UsuarioEmail, SenhaId, UsuarioTipo, UsuarioNome, UsuarioSobrenome, UsuarioDataCad) VALUES (?, ?, ?, ?, ?, GETDATE())";
-        $parametroUsuario = array($email, $senhaId, $usuarioTipo, $nome, $sobrenome);
+        $sqlUsuario = "INSERT INTO TbUsuario (UsuarioCpf, UsuarioEmail, SenhaId, UsuarioTipo, UsuarioNome, UsuarioSobrenome, UsuarioDataCad) VALUES (?, ?, ?, ?, ?, ?, GETDATE())";
+        $parametroUsuario = array($cpf, $email, $senhaId, $usuarioTipo, $nome, $sobrenome);
         $resultadoSetUsuario = sqlsrv_query($conexao, $sqlUsuario, $parametroUsuario);
 
         // Verifica se a inserção do usuário foi bem-sucedida
@@ -75,9 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redireciona baseado no tipo de usuário
         if ($usuarioTipo === "M") {
-            header("Location: ../../frontEnd/html/home-musico.html");
+            header("Location: ../../frontend/html/home-musico.html");
+            exit();
         } elseif ($usuarioTipo === "C") {
-            header("Location: ../../frontEnd/html/home-contratante.html");
+            header("Location: ../../frontend/html/home-contratante.html");
+            exit();
         }
 
         // Libera os resultados

@@ -1,53 +1,3 @@
-<?php
-include '../../BackEnd/views/conexao.php'; // Inclua aqui seu arquivo de conexão ao banco de dados
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtém os dados do formulário
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $cpf = $_POST['cpf'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-
-    // Verifica se o CPF ou e-mail já existe
-    $query = "SELECT * FROM TbUsuario WHERE UsuarioCpf = ? OR UsuarioEmail = ?";
-    $params = array($cpf, $email);
-    $stmt = sqlsrv_query($conexao, $query, $params);
-
-    if ($stmt === false) {
-        die(print_r(sqlsrv_errors(), true));
-    }
-
-    $cpfExists = false;
-    $emailExists = false;
-
-    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-        if ($row['UsuarioCpf'] === $cpf) {
-            $cpfExists = true;
-        }
-        if ($row['UsuarioEmail'] === $email) {
-            $emailExists = true;
-        }
-    }
-
-    // Armazena mensagens de erro
-    $_SESSION['cpf_error'] = $cpfExists ? "CPF já cadastrado." : "";
-    $_SESSION['email_error'] = $emailExists ? "Email já cadastrado." : "";
-
-    // Se nenhum dos dois existir, redireciona para tipo-usuario.php
-    if (!$cpfExists && !$emailExists) {
-        // Aqui você pode fazer o cadastro no banco de dados
-        // redirecionar para tipo-usuario.php
-        header("Location: ./tipo-usuario.php");
-        exit();
-    } else {
-        // Se houver erro, redireciona para o formulário de cadastro novamente
-        header("Location: ./cadastro-inicial.php");
-        exit();
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -73,13 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <?php
                     session_start();
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $_SESSION['nome'] = $_POST['nome'];
-                        $_SESSION['sobrenome'] = $_POST['sobrenome'];
-                        $_SESSION['cpf'] = $_POST['cpf'];
-                        $_SESSION['email'] = $_POST['email'];
-                        $_SESSION['senha'] = $_POST['senha'];
-                    }
 
                     echo "<p>Nome: " . htmlspecialchars($_SESSION['nome']) . "</p>";
                     echo "<p>Sobrenome: " . htmlspecialchars($_SESSION['sobrenome']) . "</p>";

@@ -1,6 +1,6 @@
 <?php
 // Dados para conexão no banco
-$serverNome = 'João\SQLEXPRESS';
+$serverNome = 'DESKTOP-N30O7C6\SQLEXPRESS';
 $dbNome = 'DbMusicConnect';
 $usuaNome = 'joao';
 $senha = 'Jo121218vi!';

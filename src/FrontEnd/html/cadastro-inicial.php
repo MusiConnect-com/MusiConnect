@@ -1,9 +1,11 @@
 <?php 
+
+session_start();
 // Limpa as mensagens de erro após exibi-las
-if (!empty($_SESSION['cpf_error']) || !empty($_SESSION['email_error'])) {
-    unset($_SESSION['cpf_error']);
-    unset($_SESSION['email_error']);
-}
+// if (!empty($_SESSION['cpf-error']) || !empty($_SESSION['email-error'])) {
+//     unset($_SESSION['cpf-error']);
+//     unset($_SESSION['email-error']);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +36,7 @@ if (!empty($_SESSION['cpf_error']) || !empty($_SESSION['email_error'])) {
                 <h2>Sign up</h2>
                 <p>Já tem cadastro? <a href="./login.html">Faça login</a></p>
 
-                <?php session_start(); ?>
-
-                <form action="./tipo-usuario.php" method="post" id="form-cadastro">
+                <form action="./tipo-usuario.php" method="post" id="form-cadastro" onsubmit="return limparCpf()">
                     <div>
                         <div id="nome-sobrenome">
                             <input type="text" class="firt-name required" name="nome" placeholder="Nome" oninput="nameValidate()">
@@ -49,11 +49,35 @@ if (!empty($_SESSION['cpf_error']) || !empty($_SESSION['email_error'])) {
                         <input type="text" class="cpf required" name="cpf" id="cpf" placeholder="CPF" maxlength="14" oninput="mascaraCPF(this)">
                         <span class="span-required">Digite um CPF válido</span>
 
-                        <?php if (!empty($_SESSION['cpf_error'])): ?>
-                            <div class="error-message"><?php echo $_SESSION['cpf_error']; ?></div>
-                        <?php endif; ?>
+                        <?php if (!empty($_SESSION['cpf-error'])){
+                                echo "<span class='session-error'>" . $_SESSION['cpf-error'] . "</span>";
+                            }
+                        ?>
+                    </div>
 
-                        <script>
+                    <div>
+                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()">
+                        <span class="span-required">Digite um email válido</span>
+
+                        <?php if (!empty($_SESSION['email-error'])){
+                                echo "<span class='session-error'>" . $_SESSION['email-error'] . "</span>";
+                            }
+                        ?>
+                    </div>
+
+                    <div>
+                        <input type="password" class="password required" name="senha" placeholder="Senha" oninput="passwordValidate()">
+                        <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
+                    </div>
+
+                    <div>
+                        <input type="password" class="confirm-password required" placeholder="Confirmar senha" oninput="comparePassword()">
+                        <span class="span-required">Senhas devem ser compatíveis</span>
+                    </div>
+
+                    <button type="submit" id="button-signup">Cadastrar</button>
+
+                    <script>
                             function mascaraCPF(cpf) {
                                 // Remove caracteres que não sejam números
                                 cpf.value = cpf.value.replace(/\D/g, '');
@@ -68,28 +92,17 @@ if (!empty($_SESSION['cpf_error']) || !empty($_SESSION['email_error'])) {
                                     cpf.value = cpf.value.substring(0, 14);
                                 }
                             }
-                        </script>
-                    </div>
 
-                    <div>
-                        <input type="email" class="email required" name="email" placeholder="E-mail" oninput="emailValidate()">
-                        <span class="span-required">Digite um email válido</span>
-                        <?php if (!empty($_SESSION['email_error'])): ?>
-                            <div class="error-message"><?php echo $_SESSION['email_error']; ?></div>
-                        <?php endif; ?>
-                    </div>
+                            function limparCpf() {
+                                // Obtém o valor do campo CPF
+                                var cpfInput = document.getElementById('cpf');
 
-                    <div>
-                        <input type="password" class="password required" name="senha" placeholder="Senha" oninput="passwordValidate()">
-                        <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
-                    </div>
+                                // Remove a máscara
+                                cpfInput.value = cpfInput.value.replace(/\D/g, '');
 
-                    <div>
-                        <input type="password" class="confirm-password required" placeholder="Confirmar senha" oninput="comparePassword()">
-                        <span class="span-required">Senhas devem ser compatíveis</span>
-                    </div>
-
-                    <button type="submit" id="button-signup">Cadastrar</button>
+                                return true;
+                            }
+                    </script>
                 </form>
 
 
