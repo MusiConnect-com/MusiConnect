@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0" version="24.7.17">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2940" dy="1158" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1654" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -91,7 +91,7 @@
         <mxCell id="g0T9W5ghNMHpebIkajyG-13" value="TbAnuncio" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="1020" y="410" width="160" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="g0T9W5ghNMHpebIkajyG-61" value="- AnuncioId (PK)&lt;div&gt;- UsuarioId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioDataHora&lt;/div&gt;&lt;div&gt;- AnuncioValidade&lt;/div&gt;&lt;div&gt;- TipoEventoId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioEndLogr&lt;/div&gt;&lt;div&gt;- AnuncioEndNum&lt;/div&gt;&lt;div&gt;- AnuncioEndComp&lt;/div&gt;&lt;div&gt;- AnuncioEndBai&lt;/div&gt;&lt;div&gt;- AnuncioEndCep&lt;/div&gt;&lt;div&gt;- CidadeId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioDesc&lt;/div&gt;&lt;div&gt;- AnuncioValor&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="g0T9W5ghNMHpebIkajyG-13">
+        <mxCell id="g0T9W5ghNMHpebIkajyG-61" value="- AnuncioId (PK)&lt;div&gt;- UsuarioId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioDataHr&lt;/div&gt;&lt;div&gt;- AnuncioValidade&lt;/div&gt;&lt;div&gt;- TipoEventoId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioEndLogr&lt;/div&gt;&lt;div&gt;- AnuncioEndNum&lt;/div&gt;&lt;div&gt;- AnuncioEndComp&lt;/div&gt;&lt;div&gt;- AnuncioEndBai&lt;/div&gt;&lt;div&gt;- AnuncioEndCep&lt;/div&gt;&lt;div&gt;- CidadeId (FK)&lt;/div&gt;&lt;div&gt;- AnuncioDesc&lt;/div&gt;&lt;div&gt;- AnuncioValor&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="g0T9W5ghNMHpebIkajyG-13">
           <mxGeometry y="30" width="160" height="200" as="geometry" />
         </mxCell>
         <mxCell id="g0T9W5ghNMHpebIkajyG-15" value="TbTipoEvento" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
