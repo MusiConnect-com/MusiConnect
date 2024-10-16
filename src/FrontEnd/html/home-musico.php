@@ -74,7 +74,7 @@ session_start();
         </div>
         <hr>
         <div class="content-bottom">
-            <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a>
+            <a class="profile-list-items" href="perfil-musico.html">Meu Perfil</a>
             <a class="profile-list-items" href="">Configurações</a>
             <a class="profile-list-items" href="../../BackEnd/views/logout.php">Sair</a>
         </div>
