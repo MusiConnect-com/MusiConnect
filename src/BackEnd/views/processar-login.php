@@ -9,7 +9,7 @@ $email = $_POST['email'];
 $senha = $_POST['password'];
 
 // Cria a consulta SQL
-$sqlGetUsuario = "SELECT u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, SenhaStatus FROM TbUsuario u INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId WHERE u.UsuarioEmail = ?";
+$sqlGetUsuario = "SELECT u.UsuarioId, u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, SenhaStatus FROM TbUsuario u INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId WHERE u.UsuarioEmail = ?";
 $parametro = array($email);
 $resultadoGetUsuario = sqlsrv_query($conexao, $sqlGetUsuario, $parametro);
 

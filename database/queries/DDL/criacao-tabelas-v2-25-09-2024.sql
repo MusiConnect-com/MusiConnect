@@ -30,7 +30,9 @@ UsuarioEndComp VARCHAR(255),
 UsuarioEndBai VARCHAR(255),
 UsuarioEndCep CHAR(8),
 CidadeId SMALLINT,
-UsuarioDataCad DATETIME NOT NULL,
+UsuarioDesc TEXT,
+UsuarioPreco DECIMAL(10,2),
+UsuarioDataCad DATETIME NOT NULL DEFAULT GETDATE(),
 
 CONSTRAINT PkUsuarioId PRIMARY KEY (UsuarioId),
 CONSTRAINT UqUsuarioCpf UNIQUE (UsuarioCpf),
@@ -44,8 +46,8 @@ CREATE TABLE TbSenha (
 SenhaId SMALLINT IDENTITY(1,1),
 UsuarioId SMALLINT NOT NULL,
 SenhaHash VARCHAR(255) NOT NULL,
-SenhaDataAlt DATETIME NOT NULL,
-SenhaStatus BIT NOT NULL,
+SenhaDataAlt DATETIME NOT NULL DEFAULT GETDATE(),
+SenhaStatus BIT NOT NULL DEFAULT 1,
 
 CONSTRAINT PkSenhaId PRIMARY KEY (SenhaId),
 CONSTRAINT FKUsuarioIdTbSenha FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId)
@@ -62,6 +64,16 @@ CONSTRAINT FkUsuarioIdTbTelefone FOREIGN KEY (UsuarioId) REFERENCES TbUsuario(Us
 CONSTRAINT UqTelefoneNum UNIQUE (TelefoneNum)
 );
 
+CREATE TABLE TbRedeSocial (
+RedeSocialId SMALLINT IDENTITY(1,1),
+UsuarioId SMALLINT NOT NULL,
+RedeSocialNome VARCHAR(255) NOT NULL,
+RedeSocialUrl TEXT NOT NULL,
+
+CONSTRAINT PkRedeSocialId PRIMARY KEY (RedeSocialId),
+CONSTRAINT FkUsuarioIdTbRedeSocial FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId)
+); 
+
 CREATE TABLE TbHabilidade (
 HabilidadeId SMALLINT IDENTITY(1,1),
 HabilidadeNome VARCHAR(255) NOT NULL,
@@ -73,7 +85,7 @@ CONSTRAINT UqHabilidadeNome UNIQUE (HabilidadeNome)
 
 CREATE TABLE TbUsuarioHabilidade (
 UsuarioId SMALLINT NOT NULL,
-HabilidadeId SMALLINT NOT NULL,
+HabilidadeId SMALLINT NOT NULL, 
 
 CONSTRAINT PkUsuarioIdHabilidadeId PRIMARY KEY (UsuarioId, HabilidadeId),
 CONSTRAINT FkUsuarioIdTbUH FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
@@ -98,20 +110,11 @@ CONSTRAINT FkUsuarioIdTbUGM FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (Usuari
 CONSTRAINT FkGeneroMuIdTbUGM FOREIGN KEY (GeneroMuId) REFERENCES TbGeneroMusical (GeneroMuId)
 );
 
-CREATE TABLE TbRedeSocial (
-RedeSocialId SMALLINT IDENTITY(1,1),
-UsuarioId SMALLINT NOT NULL,
-RedeSocialNome VARCHAR(255) NOT NULL,
-RedeSocialUrl TEXT NOT NULL,
-
-CONSTRAINT PkRedeSocialId PRIMARY KEY (RedeSocialId),
-CONSTRAINT FkUsuarioIdTbRedeSocial FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId)
-);
 
 CREATE TABLE TbTipoEvento (
     TipoEventoId SMALLINT IDENTITY(1,1),
     TipoEventoNome VARCHAR(255) NOT NULL,
-    TipoEventoDescricao TEXT,
+    TipoEventoDesc TEXT,
 
     CONSTRAINT PkTipoEventoId PRIMARY KEY (TipoEventoId),
     CONSTRAINT UqTipoEventoNome UNIQUE (TipoEventoNome)
@@ -120,22 +123,29 @@ CREATE TABLE TbTipoEvento (
 CREATE TABLE TbAnuncio (
     AnuncioId SMALLINT IDENTITY(1,1),
     UsuarioId SMALLINT NOT NULL,
-    AnuncioDataHora DATETIME NOT NULL,
+    AnuncioDataHr DATETIME NOT NULL DEFAULT GETDATE(),
     AnuncioValidade DATE NOT NULL,
+	AnuncioTitulo VARCHAR(255) NOT NULL,
+	AnuncioDataHrIncio DATETIME NOT NULL,
+	AnuncioDataHrFim DATETIME NOT NULL,
     TipoEventoId SMALLINT NOT NULL,
-    AnuncioLogradouro VARCHAR(255),
-    AnuncioNumero SMALLINT,
-    AnuncioComplemento VARCHAR(255),
-    AnuncioBairro VARCHAR(255),
-    AnuncioCep CHAR(8),
+    AnuncioEndLogra VARCHAR(255) NOT NULL,
+    AnuncioEndNum SMALLINT NOT NULL,
+    AnuncioEndComp VARCHAR(255) NOT NULL,
+    AnuncioEndBai VARCHAR(255) NOT NULL,
+    AnuncioEndCep CHAR(8) NOT NULL,
     CidadeId SMALLINT NOT NULL,
-    AnuncioDescricao TEXT,
+    AnuncioDesc TEXT NOT NULL,
+	AnuncioBeneficios TEXT,
+	AnuncioContato CHAR(11),
     AnuncioValor DECIMAL(10,2) NOT NULL,
+	AnuncioStatus VARCHAR(50) NOT NULL DEFAULT 'ATIVO',
 
     CONSTRAINT PkAnuncioId PRIMARY KEY (AnuncioId),
     CONSTRAINT FkUsuarioIdTbAnuncio FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
     CONSTRAINT FkTipoEventoIdTbAnuncio FOREIGN KEY (TipoEventoId) REFERENCES TbTipoEvento (TipoEventoId),
-    CONSTRAINT FkCidadeIdTbAnuncio FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
+    CONSTRAINT FkCidadeIdTbAnuncio FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId),
+	CONSTRAINT CkAnuncioStatus CHECK (AnuncioStatus IN ('ATIVO', 'DESATIVADO', 'VENCIDO', 'FINALIZADO')),
 );
 
 CREATE TABLE TbAnuncioHabilidade (
@@ -158,26 +168,75 @@ CREATE TABLE TbAnuncioGeneroMusical (
 
 CREATE TABLE TbContrato (
     ContratoId SMALLINT IDENTITY(1,1),
-    UsuarioId SMALLINT NOT NULL,
+    MusicoId SMALLINT,
+	ContratanteId SMALLINT,
     AnuncioId SMALLINT,
-    ContratoDataHora DATETIME NOT NULL,
-    ContratoDataHoraAtividade DATETIME NOT NULL,
-    ContratoDescricaoAtividade TEXT,
+	ContratoTitulo VARCHAR(255) NOT NULL,
+    ContratoDataHr DATETIME NOT NULL DEFAULT GETDATE(),
+	ContratoDataHrInicio DATETIME NOT NULL,
+	ContratoDataHrFim DATETIME NOT NULL,
+    ContratoDescAtiv TEXT NOT NULL,
     TipoEventoId SMALLINT NOT NULL,
-    ContratoLogradouro VARCHAR(255),
-    ContratoNumero SMALLINT,
-    ContratoComplemento VARCHAR(255),
-    ContratoBairro VARCHAR(255),
-    ContratoCep CHAR(8),
+    ContratoEndLogra VARCHAR(255) NOT NULL,
+    ContratoEndNum SMALLINT NOT NULL,
+    ContratoEndComp VARCHAR(255) NOT NULL,
+    ContratoEndBai VARCHAR(255) NOT NULL,
+    ContratoEndCep CHAR(8) NOT NULL,
     CidadeId SMALLINT NOT NULL,
     ContratoValor DECIMAL(10,2) NOT NULL,
     ContratoPenalidade TEXT,
     ContratoStatus BIT NOT NULL, 
 
     CONSTRAINT PkContratoId PRIMARY KEY (ContratoId),
-    CONSTRAINT FkUsuarioIdTbContrato FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+    CONSTRAINT FkMusicoIdTbContrato FOREIGN KEY (MusicoId) REFERENCES TbUsuario (UsuarioId),
+	CONSTRAINT FkContratanteIdTbContrato FOREIGN KEY (ContratanteId) REFERENCES TbUsuario (UsuarioId),
     CONSTRAINT FkAnuncioIdTbContrato FOREIGN KEY (AnuncioId) REFERENCES TbAnuncio (AnuncioId),
     CONSTRAINT FkTipoEventoIdTbContrato FOREIGN KEY (TipoEventoId) REFERENCES TbTipoEvento (TipoEventoId),
     CONSTRAINT FkCidadeIdTbContrato FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
 );
 
+-- Tabela TbTipoMidia
+CREATE TABLE TbTipoMidia (
+    TipoMidiaId SMALLINT IDENTITY(1,1),
+    TipoMidiaNome VARCHAR(255) NOT NULL,
+    TipoMidiaDesc TEXT,
+    
+	CONSTRAINT UqTipoMidiaNome UNIQUE (TipoMidiaNome),
+    CONSTRAINT PkTipoMidiaId PRIMARY KEY (TipoMidiaId)
+);
+
+-- Tabela TbMidia
+CREATE TABLE TbMidia (
+    MidiaId SMALLINT IDENTITY(1,1),
+    UsuarioId SMALLINT NOT NULL,
+    MidiaNome VARCHAR(255),
+    TipoMidiaId SMALLINT NOT NULL,
+    MidiaCaminho VARCHAR(255) NOT NULL,
+    MidiaTitulo VARCHAR(255),
+    MidiaDesc TEXT,
+    MidiaDataUpload DATETIME NOT NULL DEFAULT GETDATE(),
+    
+    CONSTRAINT PkMidiaId PRIMARY KEY (MidiaId),
+    CONSTRAINT FkUsuarioIdTbMidia FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+    CONSTRAINT FkTipoMidiaIdTbMidia FOREIGN KEY (TipoMidiaId) REFERENCES TbTipoMidia (TipoMidiaId)
+);
+
+-- Tabela TbPerfilMidia
+CREATE TABLE TbPerfilMidia (
+    UsuarioId SMALLINT NOT NULL,
+    MidiaId SMALLINT NOT NULL,
+    
+    CONSTRAINT PkTbPerfilMidia PRIMARY KEY (UsuarioId, MidiaId),
+    CONSTRAINT FkUsuarioIdTbPerfilMidia FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
+    CONSTRAINT FkMidiaIdTbPerfilMidia FOREIGN KEY (MidiaId) REFERENCES TbMidia (MidiaId)
+);
+
+-- Tabela TbAnuncioMidia
+CREATE TABLE TbAnuncioMidia (
+    AnuncioId SMALLINT NOT NULL,
+    MidiaId SMALLINT NOT NULL,
+    
+    CONSTRAINT PkTbAnuncioMidia PRIMARY KEY (AnuncioId, MidiaId),
+    CONSTRAINT FkAnuncioIdTbAnuncioMidia FOREIGN KEY (AnuncioId) REFERENCES TbAnuncio (AnuncioId),
+    CONSTRAINT FkMidiaIdTbAnuncioMidia FOREIGN KEY (MidiaId) REFERENCES TbMidia (MidiaId)
+);
