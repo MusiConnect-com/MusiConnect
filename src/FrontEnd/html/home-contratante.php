@@ -39,9 +39,9 @@ session_start();
                     <li><i id="search-icon" class="bi bi-search"></i></li>
                     <li id="profiles-search"><a href="">Buscar Músicos</a></li>
                     <li><a href="">Meus Contratos</a></li>
-                    <li><a href="">Meus Anúncios</a></li>
-                    <li><a href="../html/anunciar.php">Anunciar</a></li>
-                    <li class="nav-active"><a href="/html/home-contratante.html">Home</a></li>
+                    <li><a href="./meus-anuncios.php">Meus Anúncios</a></li>
+                    <li><a href="./anunciar.php">Anunciar</a></li>
+                    <li class="nav-active"><a href="home-contratante.php">Home</a></li>
                 </ul>
             </nav>
     
