@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-    // if (!isset($_SESSION['UsuarioId'], $_SESSION['UsuarioTipo'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'])) {
-    //     header('Location: ../../BackEnd/views/logout.php');
-    //     exit();
-    // }
+    if (!isset($_SESSION['UsuarioId'], $_SESSION['UsuarioTipo'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'])) {
+        header('Location: ../../BackEnd/views/logout.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
