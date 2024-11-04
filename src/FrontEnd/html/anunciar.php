@@ -195,7 +195,7 @@
                             }
                             sqlsrv_free_stmt($resultado);
                         } else {
-                            echo '<option value="" disabled>Nenhuma habilidade encontrado</option>';
+                            echo '<option value="" disabled>Nenhuma cidade encontrada</option>';
                         }
 
                         sqlsrv_close($conexao);

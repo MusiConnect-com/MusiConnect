@@ -9,7 +9,7 @@ $email = $_POST['email'];
 $senha = $_POST['password'];
 
 // Cria a consulta SQL
-$sqlGetUsuario = "SELECT u.UsuarioId, u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, SenhaStatus FROM TbUsuario u INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId WHERE u.UsuarioEmail = ?";
+$sqlGetUsuario = "SELECT u.UsuarioId, u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, s.SenhaStatus FROM TbUsuario u INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId WHERE u.UsuarioEmail = ?";
 $parametro = array($email);
 $resultadoGetUsuario = sqlsrv_query($conexao, $sqlGetUsuario, $parametro);
 
@@ -19,7 +19,7 @@ if ($resultadoGetUsuario && sqlsrv_has_rows($resultadoGetUsuario)) {
     $listaResultado = sqlsrv_fetch_array($resultadoGetUsuario, SQLSRV_FETCH_ASSOC);
 
     if ($listaResultado['SenhaStatus'] === 0) {
-        $_SESSION['login-error'] = 'Senha inativa, tente outra';
+        $_SESSION['login-error'] = 'Senha inativa, entre em contato com o suporte';
     } 
     elseif ($listaResultado['SenhaStatus'] === 1) {
         // verifica a senha hash

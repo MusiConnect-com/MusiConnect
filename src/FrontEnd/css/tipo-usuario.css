@@ -1,52 +1,128 @@
 /* importação do global */
-@import url(/global.css);
+/* @import url(/global.css); */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html {
+    height: 100vh;
+}
 /* Style body */
 body {
+    background-color: var(--light-grey);
+    height: 100%;
+}
+
+header {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 20px;
+    height: 180px;
+    width: 100%;
+    z-index: 1001;
+    position: fixed;
+    top: 0;
     background-color: var(--light-grey);
-    height: 100vh;
+    padding-top: 20px;
+}
+
+.progress-signup {
+    width: 60%;
+    height: 100%;
+}
+
+.progress-signup h1 {
+    font-size: 38px;
+    text-align: center;
+}
+
+/* Estilizando a barra de progresso */
+.progress {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 10px;
+    width: 0%;
+    background-color: #F96900; /* Cor do progresso */
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+/* Estilizando os steps */
+.steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.step {
+    width: 20%;
+    text-align: center;
+    font-size: 18px;
+}
+.step.active {
+    color: var(--orange);
+}
+
+.step.hidden-step {
+    display: none;
 }
 
 /*Style main*/
 main {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: row;
-    height: 90vh;
+    flex-direction: column; /* Mantenha apenas uma linha para margin-top */
+    padding-top: 200px;
+    padding-bottom: 50px;
     width: 100%;
+    height: auto;
+}
+
+
+fieldset {
+    border: none;
+}
+
+.form-step.hidden {
+    display: none !important;
 }
 
 /*Style card*/
-.select-options {
-    background-color: var(--white);
-    padding: 20px;
-    width: 60vw;
-    height: 60vh;
-    box-shadow: 0 0 1px 1px var(--black40);
-    border-radius: 5px;
+.form-signup {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    gap: 20px;
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 20px;
+    width: 80%;
+    min-height: 350px;
 }
 
-.card {
+/*Style objetivo*/
+#form-step-goal {
     display: flex;
-    justify-content: center;
+    justify-content:space-evenly;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    gap: 40px;
     width: 100%;
+    height: 240px;
+    box-sizing: border-box;
+    border: none;
 }
+
 
 /*Style top*/
-.card .top {
+.form-step-goal-top {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,31 +131,30 @@ main {
     text-align: center;
 }
 
-.card span{
-    color: var(--red);
+.form-step-goal-top span{
     display: none;
 }
 
-h2 {
-    cursor: default;
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--black);
+span {
+    color: var(--red);
 }
 
-/*Style options*/
-.form-box-select {
+.top h2 {
+    cursor: default;
+    font-size: 32px;
+}
+
+.user-selection {
     display: flex;
     justify-content:space-evenly;
     align-items: center;
-    flex-direction: row;
     width: 100%;
     height: 60%;
     box-sizing: border-box;
+    border: none;
 }
 
-
-.form-box-select label div{
+.user-selection label div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,24 +162,24 @@ h2 {
     height: 20%;
 }
 
-.form-box-select input{
+.user-selection input{
     width: 20px;
     height: 20px;
     margin-right: 10px;
 }
 
-.form-box-select input:focus {
+.user-selection input:focus {
     box-shadow: none !important;
 }
 
-.form-box-select h3 {
+.user-selection h3 {
     box-sizing: border-box;
     font-weight: 500;
     color: var(--black);
     text-align: center;
 }
 
-.form-box-select p {
+.user-selection p {
     text-align: center;
     display: flex;
     justify-content: center;
@@ -137,6 +212,106 @@ h2 {
     transition: 500ms;
 }
 
+/* dados pessoais */
+#form-step-personal-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#form-step-personal-data h1 {
+    margin-top: 10px;
+}
+
+#profile-picture-group {
+    display: flex;
+    gap: 10px;
+}
+
+#layout-preview-picture {
+    border: 1px solid var(--black40);
+    border-radius: 5px;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+#preview-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-profile-group {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 50px;
+}
+
+.address {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+
+.form-step-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-step-group input[type="text"] {
+    width: 300px;
+}
+.form-step-group input[type="number"], #cep {
+    width: 120px;
+}
+.form-step-group select {
+    width: 150px;
+    height: 25px;
+}
+
+/* Sobre o músico */
+#form-step-about-music {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.selects-skill-genre {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.selects-skill-genre select {
+    width: 200px;
+    height: 25px;
+}
+
+.form-step-group textarea {
+    width: 500px;
+    height: 150px;
+    resize: none;
+}
 
 /*Style buttons*/
 .buttons {
@@ -201,11 +376,11 @@ h2 {
     color: var(--white);
 }
 
-.button-confirm {
+.button-next {
     margin-left: 4%;
 }
 
-.button-confirm button{
+.button-next button{
     background-color: var(--dark-navy-blue);
     font-size: 18px;
     font-weight: 500;
@@ -221,7 +396,7 @@ h2 {
     box-sizing: border-box;
 }
 
-.button-confirm button:hover {
+.button-next button:hover {
     background-color: var(--orange);
     color: var(--white);
     transition: .3s;

@@ -9,7 +9,8 @@ $senha = 'Jo121218vi!';
 $conexao = sqlsrv_connect($serverNome, array(
     'Database' => $dbNome,
     'UID' => $usuaNome,
-    'PWD' => $senha
+    'PWD' => $senha,
+    "CharacterSet" => "UTF-8"
 ));
 
 // Verifica a conexão

@@ -97,13 +97,9 @@ session_start();
 
                             function validarForm() {
                                 // Obtém o valor do campo CPF
-                                var cpfInput = document.getElementById('cpf');
                                 var senha = document.getElementById('senha').value;
                                 var confirmSenha = document.getElementById('confirmar-senha').value;
                                 var spanSenhaDif = document.getElementById('span-senha-diferente');
-
-                                // Remove a máscara
-                                cpfInput.value = cpfInput.value.replace(/\D/g, '');
 
                                 if (senha !== confirmSenha) {
                                     spanSenhaDif.style.display = "block";

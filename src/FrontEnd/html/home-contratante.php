@@ -1,9 +1,26 @@
 <?php
-session_start();
 
-    if (!isset($_SESSION['UsuarioId'], $_SESSION['UsuarioTipo'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'])) {
-        header('Location: ../../BackEnd/views/logout.php');
-        exit();
+    include '../../BackEnd/views/verificar-logado.php';
+    include '../../BackEnd/views/conexao.php';
+
+    if ($_SESSION['UsuarioTipo'] != "C") return header('Location: ../../BackEnd/views/logout.php');
+
+    $usuarioId = $_SESSION['UsuarioId'];
+    $nome = $_SESSION['UsuarioNome'];
+    $primeiroNome = explode(" ", $nome)[0];
+    $sobrenome = $_SESSION['UsuarioSobrenome'];
+    $usuarioTipo = $_SESSION['UsuarioTipo'];
+
+    $sqlGetFoto = "SELECT M.MidiaCaminho FROM TbPerfilMidia PM INNER JOIN TbMidia M ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = ? AND PM.MidiaDestino = 'perfil';";
+    $parametroGetFoto = array($usuarioId);
+    $resultGetFoto = sqlsrv_query($conexao, $sqlGetFoto, $parametroGetFoto);
+
+    $caminhoFoto = null;
+
+    if ($resultGetFoto !== false) {
+        if ($linha = sqlsrv_fetch_array($resultGetFoto, SQLSRV_FETCH_ASSOC)) {
+            $caminhoFoto = $linha['MidiaCaminho'];
+        }
     }
 ?>
 
@@ -38,7 +55,6 @@ session_start();
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
                     <li id="profiles-search"><a href="">Buscar Músicos</a></li>
-                    <li><a href="">Meus Contratos</a></li>
                     <li><a href="./meus-anuncios.php">Meus Anúncios</a></li>
                     <li><a href="./anunciar.php">Anunciar</a></li>
                     <li class="nav-active"><a href="home-contratante.php">Home</a></li>
@@ -46,10 +62,11 @@ session_start();
             </nav>
     
             <div class="profile">
+                <?php echo '<p id="name-profile"> Olá ' .$primeiroNome. "</p>";?>
                 <div class="profile-button" id="profile-button">
-                    <img src="../img/perfil-contratante.jpg" alt="">
+                    <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
                 </div>
-            </div>
+            </div> 
         </div>
     </header>
     <!--FIM CABEÇALHO-->
@@ -63,11 +80,8 @@ session_start();
     <!--PERFIL CABEÇALHO-->
     <div class="profile-list" id="profile-list">
         <div class="content-top">
-            <img src="../img/perfil-contratante.jpg" alt="">
-
-            <?php
-                echo "<p>" . $_SESSION['UsuarioNome'] . " " . $_SESSION['UsuarioSobrenome'] . "</p>";
-            ?>
+            <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
+            <?php echo "<p>" . $_SESSION['UsuarioNome'] . "</p>";?>
             
             <div>
                 <i id="close-profile-list" class="bi bi-x"></i>
@@ -113,98 +127,6 @@ session_start();
         <!--FIM SEÇÃO 1-->
         <!--SEÇÃO 2-->
         <section class="section-2">
-            <div class="contracts-active">
-                <div class="title">Contratos ativos</div>
-
-                <div class="modal-confirm">
-                    <p>Deseja confirmar o contrato?</p>
-
-                    <div class="btns">
-                        <button class="not-confirm">Não</button>
-                        <button class="yes-confirm">Sim</button>
-                    </div>
-                </div>
-
-                <div class="modal-confirmed">
-                    <p>Contrato confirmada com sucesso!</p>
-                    <button class="btn-ok">Ok</button>
-                </div>
-                
-                <div class="contracts">
-
-                    <div class="contracts-item">
-                        <div class="alert">
-                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
-                        </div>
-
-                        <div class="content">
-                            <div class="content-img">
-                                <img src="/img/victor-vidal.png" alt="">
-                            </div>
-
-                            <div class="content-text">
-                                <div class="info-music">
-                                    <p>Victor Vidal</p>
-
-                                    <div class="icons-chat">
-                                        <i class="bi bi-chat"></i>
-                                        <i class="bi bi-chat-fill"></i>
-                                    </div>
-                                </div>
-
-                                <div class="info">
-                                    <p>Evento no dia 01/10/2077 às 09:00 horas.</p>
-                                    <p class="value">R$2.800,00</p>
-                                </div>
-
-                                <div class="btns">
-                                    <button class="cancel">Cancelar</button>
-                                    <button class="confirm">Confirmar</button>
-                                    <button class="confirmed">Confirmado</button>
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-
-                    <div class="contracts-item">
-                        <div class="alert">
-                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
-                        </div>
-
-                        <div class="content">
-                            <div class="content-img">
-                                <img src="/img/juliano-silva.jpg" alt="">
-                            </div>
-
-                            <div class="content-text">
-                                <div class="info-music">
-                                    <p>Juliano Silva</p>
-
-                                    <div class="icons-chat">
-                                        <i class="bi bi-chat"></i>
-                                        <i class="bi bi-chat-fill"></i>
-                                    </div>
-                                </div>
-
-                                <div class="info">
-                                    <p>Evento no dia 27/06/2077 às 18:00 horas.</p>
-                                    <p class="value">R$700,00</p>
-                                </div>
-
-                                <div class="btns">
-                                    <button class="cancel">Cancelar</button>
-                                    <button class="confirm">Confirmar</button>
-                                    <button class="confirmed">Confirmado</button>
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--FIM SEÇÃO 2-->
-        <!--SEÇÃO 3-->
-        <section class="section-3">
             <div class="title">
                 <h1>Músicos recomendados</h1>
 
@@ -223,18 +145,7 @@ session_start();
                 <div class="profiles-items">
                     <div class="content-img"><img src="/img/aline-martins.jpg" alt=""></div>
                     <div class="content-text">
-                        <div class="top">
-                            <h1>Aline Martins</h1>
-
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                            </div>
-                        </div>
-
+                        <h1>Aline Martins</h1>
                         <ul>
                             <li class="genres"> Música clássica, Jazz, MPB</li>
                             <li class="descr">
@@ -252,18 +163,7 @@ session_start();
                 <div class="profiles-items">
                     <div class="content-img"><img src="/img/jorge-lucas.jpg" alt=""> </div>
                     <div class="content-text">
-                        <div class="top">
-                            <h1>Jorge Lucas</h1>
-
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                            </div>
-                        </div>
-
+                        <h1>Jorge Lucas</h1>
                         <ul>
                             <li class="genres"> Rock, Blues, Indie</li>
                             <li class="descr">
@@ -280,20 +180,8 @@ session_start();
 
                 <div class="profiles-items">
                     <div class="content-img"><img src="/img/pedro-pedrinho.jpg" alt=""></div>
-
                     <div class="content-text">
-                        <div class="top">
-                            <h1>Pedro Pedrinho</h1>
-
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-
+                        <h1>Pedro Pedrinho</h1>
                         <ul>
                             <li class="genres"> Música Latina, Samba, Funk, Pop</li>
                             <li class="descr">

@@ -1,9 +1,26 @@
 <?php
-session_start();
 
-    if (!isset($_SESSION['UsuarioId'], $_SESSION['UsuarioTipo'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'])) {
-        header('Location: ../../BackEnd/views/logout.php');
-        exit();
+    include '../../BackEnd/views/verificar-logado.php';
+    include '../../BackEnd/views/conexao.php';
+
+    if ($_SESSION['UsuarioTipo'] != "M") return header('Location: ../../BackEnd/views/logout.php');
+
+    $usuarioId = $_SESSION['UsuarioId'];
+    $nome = $_SESSION['UsuarioNome'];
+    $primeiroNome = explode(" ", $nome)[0];
+    $sobrenome = $_SESSION['UsuarioSobrenome'];
+    $usuarioTipo = $_SESSION['UsuarioTipo'];
+
+    $sqlGetFoto = "SELECT M.MidiaCaminho FROM TbPerfilMidia PM INNER JOIN TbMidia M ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = ? AND PM.MidiaDestino = 'perfil';";
+    $parametroGetFoto = array($usuarioId);
+    $resultGetFoto = sqlsrv_query($conexao, $sqlGetFoto, $parametroGetFoto);
+
+    $caminhoFoto = null;
+
+    if ($resultGetFoto !== false) {
+        if ($linha = sqlsrv_fetch_array($resultGetFoto, SQLSRV_FETCH_ASSOC)) {
+            $caminhoFoto = $linha['MidiaCaminho'];
+        }
     }
 ?>
 
@@ -39,14 +56,14 @@ session_start();
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
                     <li id="ads-search"><a href="/html/anuncios-musico.html">Buscar Anúncios</a></li>
-                    <li><a href="#">Meus Contratos</a></li>
                     <li class="nav-active"><a href="/html/home-musico.html">Home</a></li>
                 </ul>
             </nav>
 
             <div class="profile">
+                <?php echo '<p id="name-profile"> Olá ' .$primeiroNome. "</p>";?>
                 <div class="profile-button" id="profile-button">
-                    <img src="../img/victor-vidal.png" alt="">
+                    <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
                 </div>
             </div> 
         </div>
@@ -62,12 +79,8 @@ session_start();
     <!--PERFIL CABEÇALHO-->
     <div class="profile-list" id="profile-list">
         <div class="content-top">
-            <img src="../img/victor-vidal.png" alt="">
-
-            <?php
-                echo "<p>" . $_SESSION['UsuarioNome'] . " " . $_SESSION['UsuarioSobrenome'] . "</p>";
-            ?>
-
+            <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
+            <?php echo "<p>" .$nome. "</p>";?>
             <div>
                 <i id="close-profile-list" class="bi bi-x"></i>
             </div>
@@ -105,92 +118,6 @@ session_start();
         <!--FIM SEÇÃO 1-->
         <!--SEÇÃO 2-->
         <section class="section-2">
-            <div class="contracts-active">
-                <div class="title">Contratos ativos</div>
-
-                <div class="modal-confirm">
-                    <p>Deseja confirmar presença no evento?</p>
-                    
-                    <div class="btns">
-                        <button class="not-confirm">Não</button>
-                        <button class="yes-confirm">Sim</button>
-                    </div>
-                </div>
-
-                <div class="modal-confirmed">
-                    <p>Presença confirmada com sucesso!</p>
-                    <button class="btn-ok">Ok</button>
-                </div>
-
-
-                <div class="contracts">
-                    <div class="contracts-item">
-                        <div class="alert">
-                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
-                        </div>
-
-                        <div class="content">
-                            <div class="info-contractor">
-                                <img src="/img/casamento-bueno.jpg" alt="bar do zé">
-                                <div>
-                                    <p>Casamento Buenos</p>
-
-                                    <div class="icons-chat">
-                                        <i class="bi bi-chat"></i>
-                                        <i class="bi bi-chat-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="info-contract">
-                                <p>Evento no dia 01/10/2077 às 09:00 horas.</p>
-                                <p class="value-contract">R$2.800,00</p>
-                            </div>
-
-                            <div class="btns">
-                                <button class="cancel">Cancelar</button>
-                                <button class="confirm">Confirmar</button>
-                                <button class="confirmed">Confirmado</button>
-                            </div>
-                        </div>    
-                    </div>
-
-                    <div class="contracts-item">
-                        <div class="alert">
-                            <p><span>NÃO CONFIRMADO!</span>Prazo de 24 horas</p>
-                        </div>
-
-                        <div class="content">
-                            <div class="info-contractor">
-                                <img src="/img/bar-do-ze.jpg" alt="bar do zé">
-                                <div>
-                                    <p>Bar do Zé</p>
-
-                                    <div class="icons-chat">
-                                        <i class="bi bi-chat"></i>
-                                        <i class="bi bi-chat-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="info-contract">
-                                <p>Evento no dia 18/05/2077 às 18:00 horas.</p>
-                                <p class="value-contract">R$400,00</p>
-                            </div>
-
-                            <div class="btns">
-                                <button class="cancel">Cancelar</button>
-                                <button class="confirm">Confirmar</button>
-                                <button class="confirmed">Confirmado</button>
-                            </div>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--FIM SEÇÃO 2-->
-        <!--SEÇÃO 3-->
-        <section class="section-3">
             <div class="title">
                 <h1>Anúncios mais recentes</h1>
 
@@ -262,7 +189,7 @@ session_start();
                 </div>      
             </div>
         </section>
-        <!--FIM SEÇÃO 3-->
+        <!--FIM SEÇÃO 2-->
         <!--RODAPÉ-->
         <footer>
             <h3>@ MusicConnect</h3>
