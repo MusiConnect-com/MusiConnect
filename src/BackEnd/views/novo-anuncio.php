@@ -3,8 +3,12 @@ include '../../BackEnd/views/conexao.php'; // Conexão com o banco de dados
 
 session_start();
 
-// Verifica se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+try {
+    // Verifica se o formulário foi enviado
+    if (!$_SERVER["REQUEST_METHOD"] == "POST") {
+        throw new Exception('Método de envio diferente de POST');
+    }
     // Obtendo dados do formulário
     $usuarioId = $_SESSION['UsuarioId'];
     $titulo = $_POST['titulo'];
@@ -12,122 +16,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $generoMusicalId = $_POST['genero-musical'];
     $descricao = $_POST['descricao'];
     $beneficios = $_POST['beneficios'];
-    $habilidadesId = $_POST['habilidades'];
+    $habilidadeId = $_POST['habilidades'];
     $dataInicio = DateTime::createFromFormat('Y-m-d\TH:i', $_POST['data-hr-inicio']);
     $dataFim = DateTime::createFromFormat('Y-m-d\TH:i', $_POST['data-hr-fim']);
     $valor = $_POST['valor-hora'];
-    $endLogra = $_POST['logradouro'];
-    $endNum = $_POST['numero'];
-    $endComp = $_POST['complemento'];
-    $endBai = $_POST['bairro'];
-    $endCep = str_replace('-', '', $_POST['cep']);
+    $logradouro = $_POST['logradouro'];
+    $numero = $_POST['numero'];
+    $complemento = $_POST['complemento'];
+    $bairro = $_POST['bairro'];
+    $cep = str_replace('-', '', $_POST['cep']);
     $cidadeId = $_POST['cidade'];
-    $telefone = preg_replace('/\D/', '', $_POST['telefone']);
+    $nomeContato = $_POST['nome-contato'];
+    $contato = preg_replace('/\D/', '', $_POST['telefone']);
 
     $dataInicioFormatada = $dataInicio ? $dataInicio->format('Y-m-d H:i:s') : null;
     $dataFimFormatada = $dataFim ? $dataFim->format('Y-m-d H:i:s') : null;
 
-    // Tratamento para o upload da foto
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
-        $fotoTemp = $_FILES['foto']['tmp_name'];
-        $fotoNome = $_FILES['foto']['name'];
-        $caminhoFoto = 'http://localhost/musiconnect/src/frontend/uploads/' . basename($fotoNome); // Caminho onde a foto será salva
+    // capturando a foto
+    $foto = $_FILES['foto'];
+    $fotoNome = $foto['name'];
+    $fotoTamanho = $foto['size'];
+    $pastaUpload = "../../FrontEnd/upload/";
+    $nomeUniqFoto = uniqid();
+    $extensaoFoto = strtolower(pathinfo($fotoNome, PATHINFO_EXTENSION));
+    $fotoCaminho = $pastaUpload . $nomeUniqFoto . "." . $extensaoFoto;
 
-        $fotoNomeLimpo = preg_replace('/[^a-zA-Z0-9_\.-]/', '_', $fotoNome);
-        // Move o arquivo para o diretório de uploads
-        move_uploaded_file($fotoTemp, $caminhoFoto);
-    } else {
-        $caminhoFoto = null; // Se não houver foto, define como null
+    $uploadConcluido = move_uploaded_file($foto['tmp_name'], $fotoCaminho);
+    if (!$uploadConcluido) {
+        throw new Exception('Foto não movida com sucesso');
     }
 
-    // Preparando a instrução SQL para inserir o anúncio
-    $sqlAnuncio = "INSERT INTO TbAnuncio (UsuarioId, AnuncioTitulo, AnuncioDataHrInicio, AnuncioDataHrFim, 
-            TipoEventoId, AnuncioEndLogra, AnuncioEndNum, AnuncioEndComp, AnuncioEndBai, AnuncioEndCep, 
-            CidadeId, AnuncioDesc, AnuncioBeneficios, AnuncioContato, AnuncioValor, AnuncioStatus, 
-            AnuncioDataHr, AnuncioValidade)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ATIVO', GETDATE(), DATEADD(DAY,30, GETDATE()))";
+    // Prepara a chamada da procedure
+    $stmt = $conexao->prepare("
+    EXEC SpInserirNovoAnuncio 
+        @UsuarioId = :UsuarioId,
+        @AnuncioTitulo = :AnuncioTitulo,
+        @AnuncioDataHrInicio = :AnuncioDataHrInicio,
+        @AnuncioDataHrFim = :AnuncioDataHrFim,
+        @TipoEventoId = :TipoEventoId,
+        @CidadeId = :CidadeId,
+        @Logradouro = :Logradouro,
+        @Numero = :Numero,
+        @Complemento = :Complemento,
+        @Bairro = :Bairro,
+        @Cep = :Cep,
+        @AnuncioDesc = :AnuncioDesc,
+        @AnuncioBeneficios = :AnuncioBeneficios,
+        @AnuncioContato = :AnuncioContato,
+        @AnuncioNomeContato = :AnuncioNomeContato,
+        @AnuncioValor = :AnuncioValor,
+        @FotoNome = :FotoNome,
+        @FotoCaminho = :FotoCaminho,
+        @FotoTamanho = :FotoTamanho,
+        @HabilidadeId = :HabilidadeId,
+        @GeneroMusicalId = :GeneroMusicalId");
 
-    // Executando a consulta
-    $parametrosAnuncio = array($usuarioId, $titulo, $dataInicioFormatada, $dataFimFormatada, $tipoEventoId, $endLogra, $endNum, $endComp, $endBai, $endCep, $cidadeId, $descricao, $beneficios, $telefone, $valor);
-    $resultadoAnuncio = sqlsrv_query($conexao, $sqlAnuncio, $parametrosAnuncio);
+    // Definição dos parâmetros
+    $stmt->bindParam(':UsuarioId', $usuarioId, PDO::PARAM_INT);
+    $stmt->bindParam(':AnuncioTitulo', $titulo, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioDataHrInicio', $dataInicioFormatada);
+    $stmt->bindParam(':AnuncioDataHrFim', $dataFimFormatada);
+    $stmt->bindParam(':TipoEventoId', $tipoEventoId, PDO::PARAM_INT);
+    $stmt->bindParam(':CidadeId', $cidadeId, PDO::PARAM_INT);
+    $stmt->bindParam(':Logradouro', $logradouro, PDO::PARAM_STR);
+    $stmt->bindParam(':Numero', $numero, PDO::PARAM_INT);
+    $stmt->bindParam(':Complemento', $complemento, PDO::PARAM_STR);
+    $stmt->bindParam(':Bairro', $bairro, PDO::PARAM_STR);
+    $stmt->bindParam(':Cep', $cep, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioDesc', $descricao, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioBeneficios', $beneficios, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioContato', $contato, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioNomeContato', $nomeContato, PDO::PARAM_STR);
+    $stmt->bindParam(':AnuncioValor', $valor);
+    $stmt->bindParam(':FotoNome', $fotoNome, PDO::PARAM_STR);
+    $stmt->bindParam(':FotoCaminho', $fotoCaminho, PDO::PARAM_STR);
+    $stmt->bindParam(':FotoTamanho', $fotoTamanho, PDO::PARAM_INT);
+    $stmt->bindParam(':HabilidadeId', $habilidadeId, PDO::PARAM_INT);
+    $stmt->bindParam(':GeneroMusicalId', $generoMusicalId, PDO::PARAM_INT);
 
-    // Verifica se a execução foi bem-sucedida
-    if ($resultadoAnuncio) {
+    $stmt->execute();
 
-        $sqlAnuncioId = "SELECT COUNT(AnuncioId) AS TotalAnuncios FROM TbAnuncio;";
-        $resultadoAnuncioId = sqlsrv_query($conexao, $sqlAnuncioId);
-        $linha = sqlsrv_fetch_array($resultadoAnuncioId, SQLSRV_FETCH_ASSOC);
-        $anuncioId = $linha['TotalAnuncios'];
+    header("Location: ../../frontend/html/home-contratante.php");
+    exit();
 
-        if ($anuncioId) {
-            // Verifica se o caminho da foto não é null
-            if ($caminhoFoto) {
-                // Inserindo na tabela TbMidia
-                $sqlMidia = "INSERT INTO TbMidia (UsuarioId, MidiaNome, TipoMidiaId, MidiaCaminho, MidiaTitulo, MidiaDesc) VALUES (?, ?, ?, ?, ?, ?)";
-                // Ajuste o TipoMidiaId e outros campos conforme necessário
-                $tipoMidiaId = 1; // Por exemplo, 1 para foto
-                $midiaTitulo = "Título da Mídia"; // Coloque um título relevante
-                $midiaDesc = "Descrição da Mídia"; // Coloque uma descrição relevante
-                $parametrosMidia = array($usuarioId, $fotoNome, $tipoMidiaId, $caminhoFoto, $midiaTitulo, $midiaDesc);
-                $resultadoMidia = sqlsrv_query($conexao, $sqlMidia, $parametrosMidia);
-                
-                if ($resultadoMidia) {
-
-                    $sqlMidiaId = "SELECT COUNT(MidiaId) AS TotalMidias FROM TbMidia;";
-                    $resultadoMidiaId = sqlsrv_query($conexao, $sqlMidiaId);
-                    $linhaMidia = sqlsrv_fetch_array($resultadoMidiaId, SQLSRV_FETCH_ASSOC);
-                    $midiaId = $linhaMidia['TotalMidias'];
-
-                    // Inserindo na tabela TbAnuncioMidia
-                    $sqlAnuncioMidia = "INSERT INTO TbAnuncioMidia (AnuncioId, MidiaId) VALUES (?, ?)";
-                    $parametrosAnuncioMidia = array($anuncioId, $midiaId);
-                    $resultadoAnuncioMidia = sqlsrv_query($conexao, $sqlAnuncioMidia, $parametrosAnuncioMidia);
-
-                    if ($resultadoAnuncioMidia) {
-                        echo "Mídia adicionada com sucesso ao anúncio!";
-                    } else {
-                        echo "Erro ao adicionar mídia ao anúncio: " . print_r(sqlsrv_errors(), true);
-                    }
-                } else {
-                    echo "Erro ao inserir na tabela TbMidia: " . print_r(sqlsrv_errors(), true);
-                }
-            } else {
-                echo "Caminho de foto null";
-            }
-
-            // Resto do seu código para adicionar habilidades e gêneros musicais...
-            if ($habilidadesId) {
-                $sqlAnuncioHabilidade = "INSERT INTO TbAnuncioHabilidade (AnuncioId, HabilidadeId) VALUES (?, ?)";
-                $parametrosAnuncioHabilidade = array($anuncioId, $habilidadesId);
-                $resultadoAnuncioHabilidade = sqlsrv_query($conexao, $sqlAnuncioHabilidade, $parametrosAnuncioHabilidade);
-
-                if ($resultadoAnuncioHabilidade) {
-                    echo "Habilidade adicionada com sucesso!";
-                } else {
-                    echo "Erro ao adicionar habilidade: " . print_r(sqlsrv_errors(), true);
-                }
-            }
-            if ($generoMusicalId) {
-                $sqlAnuncioGeneroMusical = "INSERT INTO TbAnuncioGeneroMusical (AnuncioId, GeneroMuId) VALUES (?, ?)";
-                $parametrosAnuncioGeneroMusical = array($anuncioId, $generoMusicalId);
-                $resultadoAnuncioGeneroMusical = sqlsrv_query($conexao, $sqlAnuncioGeneroMusical, $parametrosAnuncioGeneroMusical);
-
-                if ($resultadoAnuncioGeneroMusical) {
-                    echo "Gênero Musical adicionado com sucesso!";
-                } else {
-                    echo "Erro ao adicionar Gênero Musical: " . print_r(sqlsrv_errors(), true);
-                }
-            }
-        } else {
-            echo "Erro ao recuperar AnuncioId.";
-        }
-
-        echo "Anúncio criado com sucesso!";
-    } else {
-        echo "Erro ao criar anúncio: " . print_r(sqlsrv_errors(), true);
-    }
-
-    // Fecha a conexão
-    sqlsrv_close($conexao);
+} catch (Exception $e){
+    error_log("Erro ao inserir anúncio: " . $e->getMessage());
+    echo '<script>
+            alert("Ocorreu um erro inesperado. Tente novamente.");
+            window.location.href = "../../FrontEnd/html/home-contratante.php";
+          </script>';
 }
 ?>

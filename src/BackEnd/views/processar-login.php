@@ -1,61 +1,63 @@
 <?php
 
-include './conexao.php';
+include '../../BackEnd/views/conexao.php';
 
 session_start();
 
-// Captura os dados do formulário
-$email = $_POST['email'];
-$senha = $_POST['password'];
+try {
+    $email = $_POST['email'];
+    $senha = $_POST['password'];
+    // Cria a consulta SQL
+    $sqlGetUsuario = "SELECT u.UsuarioId, u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, s.SenhaStatus 
+                      FROM TbUsuario u 
+                      INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId 
+                      WHERE u.UsuarioEmail = :email";
 
-// Cria a consulta SQL
-$sqlGetUsuario = "SELECT u.UsuarioId, u.UsuarioNome, u.UsuarioSobrenome, u.UsuarioTipo, s.SenhaHash, s.SenhaStatus FROM TbUsuario u INNER JOIN TbSenha s ON u.UsuarioId = s.UsuarioId WHERE u.UsuarioEmail = ?";
-$parametro = array($email);
-$resultadoGetUsuario = sqlsrv_query($conexao, $sqlGetUsuario, $parametro);
+    // Preparação e execução da consulta
+    $stmt = $conexao->prepare($sqlGetUsuario);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
 
-// Verifica se o usuário existe
-if ($resultadoGetUsuario && sqlsrv_has_rows($resultadoGetUsuario)) {
-    // Obtém os dados do usuário
-    $listaResultado = sqlsrv_fetch_array($resultadoGetUsuario, SQLSRV_FETCH_ASSOC);
+    
 
-    if ($listaResultado['SenhaStatus'] === 0) {
-        $_SESSION['login-error'] = 'Senha inativa, entre em contato com o suporte';
-    } 
-    elseif ($listaResultado['SenhaStatus'] === 1) {
-        // verifica a senha hash
-        if (password_verify($senha, $listaResultado['SenhaHash'])) {
+    $listaResultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Verifica se o usuário existe
+    if ($listaResultado) {
+        // Obtém os dados do usuário
+        if ($listaResultado['SenhaStatus'] == 0) {
+            $_SESSION['login-error'] = 'Senha inativa, entre em contato com o suporte';
+        } else if ($listaResultado['SenhaStatus'] == 1) {
+            // Verifica a senha hash
+            if (password_verify($senha, $listaResultado['SenhaHash'])) {
+                // Salva os dados em sessões
+                $_SESSION['UsuarioId'] = $listaResultado['UsuarioId'];
+                $_SESSION['UsuarioTipo'] = $listaResultado['UsuarioTipo'];
+                $_SESSION['UsuarioNome'] = $listaResultado['UsuarioNome'];
+                $_SESSION['UsuarioSobrenome'] = $listaResultado['UsuarioSobrenome'];
 
-            //salva os dados em sessões
-            $_SESSION['UsuarioId'] = $listaResultado['UsuarioId'];
-            $_SESSION['UsuarioTipo'] = $listaResultado['UsuarioTipo'];
-            $_SESSION['UsuarioNome'] = $listaResultado['UsuarioNome'];
-            $_SESSION['UsuarioSobrenome'] = $listaResultado['UsuarioSobrenome'];
-
-            // validando o tipo de usuário
-            if ($listaResultado['UsuarioTipo'] === 'M') {
-                header("Location: ../../frontend/html/home-musico.php");
-                exit();
-            }
-            elseif ($listaResultado['UsuarioTipo'] === 'C') {
-                header("Location: ../../frontend/html/home-contratante.php");
-                exit();
+                // Valida o tipo de usuário
+                if ($listaResultado['UsuarioTipo'] === 'M') {
+                    header('Location: ../../FrontEnd/html/home-musico.php');
+                    echo '<script>window.location.href = "../../FrontEnd/html/home-musico.php";</script>';
+                    exit();
+                } else if ($listaResultado['UsuarioTipo'] === 'C') {
+                    header('Location: ../../frontend/html/home-contratante.php');
+                    exit();
+                }
+            } else {
+                $_SESSION['login-error'] = 'Senha incorreta';
             }
         }
-        else {
-            $_SESSION['login-error'] = 'Senha incorreta';
-        }
+    } else {
+        $_SESSION['login-error'] = 'Email não cadastrado';
     }
-} 
-else {
-    $_SESSION['login-error'] = 'Email não cadastrado';
+} catch (PDOException $e) {
+    echo "Erro de conexão: " . $e->getMessage();
 }
 
-if (!empty($_SESSION['login-error'])){
-    header("Location: ../../frontend/html/login.php");
+// Redireciona para a página de login em caso de erro
+if (!empty($_SESSION['login-error'])) {
+    header('Location: ../../frontend/html/login.php');
     exit();
 }
-
-// Fecha a conexão
-sqlsrv_free_stmt($resultadoGetUsuario);
-sqlsrv_close($conexao);
 ?>

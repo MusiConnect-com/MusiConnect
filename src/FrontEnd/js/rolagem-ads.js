@@ -1,6 +1,6 @@
 // rolagem de anúncios
 
-const ad = document.querySelector(".ad");
+const ad = document.querySelector(".anuncios-recentes");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 

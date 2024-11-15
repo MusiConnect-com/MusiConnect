@@ -1,8 +1,21 @@
 <?php
 
-include '../../BackEnd/views/conexao.php';
+$serverNome = 'JOAO\SQLEXPRESS';
+$dbNome = 'TesteFoto';
+$usuaNome = 'João';
+$senha = 'Jo121218vi!';
+$dsn = "sqlsrv:Server=$serverNome;Database=$dbNome"; //Data Source Name, string de conexão
+// parametros : nome do driver:Nome do servidor;Nome do banco de dados; Porta (opcional)
 
-// var_dump($_FILES);
+// Conexão PDO
+try {
+    $conexao = new PDO($dsn, $usuaNome, $senha);
+    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // definindo o modo de erro como exception
+} catch (PDOException $e) {
+    echo "Erro na conexão: " . $e->getMessage();
+    exit();
+}
+
 if (isset($_FILES['arquivo'])) {
     $arquivo = $_FILES['arquivo'];
     $nomeArquivo = $arquivo['name'];
@@ -35,40 +48,32 @@ if (isset($_FILES['arquivo'])) {
     $deu_certo = move_uploaded_file($arquivo['tmp_name'], $pastaArquivo);
 
     if ($deu_certo) {
-        $sqlSetFoto = "INSERT INTO TbMidia (MidiaNome, TipoMidiaId, MidiaCaminho, MidiaTamanho) VALUES (?, ?, ?, ?)";
-        $parametroFoto = array($nomeArquivo, 1, $pastaArquivo, $arquivoSize);
-        $resultSetFoto = sqlsrv_query($conexao, $sqlSetFoto, $parametroFoto);
+        // Inserir e obter o ID no mesmo comando com PDO
+        $sqlSetFoto = "
+            INSERT INTO TbMidia (MidiaNome, MidiaCaminho, MidiaTamanho) 
+            VALUES (:nomeArquivo, :caminhoArquivo, :arquivoSize);";
 
-        if ($resultSetFoto) {
-            // Recupera o ID da mídia
-            $sqlGetMidiaId = "SELECT MidiaId FROM TbMidia WHERE MidiaCaminho = ?";
-            $parametroGetMidiaId = array($pastaArquivo);
-            $resultGetMidiaId = sqlsrv_query($conexao, $sqlGetMidiaId, $parametroGetMidiaId);
+        // Preparar a consulta PDO
+        $stmt = $conexao->prepare($sqlSetFoto);
 
-            if (!$resultGetMidiaId) {
-                error_log(print_r(sqlsrv_errors(), true));
-                throw new Exception("Erro ao pegar midiaId.");
-            } else if (sqlsrv_fetch($resultGetMidiaId)) {
-                $midiaId = sqlsrv_get_field($resultGetMidiaId, 0);
-            }
+        // Vincular os parâmetros
+        $stmt->bindParam(':nomeArquivo', $nomeArquivo);
+        $stmt->bindParam(':caminhoArquivo', $pastaArquivo);
+        $stmt->bindParam(':arquivoSize', $arquivoSize);
 
-            // Adicionando ao perfil mídia
-            $sqlSetPerfilMidia = "INSERT INTO TbPerfilMidia (UsuarioId, MidiaId) VALUES (?, ?);";
-            $parametroSetPerfilMidia = array(1, $midiaId);
-            $resultSetPerfilMidia = sqlsrv_query($conexao, $sqlSetPerfilMidia, $parametroSetPerfilMidia);
+        // Executar a consulta
+        $stmt->execute();
 
-            if (!$resultSetPerfilMidia) {
-                error_log(print_r(sqlsrv_errors(), true));
-                throw new Exception("Erro ao adicionar ao perfil mídia.");
-            }
+        // Obter o último ID inserido
+        $idInserido = $conexao->lastInsertId();
 
-            echo '<p>Arquivo enviado com sucesso! <a target="_blank" href="'.$pastaArquivo.'">Acessar Arquivo</a></p>';
+        if ($idInserido) {
+            echo '<p>Arquivo enviado com sucesso! <a target="_blank" href="'.$pastaArquivo.'">Acessar Arquivo a MidiaId '.$idInserido.'</a></p>';
             echo '<img src="' .$pastaArquivo. '" alt="">';
         } else {
-            echo "Erro : " . print_r(sqlsrv_errors(), true);
+            echo "Erro ao obter o último ID inserido.";
         }
     } else {
         echo '<p>Falha ao enviar arquivo</p>';
     }
 }
-?>

@@ -6,26 +6,28 @@
 
             include '../../BackEnd/views/conexao.php';
 
+            $UsuarioId = $_SESSION['UsuarioId'];
             // Consulta SQL
-            $sqlGetUsuario = "SELECT UsuarioId FROM TbUsuario WHERE UsuarioId = ?";
-            $parametro = array($_SESSION['UsuarioId']);
-            $resultadoGetUsuario = sqlsrv_query($conexao, $sqlGetUsuario, $parametro);
+            $stmt = $conexao->prepare("SELECT UsuarioId FROM TbUsuario WHERE UsuarioId = :UsuarioId");
 
-            if ($resultadoGetUsuario === false) {
-                throw new Exception("Erro na consulta SQL: " . print_r(sqlsrv_errors(), true));
-            }
+            $stmt->bindParam(':UsuarioId', $UsuarioId, PDO::PARAM_INT);
+            $stmt->execute();
 
-            // Fechar conexão (opcional)
-            sqlsrv_close($conexao);
+            if (!$stmt->fetch(PDO::FETCH_NUM)) {
+                header('Location: ../../BackEnd/views/logout.php');
+                exit();
+            } 
+
+            $stmt->closeCursor();
         } else {
             header('Location: ../../BackEnd/views/logout.php');
             exit();
         }
     } catch (Exception $e) {
         // Exibe a mensagem de erro e redireciona para logout
-        error_log("Erro encontrado: " . $e->getMessage());
+        error_log("Erro ao verificar usuário logado : " . $e->getMessage());
+        echo '<script>alert("Ocorreu um erro no sistema e perdemos sua conexão, faça login novamente por favor.");</script>';
         header('Location: ../../BackEnd/views/logout.php');
         exit();
     }
-
 ?>

@@ -1,0 +1,395 @@
+/* importação do global */
+@import url(/global.css);
+
+/* Style body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--light-grey);
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Style overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+}
+
+/* Style Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--navy-blue);
+    height: 10vh;
+    min-height: 90px;
+    max-height: 90px;
+    width: 100%;
+    z-index: 1001;
+    position: fixed;
+    top: 0;
+}
+
+header .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    padding-left: 5%;
+}
+
+/* Style nav Header */
+.logo{
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-links {
+    margin-left: auto;
+    padding-right: 2%;
+}
+
+.nav-links ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-links .nav-active a{
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.nav-links a{
+    display: inline-block;
+    transition: .3s;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.nav-links a:hover{
+    background-color: var(--orange);
+    color: var(--white);
+    transition: .3s;
+}
+
+.nav-links #search-icon::before{
+    font-size: 16px;
+    color: var(--white);
+    padding: 14.5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav-links #search-icon:hover::before {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.search-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    background-color: var(--white);
+    border: 1px solid var(--orange);
+    box-shadow: 0 0 1px 1px var(--orange);
+    padding: 0 20px;
+    border-radius: 5px;
+    top: 20px;
+    width: 0;
+    opacity: 0;
+    z-index: 1003;
+    transition: width .2s ease, opacity .2s ease;
+}
+
+.search-header.open-search {
+    width: 700px;
+    opacity: 1;
+}
+
+.search-header .bi-search::before {
+    cursor: default;
+}
+
+.search-header input {
+    background-color: var(--white);
+    font-size: 14px;
+    font-weight: 100;
+    padding: 0px 0px 0px 10px;
+    border: 1px solid transparent !important;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    height: 50px;
+}
+
+.search-header input:focus{
+    border-color: solid transparent !important;
+    box-shadow: none !important;
+}
+
+
+.search-header .bi-x::before{
+    font-size: 26px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.search-header .bi-x:hover::before{
+    background-color: var(--navy-blue);
+    color: var(--white);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--orange);
+    margin-left: 1%;
+    height: 100%;
+    padding: 0 1%;
+    width: 12%;
+}
+
+.profile p {
+    color: var(--white);
+}
+
+
+/* style perfil */
+.profile-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    max-height: 50px;
+}
+
+.profile-button img{
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color .3s ease;
+}
+
+.profile-button img:hover {
+    border-color:var(--orange);
+}
+
+.profile-list {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    gap: 20px;
+    top: 0;
+    right: 0;
+    z-index: 1003 !important;
+    width: 250px;
+    padding: 20px;
+    opacity: 0;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    border: 1px solid var(--black25);
+    border-radius: 5px;
+    transition: opacity .3s ease;
+}
+
+.profile-list.open-profile {
+    opacity: 1;
+}
+
+.profile-list .content-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-list .content-top img {
+    border-radius: 100%;
+    border: 2px solid var(--orange);
+    width: 40px;
+    height: 40px;
+    cursor: default;
+    margin-right: 5px;
+}
+
+.profile-list .content-top p {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.profile-list .content-top i::before {
+    font-size: 26px;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.profile-list .content-top i:hover::before {
+    background-color: var(--orange);
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.profile-list .content-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-list-items {
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 10px;
+    transition: .3s;
+    border-radius: 5px;
+    color: var(--white);
+    width: 100%;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.profile-list-items:hover{
+    background-color: var(--orange);
+    transition: .3s;
+}
+
+/*Style main*/
+main {
+    width: 100%;
+    height: 100%;
+    margin-top: 11vh;
+    padding: 20px;
+}
+
+/* Container principal dos anúncios */
+.anuncio {
+    display: flex;
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    background-color: var(--white);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+/* Lado esquerdo (imagem e informações básicas) */
+.left-anuncio {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilização da imagem do anúncio */
+.img-anuncio {
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.img-anuncio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Informações básicas do lado esquerdo */
+.info-anuncio {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Lado direito (detalhes do anúncio) */
+.right-anuncio {
+    width: 30%;
+    padding: 0 20px;
+}
+
+/* Título do anúncio */
+.right-anuncio h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+/* Valor do anúncio */
+.valor-anuncio {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--orange);
+    margin: 10px 0;
+}
+
+/* Títulos de seções dentro do conteúdo */
+.anuncio h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--black);
+}
+
+/* Estilo para as informações adicionais, como contato e datas */
+.descr-anuncio,
+.local-anuncio,
+.info-anuncio p {
+    font-size: 14px;
+    color: var(--black);
+}
+
+#botao-zap {
+    margin-top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--white);
+    background-color: #25D366;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#botao-zap:hover {
+    color: #25D366;
+    background-color: var(--navy-blue);
+}

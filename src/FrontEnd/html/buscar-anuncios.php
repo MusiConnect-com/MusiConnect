@@ -1,13 +1,82 @@
+<?php
+
+    include '../../BackEnd/views/verificar-logado.php';
+    include '../../BackEnd/views/conexao.php';
+
+    if ($_SESSION['UsuarioTipo'] != "M") return header('Location: ../../BackEnd/views/logout.php');
+
+    $usuarioId = $_SESSION['UsuarioId'];
+    $nome = $_SESSION['UsuarioNome'];
+    $primeiroNome = explode(" ", $nome)[0];
+    $sobrenome = $_SESSION['UsuarioSobrenome'];
+    $usuarioTipo = $_SESSION['UsuarioTipo'];
+
+    try {
+        $stmt = $conexao->prepare("SELECT M.MidiaCaminho FROM TbMidia M INNER JOIN TbPerfilMidia PM ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = :UsuarioId AND PM.MidiaDestino = 'perfil';");
+        $stmt->bindParam(':UsuarioId', $usuarioId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $caminhoFoto = null;
+        if ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $caminhoFoto = $linha['MidiaCaminho'];
+        }
+    } catch (Exception $e) {
+        // Exibe a mensagem de erro e redireciona para logout
+        error_log("Erro ao consultar foto de perfil : " . $e->getMessage());
+        echo '<script>alert("Ocorreu um erro de conexão, faça login novamente por favor.");</script>';
+        header('Location: ../../BackEnd/views/logout.php');
+        exit();
+    }
+
+    try {
+        
+        if (isset($_GET['titulo'], $_GET['cidade'])) {
+            $AnuncioTitulo = $_GET['titulo'];
+            $CidadeNome = $_GET['cidade'];
+        }
+        
+        if ((!isset($_GET['titulo'], $_GET['cidade'])) || ($_GET['titulo'] == '' AND $_GET['cidade'] == '')) {
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios;");
+            $stmt->execute();
+        } 
+        else if ($AnuncioTitulo !== '' && $CidadeNome == '') {
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioTitulo = :AnuncioTitulo;");
+            $stmt->bindParam(':AnuncioTitulo', $AnuncioTitulo, PDO::PARAM_STR);
+            $stmt->execute();
+        }
+        else if ($AnuncioTitulo == '' && $CidadeNome !== '') {
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE CidadeNome = :CidadeNome;");
+            $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
+            $stmt->execute();
+        }
+        else {
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioTitulo = :AnuncioTitulo AND CidadeNome = :CidadeNome;");
+            $stmt->bindParam(':AnuncioTitulo', $AnuncioTitulo, PDO::PARAM_STR);
+            $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
+            $stmt->execute();
+        }
+
+        
+    } catch (Exception $e) {
+        error_log("Erro ao executar View VwVisualizarAnuncios: " . $e->getMessage());
+        echo '<script>
+                alert("Ocorreu um erro inesperado. Tente novamente.");
+                window.location.href = "../../FrontEnd/html/home-contratante.php";
+            </script>';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <link rel="stylesheet" href="/css/anuncios-musico.css">
-    <script src="/js/perfil.js" defer></script>
-    <script src="/js/pesquisar-cabecalho-musico.js" defer></script>
-    <script src="/js/filtros.js" defer></script>
+    <link rel="stylesheet" href="../css/buscar-anuncios.css">
+    <link rel="stylesheet" href="../global.css">
+    <script src="../js/perfil.js" defer></script>
+    <script src="../js/pesquisar-cabecalho-musico.js" defer></script>
+    <script src="../js/filtros.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,19 +93,19 @@
     <!--CABEÇALHO-->
     <header>
         <div class="content">
-            <a class="logo" href="/html/home-musico.html"><img src="/img/img-logo.png"alt=""></a>
+            <a class="logo" href=""><img src="../img/img-logo.png"alt=""></a>
             <nav class="nav-links">
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
-                    <li id="ads-search" class="nav-active"><a href="/html/anuncios.html">Buscar Anúncios</a></li>
-                    <li><a href="#">Meus Contratos</a></li>
-                    <li><a href="/html/home-musico.html">Home</a></li>
+                    <li id="ads-search" class="nav-active"><a href="./buscar-anuncios.html">Buscar Anúncios</a></li>
+                    <li><a href="./home-musico.php">Home</a></li>
                 </ul>
             </nav>
 
             <div class="profile">
+                <?php echo '<p id="name-profile"> Olá ' .$primeiroNome. "</p>";?>
                 <div class="profile-button" id="profile-button">
-                    <img src="/img/victor-vidal.png" alt="">
+                    <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
                 </div>
             </div> 
         </div>
@@ -52,17 +121,17 @@
     <!--PERFIL CABEÇALHO-->
     <div class="profile-list" id="profile-list">
         <div class="content-top">
-            <img src="/img/victor-vidal.png" alt="">
-            <p>Victor Vidal</p>
+            <?php echo '<img src="'.$caminhoFoto.'" alt="">';?>
+            <?php echo "<p>" .$nome. "</p>";?>
             <div>
                 <i id="close-profile-list" class="bi bi-x"></i>
             </div>
         </div>
         <hr>
         <div class="content-bottom">
-            <a class="profile-list-items" href="/html/perfil-musico.html">Meu Perfil</a></li>
-            <a class="profile-list-items" href="">Configurações</a></li>
-            <a class="profile-list-items" href="/html/login.html">Sair</a></li>
+            <a class="profile-list-items" href="perfil-musico.html">Meu Perfil</a>
+            <a class="profile-list-items" href="">Configurações</a>
+            <a class="profile-list-items" href="../../BackEnd/views/logout.php">Sair</a>
         </div>
     </div>
     <!--FIM PERFIL CABEÇALHO-->
@@ -71,11 +140,11 @@
         <!--SEÇÃO 1-->
         <section class="section-1">
             <div class="search">
-                <div class="search-input">
-                    <input type="text" placeholder="Ex : Bar da esquina" id="keyword">
-                    <input type="text" placeholder="Ex : Campo Grande">
-                    <button class="button-search" type="button"><i class="bi bi-search"></i></button>
-                </div>
+                <form action="./buscar-anuncios.php" method="get" class="search-input">
+                    <input type="text" placeholder="Título" name="titulo">
+                    <input type="text" placeholder="Cidade" name="cidade">
+                    <button class="button-search" type="submit"><i class="bi bi-search"></i></button>
+                </form>
             </div>
 
             <div class="order">
@@ -95,57 +164,48 @@
         <!--FIM SEÇÃO 1-->
         <!--SEÇÃO 2-->
         <section class="section-2">
-            <div class="ads">
-                <a href="" class="ad-item">
-                    <div class="img-ad"><img src="/img/estabelecimento.png" alt=""></div>
-                    <div class="info-ad">
-                        <h2>Restaurante Carioca</h2>
-                        <p class="value-ad">R$ 400,00</p>
-                        <p class="descr-ad">Musica Ao Vivo no Restaurante Carioca, horário das 20:00 / 21:30.</p>
-                        <p class="local-ad">Campo Grande - MS</p>
-                    </div>
-                </a>
-            
-                <a href="" class="ad-item">
-                    <div class="img-ad"><img src="/img/casamento.png" alt=""></div>
-                    <div class="info-ad">
-                        <h2>Meu Casamento</h2>
-                        <p class="value-ad">R$ 1.000,00</p>
-                        <p class="descr-ad">Vou me casar no dia 03/06/2024, preciso de alguém que saiba tocar músicas antigas de sertanejo, e que seja animado para cantar por 4 horas seguidas!</p>
-                        <p class="local-ad">Campo Grande - MS</p>
-                    </div>
-                </a>
-            
-                <a href="" class="ad-item">
-                    <div class="img-ad"><img src="/img/cultural.png" alt=""></div>
-                    <div class="info-ad">
-                        <h2>Cultural</h2>
-                        <p class="value-ad">R$ 600,00</p>
-                        <p class="descr-ad">Abertura de show para um evento cultural, precisamos de um músico que saiba tocar músicas clássicas brasileiras.</p>
-                        <p class="local-ad">Campo Grande - MS</p>
-                    </div>
-                </a>
-            
-                <a href="" class="ad-item">
-                    <div class="img-ad"><img src="/img/festa-15-anos.webp" alt=""></div>
-                    <div class="info-ad">
-                        <h2>Meus 15 anos</h2>
-                        <p class="value-ad">À Combinar</p>
-                        <p class="descr-ad"> Preciso de um DJ para tocar no aniversário da minha filha, das 19:00 até 21:00. Que já tenha experências e avaliações!</p>
-                        <p class="local-ad">Campo Grande - MS</p>
-                    </div>
-                </a>
-            
-                <a href="" class="ad-item">
-                    <div class="img-ad"><img src="/img/cafe-mostarda.jpg" alt=""></div>
-                    <div class="info-ad">
-                        <h2>Café Mostarda</h2>
-                        <p class="value-ad">R$ 800,00</p>
-                        <p class="descr-ad"> Músico sertanejo que tenha experências e vontade de fazer um belo show!</p>
-                        <p class="local-ad">Campo Grande - MS</p>
-                    </div>
-                </a>
-            </div>
+        <div class="anuncios">
+            <?php
+                try {
+                    if ($stmt->rowCount() == 0) {
+                        echo "<p> Nenhum anúncio encontrado </p>";
+                    } 
+                    else {
+                        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
+                            $dataFim = new DateTime($result['AnuncioDataHrFim']);
+        
+                            echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
+                            echo '<div class="img-anuncio"><img src='. $result['MidiaCaminho'].' alt=""></div>';
+                            echo '<div class="info-anuncio">';
+                            echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";
+        
+                            echo '<h3 class="valor-anuncio">R$ ' . htmlspecialchars($result['AnuncioValor']) . "</h3>";
+                            echo "<h3>" . htmlspecialchars($result['TipoEventoNome']) . "</h3>";
+                            if ($dataInicio->format('d/m/Y') === $dataFim->format('d/m/Y')) {
+                                echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs</p>";
+                            } else {
+                                echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs de ".$dataFim->format('d/m/Y')."</p>";
+                            }
+                            echo '<p class="descr-anuncio">' . htmlspecialchars($result['AnuncioDesc']) . "</p>";
+                            echo '<p class="local-anuncio">' . htmlspecialchars($result['CidadeNome']) . ", " . htmlspecialchars($result['EstadoUf']) . "</p>";
+                            echo "</div>";
+                            echo "</a>";
+                        }
+                    }
+        
+                    // Fechar a consulta
+                    $stmt->closeCursor();
+                } catch(Exception $e) {
+                    error_log("Erro ao exibir anúncios: " . $e->getMessage());
+                    echo '<script>
+                            alert("Ocorreu um erro inesperado. Tente novamente.");
+                            window.location.href = "../../FrontEnd/html/home-contratante.php";
+                        </script>';
+                }
+        
+            ?>
+        </div>
 
             <div class="filters">
                 <div class="filters-list" id="filters-list">   

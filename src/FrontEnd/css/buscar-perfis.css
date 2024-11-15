@@ -8,7 +8,8 @@ body {
     align-items: center;
     flex-direction: column;
     background-color: var(--light-grey);
-    height: 100%;
+    min-height: 100vh;
+    margin: 0;
 }
 
 /* Style overlay */
@@ -21,10 +22,6 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1002;
-}
-
-#overlay3 {
-    background-color: transparent;
 }
 
 /* Style Header */
@@ -47,9 +44,10 @@ header .content {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
     height: 100%;
-    width: 95%;
-    padding: 20px 0px;
+    width: 100%;
+    padding-left: 5%;
 }
 
 /* Style footer */
@@ -88,9 +86,9 @@ footer h3{
     padding-right: 2%;
 }
 
-
 .nav-links ul {
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 20px;
     flex-wrap: wrap;
@@ -100,7 +98,6 @@ footer h3{
     background-color: var(--orange);
     color: var(--white);
 }
-
 
 .nav-links a{
     display: inline-block;
@@ -116,6 +113,7 @@ footer h3{
 
 .nav-links a:hover{
     background-color: var(--orange);
+    color: var(--white);
     transition: .3s;
 }
 
@@ -189,6 +187,21 @@ footer h3{
     color: var(--white);
 }
 
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--orange);
+    margin-left: 1%;
+    height: 100%;
+    padding: 0 1%;
+    width: 12%;
+}
+
+.profile p {
+    color: var(--white);
+}
+
 
 /* style perfil */
 .profile-button {
@@ -206,7 +219,7 @@ footer h3{
     height: 50px;
     border: 2px solid transparent;
     cursor: pointer;
-    transition: border-color .4s ease;
+    transition: border-color .3s ease;
 }
 
 .profile-button img:hover {
@@ -239,7 +252,6 @@ footer h3{
 .profile-list .content-top {
     display: flex;
     justify-content: space-between;
-    
 }
 
 .profile-list .content-top img {
@@ -252,9 +264,9 @@ footer h3{
 }
 
 .profile-list .content-top p {
+    color: var(--white);
     font-size: 16px;
     font-weight: 500;
-    color: var(--white);
     margin-right: auto;
 }
 
@@ -267,6 +279,7 @@ footer h3{
 
 .profile-list .content-top i:hover::before {
     background-color: var(--orange);
+    color: var(--white);
     border-radius: 5px;
 }
 
@@ -292,7 +305,6 @@ footer h3{
     background-color: var(--orange);
     transition: .3s;
 }
-
 
 /*Style main*/
 main {
@@ -339,7 +351,7 @@ main {
     transition: .5s;
 }
 
-.search-input input[placeholder="Ex : Campo Grande"] {
+.search-input input[placeholder="Cidade"] {
     border-radius: 0px;
 }
 
@@ -459,14 +471,14 @@ main {
 
 
 /*Style ads*/
-.ads {
+.anuncios {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 40px;
-    width: 70%;
+    width: 80%;
 }
 
-.ad-item {
+.anuncio {
     display: flex;
     flex-direction: row;
     max-width: 100%;
@@ -483,26 +495,26 @@ main {
     transition: .3s;
 }
 
-.ad-item:hover {
+.anuncio:hover {
     box-shadow: 0 0 10px 1px var(--black40);
 }
 
-.ad-item:hover .button-want button {
+.anuncio:hover .button-want button {
     background-color: var(--orange);
     color: var(--white);
 }
 
-.ad-item:hover img {
+.anuncio:hover img {
     transform: scale(1.1);
 }
 
-.ad-item .img-ad {
+.img-anuncio {
     width: 350px;
     height: 250px;
     overflow: hidden;
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .ad-item .img-ad {
         width: 200px;
     }
@@ -510,9 +522,9 @@ main {
     .ad-item .info-ad{
         width: 68%;
     }
-}
+} */
 
-.ad-item img{
+.img-anuncio img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -520,58 +532,36 @@ main {
 }
 
 /*Style informações anuncio*/
-.info-ad{
+.info-anuncio{
+    display: flex;
+    flex-direction: column;
     padding: 20px 15px;
     word-wrap: break-word;
-    width: 60%;
+    width: 70%;
     height: 100%;
+    max-height: 250px;
     transition: .3s;
 }
 
-.ad-item h2 {
+.anuncio h2 {
     font-weight: 500;
 }
 
-.value-ad {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
+.anuncio h3 {
+    font-weight: 400;
 }
 
-.descr-ad {
+.anuncio p {
     display: flex;
     font-size: 13px;
-    height: 55%;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-.local-ad {
+.local-anuncio {
     font-size: 13px;
     font-weight: 300;
     font-style: italic;
-}
-
-/*Style button-ADS*/
-.ad-item .button-want {
-    display: flex;
-    align-items: end;
-    width: 20%;
-    padding: 0 20px 20px 0;
-}
-
-.ad-item button {
-    font-size: 14px;
-    font-weight: 500;
-    background-color: var(--dark-navy-blue);
-    color: var(--white);
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    width: 100%;
-    height: 25%;
-    padding: 10px 0px;
-    cursor: pointer;
-    transition: .3s;
 }
 
 /*Style filters*/
@@ -608,14 +598,14 @@ main {
     cursor: default;
 }
 
-.category, .event {
+.genero-musical, .habilidades {
     display: flex;
     justify-content: left;
     flex-direction: column;
     gap: 10px;
 }
 
-.event {
+.habilidades {
     border-top: 1px solid var(--dark-grey);
 }
 

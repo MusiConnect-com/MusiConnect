@@ -2,7 +2,8 @@
 let indexStep = 0;
 const form = document.getElementById('form-signup');
 const progressBar = document.getElementById('progress-bar');
-const btnNext = document.getElementById('btn-next');
+const btnNext = document.getElementById('botao-avancar');
+const btnBack = document.getElementById('botao-voltar');
 const formSteps = document.querySelectorAll('.form-step');
 const steps = document.querySelectorAll('.step');
 const stepsDefault = document.querySelectorAll('.step.default');
@@ -56,6 +57,33 @@ function nextStep() {
   }
 }
 
+function backStep() {
+  let backIndexStep = indexStep - 1;
+  console.log("backIndex " + backIndexStep);
+
+  function back(width) {
+      formSteps.forEach(formStep => {
+          formStep.classList.add("hidden");
+      });
+    
+      formSteps[backIndexStep].classList.remove("hidden");
+      
+      progressBar.style.width = `${width}%`;
+  
+      steps.forEach((step, index) => {
+          step.classList.toggle("active", index < backIndexStep);
+      });
+  
+      indexStep = backIndexStep;
+  }
+
+  if (backIndexStep >= 0) {
+      let width = (backIndexStep / totalSteps) * 100;
+
+      back(width);
+  }
+}
+
 const selectMusic = document.querySelector(".select-music");
 const selectContractor = document.querySelector(".select-contractor");
 const span = document.querySelector(".form-step-goal-top span");
@@ -63,8 +91,9 @@ const musicOption = document.getElementById('music');
 const contractorOption = document.getElementById('contractor');
 const errorProfileSpan = document.getElementById("error-profile");
 const errorAddressSpan = document.getElementById("error-address");
-const inputFile = document.getElementById('profile-picture');
-const preview = document.getElementById('preview-picture');
+const inputFile = document.getElementById('foto');
+const preview = document.getElementById('image-preview');
+const botaoFoto = document.getElementById('botao-foto');
 
 function setError() {
   selectMusic.style.border = "1px solid #e63636";
@@ -216,31 +245,34 @@ btnNext.addEventListener('click', function (event) {
   }
 });
 
-// mostrando imagem selecionada
+btnBack.addEventListener('click', function(event){
+  event.preventDefault();
+  console.log("indexAtual " + indexStep);
+  backStep();
+});
+
+
 // Mostrando imagem selecionada
 inputFile.addEventListener('change', function(event) {
   const file = event.target.files[0];
 
-  preview.innerHTML = ""; 
+  preview.src = ""; 
 
   if (file) {
       if (!validateFile(file)) {
-          inputFile.value = ""; 
+          inputFoto.value = ""; 
           preview.src = ""; 
           return; 
       }
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+      botaoFoto.textContent = 'Mudar foto';
 
-          const img = document.createElement('img');
-          img.src = e.target.result; 
-          preview.appendChild(img);
-      };
-
-      reader.readAsDataURL(file);
   } else {
-      preview.innerHTML = ""; 
+      preview.src = '';
+      preview.style.display = 'none';
+      botaoFoto.textContent = 'Adicionar Foto'; 
   }
 });
 

@@ -15,20 +15,6 @@ CREATE TABLE TbCidade (
     CONSTRAINT FkEstadoUfTbCidade FOREIGN KEY (EstadoUf) REFERENCES TbEstado (EstadoUf)
 );
 
-CREATE TABLE TbEndereco (
-    EnderecoId SMALLINT IDENTITY(1,1),
-    EnderecoLogra NVARCHAR(255),
-    EnderecoNum SMALLINT,
-    EnderecoComp NVARCHAR(255),
-    EnderecoBai NVARCHAR(255),
-    EnderecoCep CHAR(8),
-    CidadeId SMALLINT,
-    EnderecoData DATETIME NOT NULL DEFAULT GETDATE(),
-
-    CONSTRAINT PkEnderecoId PRIMARY KEY (EnderecoId),
-    CONSTRAINT FkCidadeIdTbEndereco FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
-);
-
 CREATE TABLE TbUsuario (
     UsuarioId SMALLINT IDENTITY(1,1),
     UsuarioCpf CHAR(11) NOT NULL,
@@ -38,20 +24,27 @@ CREATE TABLE TbUsuario (
     UsuarioSobrenome NVARCHAR(255) NOT NULL,
     UsuarioDataNasc DATE NOT NULL,
     UsuarioSexo CHAR(1) NOT NULL,
-    EnderecoId SMALLINT NOT NULL,
+	CidadeId SMALLINT NOT NULL,
+    UsuarioEnderecoLogra NVARCHAR(255),
+    UsuarioEnderecoNum SMALLINT,
+    UsuarioEnderecoComp NVARCHAR(255),
+    UsuarioEnderecoBai NVARCHAR(255),
+    UsuarioEnderecoCep CHAR(8),
     UsuarioDataCad DATETIME NOT NULL DEFAULT GETDATE(),
 
     CONSTRAINT PkUsuarioId PRIMARY KEY (UsuarioId),
     CONSTRAINT UqUsuarioCpf UNIQUE (UsuarioCpf),
     CONSTRAINT UqUsuarioEmail UNIQUE (UsuarioEmail),
     CONSTRAINT CkUsuarioTipo CHECK (UsuarioTipo IN ('M', 'C')),
-    CONSTRAINT CkUsuarioSexo CHECK (UsuarioSexo IN ('M', 'F', 'N'))
+    CONSTRAINT CkUsuarioSexo CHECK (UsuarioSexo IN ('M', 'F', 'N')),
+    CONSTRAINT FkCidadeIdTbUsuario FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId)
 );
 
 CREATE TABLE TbUsuarioMusico (
     UsuarioMuId SMALLINT IDENTITY(1,1),
     UsuarioId SMALLINT NOT NULL,
-    UsuarioDesc NVARCHAR(MAX),
+	UsuarioNomeArt NVARCHAR(255),
+    UsuarioDesc NVARCHAR(255),
     UsuarioPreco DECIMAL(10,2),
 
     CONSTRAINT PkUsuarioMuId PRIMARY KEY (UsuarioMuId),
@@ -93,7 +86,7 @@ CREATE TABLE TbRedeSocial (
 CREATE TABLE TbHabilidade (
     HabilidadeId SMALLINT IDENTITY(1,1),
     HabilidadeNome NVARCHAR(255) NOT NULL,
-    HabilidadeDesc NVARCHAR(MAX),
+    HabilidadeDesc NVARCHAR(255),
 
     CONSTRAINT PkHabilidadeId PRIMARY KEY (HabilidadeId),
     CONSTRAINT UqHabilidadeNome UNIQUE (HabilidadeNome)
@@ -111,13 +104,13 @@ CREATE TABLE TbUsuarioHabilidade (
 CREATE TABLE TbGeneroMusical (
     GeneroMuId SMALLINT IDENTITY(1,1),
     GeneroMuNome NVARCHAR(255) NOT NULL,
-    GeneroMuDesc NVARCHAR(MAX),
+    GeneroMuDesc NVARCHAR(255),
 
     CONSTRAINT PkGeneroMuId PRIMARY KEY (GeneroMuId),
     CONSTRAINT UqGeneroMuNome UNIQUE (GeneroMuNome)
 );
 
-CREATE TABLE TbUsuarioGeneroMu (
+CREATE TABLE TbUsuarioGeneroMusical (
     UsuarioId SMALLINT NOT NULL,
     GeneroMuId SMALLINT NOT NULL,
 
@@ -129,7 +122,7 @@ CREATE TABLE TbUsuarioGeneroMu (
 CREATE TABLE TbTipoEvento (
     TipoEventoId SMALLINT IDENTITY(1,1),
     TipoEventoNome NVARCHAR(255) NOT NULL,
-    TipoEventoDesc NVARCHAR(MAX),
+    TipoEventoDesc NVARCHAR(255),
 
     CONSTRAINT PkTipoEventoId PRIMARY KEY (TipoEventoId),
     CONSTRAINT UqTipoEventoNome UNIQUE (TipoEventoNome)
@@ -141,20 +134,26 @@ CREATE TABLE TbAnuncio (
     AnuncioDataHr DATETIME NOT NULL DEFAULT GETDATE(),
     AnuncioValidade DATE NOT NULL,
     AnuncioTitulo NVARCHAR(255) NOT NULL,
-    AnuncioDataHrIncio DATETIME NOT NULL,
+    AnuncioDataHrInicio DATETIME NOT NULL,
     AnuncioDataHrFim DATETIME NOT NULL,
     TipoEventoId SMALLINT NOT NULL,
-    EnderecoId SMALLINT NOT NULL,
-    AnuncioDesc NVARCHAR(MAX) NOT NULL,
-    AnuncioBeneficios NVARCHAR(MAX),
+    CidadeId SMALLINT NOT NULL,
+    AnuncioEnderecoLogra NVARCHAR(255) NOT NULL,
+    AnuncioEnderecoNum SMALLINT NOT NULL,
+    AnuncioEnderecoComp NVARCHAR(255) NOT NULL,
+    AnuncioEnderecoBai NVARCHAR(255) NOT NULL,
+    AnuncioEnderecoCep CHAR(8) NOT NULL,
+    AnuncioDesc NVARCHAR(255) NOT NULL,
+    AnuncioBeneficios NVARCHAR(255),
     AnuncioContato CHAR(11) NOT NULL,
+    AnuncioNomeContato NVARCHAR(255) NOT NULL,
     AnuncioValor DECIMAL(10,2) NOT NULL,
     AnuncioStatus NVARCHAR(50) NOT NULL DEFAULT 'ATIVO',
 
     CONSTRAINT PkAnuncioId PRIMARY KEY (AnuncioId),
     CONSTRAINT FkUsuarioIdTbAnuncio FOREIGN KEY (UsuarioId) REFERENCES TbUsuario (UsuarioId),
     CONSTRAINT FkTipoEventoIdTbAnuncio FOREIGN KEY (TipoEventoId) REFERENCES TbTipoEvento (TipoEventoId),
-    CONSTRAINT FkEnderecoIdTbAnuncio FOREIGN KEY (EnderecoId) REFERENCES TbEndereco (EnderecoId),
+    CONSTRAINT FkCidadeIdTbAnuncio FOREIGN KEY (CidadeId) REFERENCES TbCidade (CidadeId),
     CONSTRAINT CkAnuncioStatus CHECK (AnuncioStatus IN ('ATIVO', 'DESATIVADO', 'VENCIDO', 'FINALIZADO'))
 );
 
@@ -191,7 +190,7 @@ CREATE TABLE TbAnuncioGeneroMusical (
 CREATE TABLE TbTipoMidia (
     TipoMidiaId SMALLINT IDENTITY(1,1),
     TipoMidiaNome NVARCHAR(255) NOT NULL,
-    TipoMidiaDesc NVARCHAR(MAX),
+    TipoMidiaDesc NVARCHAR(255),
     
     CONSTRAINT UqTipoMidiaNome UNIQUE (TipoMidiaNome),
     CONSTRAINT PkTipoMidiaId PRIMARY KEY (TipoMidiaId)
@@ -235,14 +234,17 @@ CREATE TABLE TbAnuncioMidia (
     CONSTRAINT FkMidiaIdTbAnuncioMidia FOREIGN KEY (MidiaId) REFERENCES TbMidia (MidiaId)
 );
 
-ALTER TABLE TbPerfilMidia
-ALTER COLUMN MidiaTitulo NVARCHAR(255) NULL;
-
 SELECT * FROM TbUsuario;
 SELECT * FROM TbUsuarioMusico;
-SELECT * FROM TbEndereco;
 SELECT * FROM TbSenha;
 SELECT * FROM TbUsuarioHabilidade;
-SELECT * FROM TbUsuarioGeneroMu;
+SELECT * FROM TbUsuarioGeneroMusical;
 SELECT * FROM TbMidia;
 SELECT * FROM TbPerfilMidia;
+SELECT * FROM TbTipoMidia;
+SELECT * FROM TbTelefone;
+
+SELECT * FROM TbAnuncio;
+SELECT * FROM TbAnuncioMidia;
+SELECT * FROM TbAnuncioGeneroMusical;
+SELECT * FROM TbAnuncioHabilidade;

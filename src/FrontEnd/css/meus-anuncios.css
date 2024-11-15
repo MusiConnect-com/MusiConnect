@@ -1,7 +1,7 @@
 /* importação do global */
 @import url(/global.css);
 
-/* style body */
+/* Style body */
 body {
     display: flex;
     justify-content: center;
@@ -44,25 +44,12 @@ header .content {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
     height: 100%;
-    width: 95%;
-    padding: 20px 0px;
-}
-
-/* Style footer */
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 200px;
-    background-color: var(--navy-blue);
+    padding-left: 5%;
 }
 
-footer h3{
-    font-weight: 500;
-    color: var(--white);
-}
 
 /* Style nav Header */
 .logo{
@@ -85,9 +72,9 @@ footer h3{
     padding-right: 2%;
 }
 
-
 .nav-links ul {
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 20px;
     flex-wrap: wrap;
@@ -186,13 +173,28 @@ footer h3{
     color: var(--white);
 }
 
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--orange);
+    margin-left: 1%;
+    height: 100%;
+    padding: 0 1%;
+    width: 12%;
+}
+
+.profile p {
+    color: var(--white);
+}
+
 
 /* style perfil */
 .profile-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
+    width: 100%;
     height: 50px;
     max-height: 50px;
 }
@@ -290,61 +292,110 @@ footer h3{
     transition: .3s;
 }
 
-/* Estilo para a seção Meus Anúncios */
-.meus-anuncios {
-    margin: 40px auto;
-    width: 90%;
-    max-width: 1200px;
-    font-family: 'Poppins', sans-serif;
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
 }
 
-.meus-anuncios h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
+/*Style ads*/
+.meus-anuncios {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 40px;
+    width: 80%;
 }
 
 .anuncio {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+    height: 250px;
+    max-height: 250px;
+    overflow: auto;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: var(--white);
+    box-shadow: 0 0 1px 1px var(--black40);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.anuncio:hover {
+    box-shadow: 0 0 10px 1px var(--black40);
+}
+
+.anuncio:hover .button-want button {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.anuncio:hover img {
+    transform: scale(1.1);
+}
+
+.img-anuncio {
+    width: 350px;
+    height: 250px;
+    overflow: hidden;
+}
+
+/* @media (max-width: 1000px) {
+    .ad-item .img-ad {
+        width: 200px;
+    }
+
+    .ad-item .info-ad{
+        width: 68%;
+    }
+} */
+
+.img-anuncio img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s ease;
+}
+
+/*Style informações anuncio*/
+.info-anuncio{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    word-wrap: break-word;
+    width: 70%;
+    height: 100%;
+    max-height: 250px;
+    transition: .3s;
+}
+
+.anuncio h2 {
+    font-weight: 500;
 }
 
 .anuncio h3 {
-    font-size: 1.8rem;
-    color: #444;
-    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .anuncio p {
-    font-size: 1rem;
-    color: #666;
-    margin: 8px 0;
+    display: flex;
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-.anuncio img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 15px;
-    border-radius: 8px;
+.local-anuncio {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
 }
 
-footer {
-    text-align: center;
-    background-color: #333;
-    padding: 20px;
-    color: white;
-    font-size: 1.2rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Resposividade */
+/* Resposividade
 @media (max-width: 768px) {
     .meus-anuncios h2 {
         font-size: 2rem;
@@ -357,4 +408,4 @@ footer {
     .anuncio p {
         font-size: 0.9rem;
     }
-}
+} */

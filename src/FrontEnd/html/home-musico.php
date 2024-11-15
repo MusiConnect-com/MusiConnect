@@ -3,7 +3,7 @@
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
 
-    if ($_SESSION['UsuarioTipo'] != "M") return header('Location: ../../BackEnd/views/logout.php');
+    if ($_SESSION['UsuarioTipo'] !== "M") return header('Location: ../../BackEnd/views/logout.php');
 
     $usuarioId = $_SESSION['UsuarioId'];
     $nome = $_SESSION['UsuarioNome'];
@@ -11,16 +11,34 @@
     $sobrenome = $_SESSION['UsuarioSobrenome'];
     $usuarioTipo = $_SESSION['UsuarioTipo'];
 
-    $sqlGetFoto = "SELECT M.MidiaCaminho FROM TbPerfilMidia PM INNER JOIN TbMidia M ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = ? AND PM.MidiaDestino = 'perfil';";
-    $parametroGetFoto = array($usuarioId);
-    $resultGetFoto = sqlsrv_query($conexao, $sqlGetFoto, $parametroGetFoto);
+    try {
+        $stmt = $conexao->prepare("SELECT M.MidiaCaminho FROM TbMidia M INNER JOIN TbPerfilMidia PM ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = :UsuarioId AND PM.MidiaDestino = 'perfil';");
+        $stmt->bindParam(':UsuarioId', $usuarioId, PDO::PARAM_INT);
+        $stmt->execute();
 
-    $caminhoFoto = null;
-
-    if ($resultGetFoto !== false) {
-        if ($linha = sqlsrv_fetch_array($resultGetFoto, SQLSRV_FETCH_ASSOC)) {
+        $caminhoFoto = null;
+        if ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $caminhoFoto = $linha['MidiaCaminho'];
         }
+    } catch (Exception $e) {
+        // Exibe a mensagem de erro e redireciona para logout
+        error_log("Erro ao consultar foto de perfil : " . $e->getMessage());
+        echo '<script>alert("Ocorreu um erro de conexão, faça login novamente por favor.");</script>';
+        header('Location: ../../BackEnd/views/logout.php');
+        exit();
+    }
+
+    try {
+        
+        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioDataHr >= DATEADD(DAY,-5,GETDATE());");
+        $stmt->execute();
+        
+    } catch (Exception $e) {
+        error_log("Erro ao executar View VwVisualizarAnuncios: " . $e->getMessage());
+        echo '<script>
+                alert("Ocorreu um erro inesperado. Tente novamente.");
+                window.location.href = "../../BackEnd/views/logout.php";
+            </script>';
     }
 ?>
 
@@ -34,7 +52,6 @@
     <link rel="stylesheet" href="../global.css">
     <script src="../js/perfil.js" defer></script>
     <script src="../js/pesquisar-cabecalho-musico.js" defer></script>
-    <script src="..js/contratos-ativos.js" defer></script>
     <script src="../js/rolagem-ads.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,8 +72,8 @@
             <nav class="nav-links">
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
-                    <li id="ads-search"><a href="/html/anuncios-musico.html">Buscar Anúncios</a></li>
-                    <li class="nav-active"><a href="/html/home-musico.html">Home</a></li>
+                    <li id="ads-search"><a href="./buscar-anuncios.php">Buscar Anúncios</a></li>
+                    <li class="nav-active"><a href="./home-musico.php">Home</a></li>
                 </ul>
             </nav>
 
@@ -103,11 +120,11 @@
                     <p> Está procurando por uma oportunidade no mercado musical?<br>
                         Faça uma busca rápida e encontre <span>ANÚNCIOS</span> ideal para você!</p>
 
-                    <div class="search-input">
-                        <input type="text" placeholder="Ex : Bar da esquina">
-                        <input type="text" placeholder="Ex : Campo Grande">
-                        <button class="button-search" type="button"><i class="bi bi-search"></i></button>
-                    </div>
+                    <form action="./buscar-anuncios.php" method="get" class="search-input">
+                        <input type="text" placeholder="Título" name="titulo">
+                        <input type="text" placeholder="Cidade" name="cidade">
+                        <button class="button-search" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
                 </div>
 
                 <div class="content-img">
@@ -121,69 +138,50 @@
             <div class="title">
                 <h1>Anúncios mais recentes</h1>
 
-                <a href="/html/anuncios-musico.html" class="see-all">
+                <a href="./buscar-anuncios.php" class="see-all">
                     <p>Ver mais</p>
                     <i id="arrow-see-all" class="bi bi-arrow-right"></i>
                 </a>
             </div>
 
-            <div class="ads">
+            <div class="anuncios-recentes">
                 <div class="left-arrow">
                     <i class="bi bi-chevron-right"></i>
                 </div>
 
-                <div class="ad">
-                    <a class="ad-item">
-                        <div class="img-ad"><img src="/img/estabelecimento.png" alt=""></div>
-                        <div class="info-ad">
-                            <h2>Restaurante Carioca</h2>
-                            <p class="local-ad">Campo Grande - MS</p>
-                            <p class="value-ad">R$ 400,00</p>  
-                        </div>
-                        <button class="btn-see-more" type="button">Ver mais</button>
-                    </a>
-                    
-                    <a class="ad-item">
-                        <div class="img-ad"><img src="/img/casamento.png" alt=""></div>
-                        <div class="info-ad">
-                            <h2>Meu Casamento</h2>
-                            <p class="local-ad">Campo Grande - MS</p>
-                            <p class="value-ad">R$ 1.000,00</p>
-                        </div>
-                        <button class="btn-see-more" type="button">Ver mais</button>
-                    </a>
-                    
-                    <a class="ad-item">
-                        <div class="img-ad"><img src="/img/cultural.png" alt=""></div>
-                        <div class="info-ad">
-                            <h2>Cultural</h2>
-                            <p class="local-ad">Campo Grande - MS</p>
-                            <p class="value-ad">R$ 600,00</p>
-                        </div>
-                        <button class="btn-see-more" type="button">Ver mais</button>
-                    </a>
-                
-                    <a class="ad-item">
-                        <div class="img-ad"><img src="/img/cafe-mostarda.jpg" alt=""></div>
-                        <div class="info-ad">
-                            <h2>Café Mostarda</h2>
-                            <p class="local-ad">Campo Grande - MS</p>
-                            <p class="value-ad">R$ 800,00</p>
-                        </div>
-                        <button class="btn-see-more" type="button">Ver mais</button>
-                    </a>
-                
-                    <a class="ad-item">
-                        <div class="img-ad"><img src="/img/festa-15-anos.webp" alt=""></div>
-                        <div class="info-ad">
-                            <h2>Meus 15 anos</h2>
-                            <p class="local-ad">Campo Grande - MS</p>
-                            <p class="value-ad">À Combinar</p>
-                        </div>
-                        <button class="btn-see-more" type="button">Ver mais</button>
-                    </a>
-                </div>
-                
+                <div class="anuncios">
+                    <?php
+                        try {
+                            if ($stmt->rowCount() == 0) {
+                                echo "<p> Nenhum anúncio encontrado </p>";
+                            }
+                            else {
+                                while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
+                                    $dataFim = new DateTime($result['AnuncioDataHrFim']);
+                                
+                                    echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
+                                    echo '<div class="img-anuncio"><img src="'. htmlspecialchars($result['MidiaCaminho']) .'" alt=""></div>';
+                                    echo '<div class="info-anuncio">';
+                                    echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";
+                                    echo '<p class="local-anuncio">' . htmlspecialchars($result['CidadeNome']) . ' - ' . htmlspecialchars($result['EstadoUf']) . "</p>";
+                                    echo '<p class="valor-anuncio">R$ ' . number_format($result['AnuncioValor'], 2, ',', '.') . "</p>";
+                                    echo '</div>';
+                                    echo '<button class="btn-ver-mais" type="button">Ver mais</button>';
+                                    echo '</a>';
+                                }
+                            }
+                            // Fechar a consulta
+                            $stmt->closeCursor();
+                            
+                        } catch (Exception $e) {
+                            error_log("Erro ao exibir anúncios recentes: " . $e->getMessage());
+                            echo '<script>
+                                    alert("Ocorreu um erro inesperado. Tente novamente.");
+                                    window.location.href = "../../BackEnd/views/logout.php";
+                                </script>';
+                        }
+                    ?>
                 <div class="right-arrow">
                     <i class="bi bi-chevron-right"></i>
                 </div>      

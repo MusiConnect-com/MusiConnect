@@ -1,8 +1,6 @@
 <?php
-include './conexao.php';
 
-ini_set('log_errors', 1); // Ativa o registro de erros no arquivo de log.
-ini_set('error_log', 'C:\Tools\php-8.3.12\error\php_errors.log'); //Define o caminho onde os erros serão salvos.
+include '../../BackEnd/views/conexao.php';
 
 session_start();
 
@@ -16,41 +14,48 @@ try {
     }
 
     // Verifica se o CPF ou e-mail já existe
-    $sqlSelectCpfEmail = "SELECT UsuarioCpf, UsuarioEmail FROM TbUsuario WHERE UsuarioCpf = ? OR UsuarioEmail = ?";
-    $parametros = array($_SESSION['UsuarioCpf'], $_SESSION['UsuarioEmail']);
-    $resultCpfEmail = sqlsrv_query($conexao, $sqlSelectCpfEmail, $parametros);
+    $cpf = $_SESSION['UsuarioCpf'];
+    $email = $_SESSION['UsuarioEmail'];
 
-    if ($resultCpfEmail === false) {
-        throw new Exception("Erro ao executar a consulta de verificação de CPF/E-mail: " . print_r(sqlsrv_errors(), true));
-    } else {
-        $cpfCadastrado = false;
-        $emailCadastrado = false;
-        while ($linhaAtual = sqlsrv_fetch_array($resultCpfEmail, SQLSRV_FETCH_ASSOC)) {
-            if ($linhaAtual['UsuarioCpf'] === $_SESSION['UsuarioCpf']) {
-                $_SESSION['cpf-error'] = 'CPF já cadastrado.';
-                $cpfCadastrado = true;
-                break;
-            }
-            if ($linhaAtual['UsuarioEmail'] === $_SESSION['UsuarioEmail']) {
-                $_SESSION['email-error'] = 'Email já cadastrado';
-                $emailCadastrado = true;
-                break;
-            }
-        }
-    }
-
-    if ($cpfCadastrado || $emailCadastrado) {
+    // Prepara a consulta com a stored procedure
+    $sql = "EXEC SpConsultarCadastro :UsuarioCpf, :UsuarioEmail";
+    
+    // Prepara a consulta SQL usando PDO
+    $stmt = $conexao->prepare($sql);
+    
+    // Binding dos parâmetros
+    $stmt->bindParam(':UsuarioCpf', $cpf, PDO::PARAM_STR);
+    $stmt->bindParam(':UsuarioEmail', $email, PDO::PARAM_STR);
+    
+    // Executa a stored procedure   
+    $stmt->execute();
+    
+    // Recupera os valores de erro da stored procedure
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Verifica se houve erro de CPF ou e-mail duplicado
+    if ($result['cpfErrorMessage']) {
+        $_SESSION['cpf-error'] = $result['cpfErrorMessage'];
         header('Location: ../../frontend/html/cadastro-inicial.php');
         exit();
-    } else if (!$cpfCadastrado && !$emailCadastrado) {
-        header('Location: ../../frontend/html/tipo-usuario.php');
+    }
+
+    if ($result['emailErrorMessage']) {
+        $_SESSION['email-error'] = $result['emailErrorMessage'];
+        header('Location: ../../frontend/html/cadastro-inicial.php');
         exit();
     }
 
+    // Se não houver erro, continua para o próximo passo
+    header('Location: ../../frontend/html/tipo-usuario.php');
+    exit();
+
 } catch (Exception $e) {
+    // Em caso de erro, exibe mensagem e redireciona
     error_log("Erro no cadastro: " . $e->getMessage());
     echo '<script>alert("Ocorreu um erro no sistema. Por favor, tente novamente mais tarde.");</script>';
     echo '<script>window.location.href = "../../frontend/html/cadastro-inicial.php";</script>';
     exit();
 }
+
 ?>

@@ -3,7 +3,7 @@
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
 
-    if ($_SESSION['UsuarioTipo'] != "C") return header('Location: ../../BackEnd/views/logout.php');
+    if ($_SESSION['UsuarioTipo'] !== "C") return header('Location: ../../BackEnd/views/logout.php');
 
     $usuarioId = $_SESSION['UsuarioId'];
     $nome = $_SESSION['UsuarioNome'];
@@ -11,16 +11,34 @@
     $sobrenome = $_SESSION['UsuarioSobrenome'];
     $usuarioTipo = $_SESSION['UsuarioTipo'];
 
-    $sqlGetFoto = "SELECT M.MidiaCaminho FROM TbPerfilMidia PM INNER JOIN TbMidia M ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = ? AND PM.MidiaDestino = 'perfil';";
-    $parametroGetFoto = array($usuarioId);
-    $resultGetFoto = sqlsrv_query($conexao, $sqlGetFoto, $parametroGetFoto);
+    try {
+        $stmt = $conexao->prepare("SELECT M.MidiaCaminho FROM TbMidia M INNER JOIN TbPerfilMidia PM ON PM.MidiaId = M.MidiaId WHERE PM.UsuarioId = :UsuarioId AND PM.MidiaDestino = 'perfil';");
+        $stmt->bindParam(':UsuarioId', $usuarioId, PDO::PARAM_INT);
+        $stmt->execute();
 
-    $caminhoFoto = null;
-
-    if ($resultGetFoto !== false) {
-        if ($linha = sqlsrv_fetch_array($resultGetFoto, SQLSRV_FETCH_ASSOC)) {
+        $caminhoFoto = null;
+        if ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $caminhoFoto = $linha['MidiaCaminho'];
         }
+    } catch (Exception $e) {
+        // Exibe a mensagem de erro e redireciona para logout
+        error_log("Erro ao consultar foto de perfil : " . $e->getMessage());
+        echo '<script>alert("Ocorreu um erro de conexão, faça login novamente por favor.");</script>';
+        header('Location: ../../BackEnd/views/logout.php');
+        exit();
+    }
+
+    try {
+        
+        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis;");
+        $stmt->execute();
+        
+    } catch (Exception $e) {
+        error_log("Erro ao executar View VwVisualizarPerfis: " . $e->getMessage());
+        echo '<script>
+                alert("Ocorreu um erro inesperado. Tente novamente.");
+                window.location.href = "../../FrontEnd/html/home-contratante.php";
+            </script>';
     }
 ?>
 
@@ -36,10 +54,18 @@
     <script src="../js/pesquisar-cabecalho-contratante.js" defer></script>
     <script src="../js/contratos-ativos.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script>
+        $(document).ready(function(){
+            $('#cep').mask('00000-000'); // Máscara para o CEP
+            $('#telefone').mask('(00) 00000-0000');
+            $('#value').mask('R$000,00');
+        });
+    </script>
 </head>
 <body>
     <!--OVERLAY-->
@@ -54,7 +80,7 @@
             <nav class="nav-links">
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
-                    <li id="profiles-search"><a href="">Buscar Músicos</a></li>
+                    <li id="profiles-search"><a href="../../FrontEnd/html/buscar-perfis.php">Buscar Músicos</a></li>
                     <li><a href="./meus-anuncios.php">Meus Anúncios</a></li>
                     <li><a href="./anunciar.php">Anunciar</a></li>
                     <li class="nav-active"><a href="home-contratante.php">Home</a></li>
@@ -118,10 +144,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="content-img">
-                    <img src="/img/mulher-cantando.png" alt="">
-                </div>
             </div>  
         </section>
         <!--FIM SEÇÃO 1-->
@@ -137,64 +159,39 @@
             </div>
 
             <div class="profiles-music">
-                <!-- Estrelas para avaliação 
-                 Não marcada - <i class="bi bi-star"></i>
-                 Meio marcada - <i class="bi bi-star-half"></i>
-                 Marcada - <i class="bi bi-star-fill"></i>
-                -->
-                <div class="profiles-items">
-                    <div class="content-img"><img src="/img/aline-martins.jpg" alt=""></div>
-                    <div class="content-text">
-                        <h1>Aline Martins</h1>
-                        <ul>
-                            <li class="genres"> Música clássica, Jazz, MPB</li>
-                            <li class="descr">
-                                Sou apaixonada por música desde os seis anos de idade. 
-                                Tenho mais de uma década de experiência tocando violino 
-                                e piano, e a música sempre foi a minha maior paixão. 
-                            </li>
-                            <li class="local">Campo Grande - MS</li>
-                            <li class="value">R$500,00</li>
-                        </ul>
-                        <a href="">Contratar</a>
-                    </div>
-                </div>
+                <?php
+                    try {
+                        if ($stmt->rowCount() == 0) {
+                            echo "<p> Nenhum perfil encontrado </p>";
+                        }
+                        else {
+                            while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo '<div class="profiles-items">';
+                                echo '<div class="content-img"><img src="'.$result['MidiaCaminho'].'" alt=""></div>';
+                                echo '<div class="content-text">';
+                                echo '<h1>'.$result['UsuarioNomeArt'].'</h1>';
+                                echo '<ul>';
+                                echo '<li class="genres"> Gênero Musical : '.$result['GeneroMuNome'].'</li>';
+                                echo '<li class="habilidades"> Habilidades : '.$result['HabilidadeNome'].'</li>';
+                                echo '<li class="descr">'.$result['UsuarioDesc'].'</li>';
+                                echo '<li class="local">'.$result['CidadeNome']." - ".$result['EstadoUf'].'</li>';
+                                echo '<li class="value">R$'.$result['UsuarioPreco'].'</li>';
+                                echo '</ul>';
+                                echo '<a href="">Contratar</a>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
 
-                <div class="profiles-items">
-                    <div class="content-img"><img src="/img/jorge-lucas.jpg" alt=""> </div>
-                    <div class="content-text">
-                        <h1>Jorge Lucas</h1>
-                        <ul>
-                            <li class="genres"> Rock, Blues, Indie</li>
-                            <li class="descr">
-                                Sou guitarrista e cantor com mais de 15 anos de estrada. 
-                                Comecei a tocar guitarra quando ainda era adolescente e desde então, 
-                                a música se tornou uma parte essencial da minha vida. 
-                            </li>
-                            <li class="local">Campo Grande - MS</li>
-                            <li class="value">R$840,00</li>
-                        </ul>
-                        <a href="">Contratar</a>
-                    </div>
-                </div>
-
-                <div class="profiles-items">
-                    <div class="content-img"><img src="/img/pedro-pedrinho.jpg" alt=""></div>
-                    <div class="content-text">
-                        <h1>Pedro Pedrinho</h1>
-                        <ul>
-                            <li class="genres"> Música Latina, Samba, Funk, Pop</li>
-                            <li class="descr">
-                                Olá, eu sou Pedro Pedrinho, percussionista e baterista com mais
-                                de 10 anos de experiência. Desde pequeno, sempre fui fascinado pelos 
-                                ritmos e pelos diferentes sons que podemos criar.
-                            </li>
-                            <li class="local">Campo Grande - MS</li>
-                            <li class="value">R$400,00</li>
-                        </ul>
-                        <a href="">Contratar</a>
-                    </div>
-                </div>
+                            $stmt->closeCursor();
+                        }
+                    } catch (Exception $e) {
+                        error_log("Erro ao exibir perfis recomendados: " . $e->getMessage());
+                        echo '<script>
+                                alert("Ocorreu um erro inesperado. Tente novamente.");
+                                window.location.href = "../../BackEnd/views/logout.php";
+                            </script>';
+                    }
+                ?>
             </div>
         </section>
         <!--FIM SEÇÃO 2-->

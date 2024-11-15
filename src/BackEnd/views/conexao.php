@@ -4,16 +4,16 @@ $serverNome = 'JOAO\SQLEXPRESS';
 $dbNome = 'DbMusicConnect';
 $usuaNome = 'João';
 $senha = 'Jo121218vi!';
+$dsn = "sqlsrv:Server=$serverNome;Database=$dbNome";
+//Data Source Name, string de conexão
+// parametros : nome do driver:Nome do servidor;Nome do banco de dados; Porta (opcional)
 
-// Cria a conexão com o banco
-$conexao = sqlsrv_connect($serverNome, array(
-    'Database' => $dbNome,
-    'UID' => $usuaNome,
-    'PWD' => $senha,
-    "CharacterSet" => "UTF-8"
-));
-
-// Verifica a conexão
-if ($conexao === false) {
-    die("Erro na conexão com o banco: " . print_r(sqlsrv_errors(), true));
+try {
+    $conexao = new PDO($dsn, $usuaNome, $senha);
+    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // definindo o modo de erro como exception
+} catch (PDOException $e) {
+    error_log("Erro na conexão: " . $e->getMessage());
+    echo '<script>Console.log("Erro na conexão, tente novamente.");</script>';
+    header('Location: ../../BackEnd/views/logout.php');
+    exit();
 }

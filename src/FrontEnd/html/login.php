@@ -7,7 +7,6 @@
     <title>MusicConnect</title>
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../global.css">
-    <!-- <script src="../js/login.js" defer></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -32,14 +31,14 @@
                     }
                 ?>
 
-                <form class="form" id="form" action="../../BackEnd/views/processar-login.php" method="POST">
+                <form class="form" id="form" action="../../BackEnd/views/processar-login.php" method="post">
                     <div>
-                        <input type="email" name="email" class="email required" placeholder="E-mail" oninput="emailValidate()" required>
+                        <input type="text" name="email" class="email required" placeholder="E-mail" required>
                         <span class="span-required">Digite um email válido</span>
                     </div>
                 
                     <div>
-                        <input type="password" name="password" class="password required" placeholder="Senha" oninput="passwordValidate()" required>
+                        <input type="password" name="password" class="password required" placeholder="Senha" required>
                         <span class="span-required">Senha deve ter no mínimo 8 caracteres</span>
                     </div>
                 

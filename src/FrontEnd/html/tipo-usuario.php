@@ -9,20 +9,25 @@
 
     function getSelectOptions($query) {
         include '../../BackEnd/views/conexao.php';
-        $options = '';
 
-        $resultado = sqlsrv_query($conexao, $query);
-        if ($resultado) {
-            while ($linha = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
-                $options .= '<option value="' . $linha['id'] . '">' . $linha['nome'] . '</option>';
+        try {
+            $sql = $query;
+            $stmt = $conexao->prepare($sql);
+            $stmt->execute();
+
+            $options = '';
+            while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $options .= '<option value="'. $linha['id'] . '">' . $linha['nome'] . '</option>';
             }
-            sqlsrv_free_stmt($resultado);
-        } else {
-            $options .= '<option value="" disabled>Nenhum item encontrado</option>';
+
+            return $options;
+        } catch(PDOException $e) {
+            // Em caso de erro, exibe mensagem e redireciona
+            error_log("Erro na função getSelectOptions: " . $e->getMessage());
+            echo '<script>alert("Ocorreu um erro no sistema. Por favor, tente novamente mais tarde.");</script>';
+            header('Location: ../../FrontEnd/html/cadastro-inicial.php');
+            exit();
         }
-        
-        sqlsrv_close($conexao);
-        return $options;
     }
 
     // Consultas para preencher os selects
@@ -106,12 +111,12 @@
                 <span id="error-profile"></span>
                 <div class="profile">
                     <div class="form-step-group" id="profile-picture-group">
-                        <label for="profile-picture">
-                            <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg, image/jpg">
-                        </label>
-                        <p>Foto Perfil</p>
                         <div id="layout-preview-picture">
-                            <div id="preview-picture"></div>
+                            <div id="preview-picture" onclick="document.getElementById('foto').click()">
+                                <img id="image-preview" src="" alt="Pré-visualização da foto" style="display: none;">
+                                <span id="botao-foto">Adicionar Foto</span>
+                            </div>
+                            <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
                         </div>
                     </div>
                     <div class="info-profile-group">
@@ -131,7 +136,7 @@
                         
                         <div class="form-step-group">
                             <label for="phone">Telefone*</label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <input type="text" id="phone" name="phone" required>
                         </div>
                     </div>
                 </div>
@@ -141,7 +146,7 @@
                     <div class="form-step-group" id="form-step-group-cidade">
                         <label for="cidade">Cidade*</label>
                         <select id="cidade" name="cidade" required>
-                            <option value="1">Selecione a cidade</option>
+                            <option value="0" selected disabled>Selecione a cidade</option>
                             <?php echo $cidadeOptions; ?>
                         </select>
                     </div>
@@ -171,6 +176,10 @@
             <fieldset class="form-step hidden" id="form-step-about-music">
                 <h1>Sobre o Músico</h1>
                 <span id="error-about-music"></span>
+                <div class="form-step-group">
+                    <label for="stage-name">Nome Artístico</label>
+                    <input type="text" id="stage-name" name="stage-name" required>
+                </div>
                 <div class="selects-skill-genre">
                     <div class="form-step-group">
                         <label for="skill">Habilidade*</label>
@@ -197,19 +206,9 @@
                 </div>
             </fieldset>
             <!-- buttons -->
-            <div class="buttons">
-                <!-- <div class="button-help" id="button-help">
-                    <i class="bi bi-question"></i>
-                    <i class="bi bi-question-square-fill"></i>
-                </div> -->
-
-                <div class="button-cancel">
-                    <button type="submit" id="button-cancel">Cancelar</button>
-                </div>
-
-                <div class="button-next">
-                    <button type="submit" form="form-box-select" id="btn-next">Avançar</button>
-                </div>
+            <div class="botoes">
+                <button type="button" id="botao-voltar">Voltar</button>
+                <button type="submit" id="botao-avancar">Avançar</button>
             </div>
             <!--CANCELAR CADASTRO-->
             <div class="modal-cancel">
