@@ -4,23 +4,32 @@
     include '../../BackEnd/views/conexao.php';
 
     function getSelectOptions($sql) {
-        include '../../BackEnd/views/conexao.php';
-        $options = '';
+        try {
+            include '../../BackEnd/views/conexao.php';
+            $options = '';
 
-        $stmt = $conexao->prepare($sql);
-        $stmt->execute();
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();   
+            $stmt = $conexao->prepare($sql);
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();   
 
-        if (empty($resultados)) {
-            $options .= '<option value="" disabled>Nenhum item encontrado</option>';
-        } else {
-            foreach ($resultados as $resultado) {
-                $options .= '<option value="' . $resultado['id'] . '">' . $resultado['nome'] . '</option>';
+            if (empty($resultados)) {
+                $options .= '<option value="" disabled>Nenhum item encontrado</option>';
+            } else {
+                foreach ($resultados as $resultado) {
+                    $options .= '<option value="' . $resultado['id'] . '">' . $resultado['nome'] . '</option>';
+                }
             }
+            
+            return $options;
+        } catch (Exception $e) {
+            error_log("Erro na função getSelectOptions: " . $e->getMessage());
+            echo '<script>
+                    alert("Ocorreu um erro inesperado. Tente novamente.");
+                    window.location.href = "../../frontend/html/home-contratante.php";
+                </script>';
         }
         
-        return $options;
     }
 
     // Consultas para preencher os selects
