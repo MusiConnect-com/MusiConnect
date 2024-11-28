@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     if ($_SESSION['UsuarioTipo'] !== "M") return header('Location: ../../BackEnd/views/logout.php');
 
@@ -143,9 +144,7 @@
                     
                     // Informações do anúncio
                     echo '<div class="info-anuncio">';
-                    // Tipo do Evento
-                    echo "<h3>Tipo de Evento</h3>";
-                    echo "<p>" . htmlspecialchars($result['TipoEventoNome']) . "</p>";
+                    
                     // Descrição
                     echo "<h3>Descrição</h3>";
                     echo '<p class="descr-anuncio">' . htmlspecialchars($result['AnuncioDesc']) . "</p>";
@@ -175,6 +174,9 @@
                     echo "<h1>" . htmlspecialchars($result['AnuncioTitulo']) . "</h1>";
                     // Valor
                     echo '<h2 class="valor-anuncio">R$ ' . htmlspecialchars($result['AnuncioValor']) . "</h2>";
+                    // Tipo do Evento
+                    echo "<h3>Tipo de Evento</h3>";
+                    echo "<p>" . htmlspecialchars($result['TipoEventoNome']) . "</p>";
                     // Data e hora
                     echo "<h3>Data e Hora</h3>";
                     if ($dataInicio->format('d/m/Y') === $dataFim->format('d/m/Y')) {

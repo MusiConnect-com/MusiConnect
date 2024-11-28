@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     function getSelectOptions($sql) {
         try {
@@ -82,10 +83,36 @@
         <form enctype="multipart/form-data" action="../../BackEnd/views/novo-anuncio.php" method="post" id="form-novo-anuncio">
       
         <fieldset class="form-step" id="form-step-event">
-            <h1>Sobre o Evento</h1>
-            <span id="erro-evento"></span>
             <div id="grupo-inputs-sobre-evento">
+                <h3>Sobre o Evento</h3>
+                <span id="erro-evento"></span>
                 <div class="form-input">
+                    <label for="titulo">Título<span class="obrigatorio">*</span></label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="tipo-evento">Tipo do Evento<span class="obrigatorio">*</span></label>
+                    <select id="tipo-evento" name="tipo-evento" required>
+                        <option value="" disabled selected>Selecione o tipo de evento</option>
+                        <?php echo $tipoEventoOptions ?>
+                    </select>
+                </div>
+
+                <div class="form-input">
+                    <label for="genero-musical">Gênero Musical<span class="obrigatorio">*</span></label>
+                    <select id="genero-musical" name="genero-musical">
+                        <option value="" disabled selected>Selecione o gênero musical</option>
+                        <?php echo $generoMusicalOptions ?>
+                    </select>
+                </div>
+
+                <div class="form-input">
+                    <label for="descricao">Descrição<span class="obrigatorio">*</span><small id="char-count-desc" class="char-count"></small></label>
+                    <textarea id="descricao" name="descricao" placeholder="Detalhes sobre o evento" required></textarea>
+                </div>
+            </div>
+            <div class="form-input" id="form-input-picture">
                     <div id="layout-preview-picture">
                         <div id="preview-picture" onclick="document.getElementById('foto').click()">
                             <img id="image-preview" src="" alt="Pré-visualização da foto" style="display: none;">
@@ -94,61 +121,34 @@
                         <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
                     </div>
                 </div>
-
-                <div class="form-input">
-                    <label for="titulo">Título*</label>
-                    <input type="text" id="titulo" name="titulo" required>
-                </div>
-
-                <div class="form-input">
-                    <label for="tipo-evento">Tipo do Evento*</label>
-                    <select id="tipo-evento" name="tipo-evento" required>
-                        <option value="" disabled selected>Selecione o tipo de evento</option>
-                        <?php echo $tipoEventoOptions ?>
-                    </select>
-                </div>
-
-                <div class="form-input">
-                    <label for="genero-musical">Gênero Musical*</label>
-                    <select id="genero-musical" name="genero-musical">
-                        <option value="" disabled selected>Selecione o gênero musical</option>
-                        <?php echo $generoMusicalOptions ?>
-                    </select>
-                </div>
-
-                <div class="form-input">
-                    <label for="descricao">Descrição*</label>
-                    <textarea id="descricao" name="descricao" placeholder="Detalhes sobre o evento" required></textarea>
-                </div>
-            </div>
         </fieldset>
         <fieldset class="form-step hidden" id="form-step-address">
-            <h1>Endereço do Evento</h1>
+            <h3>Endereço do Evento</h3>
             <span id="erroEndereco"></span>
             <div id="grupo-inputs-endereco">
                 <div class="form-input">
-                    <label for="logradouro">Logradouro*</label>
+                    <label for="logradouro">Logradouro<span class="obrigatorio">*</span></label>
                     <input type="text" id="logradouro" name="logradouro" required>
                 </div>
                 <div class="form-input">
-                    <label for="numero">Número*</label>
+                    <label for="numero">Número<span class="obrigatorio">*</span></label>
                     <input type="number" id="numero" name="numero" required>
                 </div>
                 <div class="form-input">
-                    <label for="complemento">Complemento*</label>
+                    <label for="complemento">Complemento<small id="char-count-comp" class="char-count"></small></label>
                     <input type="text" id="complemento" name="complemento">
                 </div>
                 <div class="form-input">
-                    <label for="bairro">Bairro*</label>
+                    <label for="bairro">Bairro<span class="obrigatorio">*</span></label>
                     <input type="text" id="bairro" name="bairro" required>
                 </div>
                 <div class="form-input">
-                    <label for="cep">CEP*</label>
+                    <label for="cep">CEP<span class="obrigatorio">*</span></label>
                     <input type="text" id="cep" name="cep" required>
                 </div>
                 
                 <div class="form-input" id="form-input-cidade">
-                    <label for="cidade">Cidade*</label>
+                    <label for="cidade">Cidade<span class="obrigatorio">*</span></label>
                     <select id="cidade" name="cidade" required>
                         <option value="" disabled selected>Selecione a cidade</option>
                         <?php echo $cidadeOptions ?>
@@ -158,25 +158,25 @@
 
         </fieldset>
         <fieldset class="form-step hidden" id="form-step-vacancy">
-            <h1>Sobre a vaga</h1>
+            <h3>Sobre a vaga</h3>
             <span id="erroVaga"></span>
             <div id="gruupo-inputs-vaga">
                 <div id="form-inputs-data">
                     <div class="form-input">
-                        <label for="data-hr-inicio">Data/Hora de Início*</label>
+                        <label for="data-hr-inicio">Data/Hora de Início<span class="obrigatorio">*</span></label>
                         <input type="datetime-local" id="data-hr-inicio" name="data-hr-inicio" required>
                     </div>
                     <div class="form-input">
-                        <label for="data-hr-fim">Data/Hora de Fim*</label>
+                        <label for="data-hr-fim">Data/Hora de Fim<span class="obrigatorio">*</span></label>
                         <input type="datetime-local" id="data-hr-fim" name="data-hr-fim" required>
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="beneficios">Benefícios</label>
+                    <label for="beneficios">Benefícios<small id="char-count-bene" class="char-count"></small></label>
                     <textarea id="beneficios" name="beneficios" placeholder="Se houver, descreva os benefícios"></textarea>
                 </div>
                 <div class="form-input">
-                    <label for="valor-hora">Valor/Hora (R$)*</label>
+                    <label for="valor-hora">Valor/Hora (R$)<span class="obrigatorio">*</span></label>
                     <input type="number" id="valor-hora" name="valor-hora" required>
                 </div>
                 <div class="form-input">
@@ -189,14 +189,14 @@
             </div>
         </fieldset>
         <fieldset class="form-step hidden" id="form-step-contact">
-            <h1>Contato</h1>
+            <h3>Contato</h3>
             <span id="erroContato"></span>
             <div class="form-input">
-                <label for="nome-contato">Nome Contato</label>
+                <label for="nome-contato">Nome Contato<span class="obrigatorio">*</span></label>
                 <input type="text" id="nome-contato" name="nome-contato" required>
             </div>
             <div class="form-input">
-                <label for="telefone">Telefone</label>
+                <label for="telefone">Telefone<span class="obrigatorio">*</span></label>
                 <input type="text" id="telefone" name="telefone" required>
             </div>
             <p><strong>Importante:</strong> O contato que você inserir neste campo será disponibilizado para o músico, caso ele deseje entrar em contato com você para maiores informações sobre o anúncio. Certifique-se de incluir um contato válido e atualizado para facilitar a comunicação!</p>

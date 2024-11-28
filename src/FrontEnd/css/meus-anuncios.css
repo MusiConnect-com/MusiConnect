@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--light-grey);
+    background-color: var(--body);
     min-height: 100vh;
     margin: 0;
 }
@@ -29,7 +29,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--navy-blue);
+    background-color: var(--header);
     height: 10vh;
     min-height: 90px;
     max-height: 90px;
@@ -50,6 +50,20 @@ header .content {
     padding-left: 5%;
 }
 
+/* Style footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20vh;
+    background-color: var(--footer);
+}
+
+footer h3{
+    font-weight: 500;
+    color: var(--font-color-primary);
+}
 
 /* Style nav Header */
 .logo{
@@ -81,8 +95,8 @@ header .content {
 }
 
 .nav-links .nav-active a{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
 }
 
 .nav-links a{
@@ -92,20 +106,17 @@ header .content {
     cursor: pointer;
     padding: 10px;
     text-decoration: none;
-    font-size: 16px;
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 .nav-links a:hover{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
 .nav-links #search-icon::before{
-    font-size: 16px;
-    color: var(--white);
+    color: var(--font-color-primary);
     padding: 14.5px;
     border-radius: 5px;
     cursor: pointer;
@@ -113,8 +124,7 @@ header .content {
 }
 
 .nav-links #search-icon:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
 }
 
 .search-header {
@@ -145,7 +155,6 @@ header .content {
 
 .search-header input {
     background-color: var(--white);
-    font-size: 14px;
     font-weight: 100;
     padding: 0px 0px 0px 10px;
     border: 1px solid transparent !important;
@@ -162,7 +171,7 @@ header .content {
 
 
 .search-header .bi-x::before{
-    font-size: 26px;
+    font-size: 1.625rem;
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -177,7 +186,7 @@ header .content {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     margin-left: 1%;
     height: 100%;
     padding: 0 1%;
@@ -185,7 +194,7 @@ header .content {
 }
 
 .profile p {
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 
@@ -208,10 +217,6 @@ header .content {
     transition: border-color .3s ease;
 }
 
-.profile-button img:hover {
-    border-color:var(--orange);
-}
-
 .profile-list {
     display: none;
     justify-content: center;
@@ -224,9 +229,8 @@ header .content {
     width: 250px;
     padding: 20px;
     opacity: 0;
-    background-color: var(--navy-blue);
-    color: var(--white);
-    border: 1px solid var(--black25);
+    background-color: var(--background-secondary);
+    color: var(--font-color-primary);
     border-radius: 5px;
     transition: opacity .3s ease;
 }
@@ -242,7 +246,7 @@ header .content {
 
 .profile-list .content-top img {
     border-radius: 100%;
-    border: 2px solid var(--orange);
+    border: 2px solid var(--background-dest);
     width: 40px;
     height: 40px;
     cursor: default;
@@ -250,22 +254,22 @@ header .content {
 }
 
 .profile-list .content-top p {
-    color: var(--white);
-    font-size: 16px;
+    color: var(--font-color-primary);
+    font-size: 1rem;
     font-weight: 500;
     margin-right: auto;
 }
 
 .profile-list .content-top i::before {
-    font-size: 26px;
+    font-size: 1.625rem;
     transition: .3s;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .profile-list .content-top i:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
     border-radius: 5px;
 }
 
@@ -281,14 +285,14 @@ header .content {
     padding: 10px 10px;
     transition: .3s;
     border-radius: 5px;
-    color: var(--white);
+    color: var(--font-color-primary);
     width: 100%;
     text-decoration: none;
     font-weight: 500;
 }
 
 .profile-list-items:hover{
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
@@ -298,9 +302,9 @@ main {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 100px;
+    margin-top: 9.375rem;
+    padding-bottom: 50px;
 }
-
 /*Style ads*/
 .meus-anuncios {
     display: grid;
@@ -314,25 +318,24 @@ main {
     flex-direction: row;
     max-width: 100%;
     width: 100%;
-    height: 250px;
-    max-height: 250px;
+    height: 18.75rem;
+    max-height: 18.75rem;
     overflow: auto;
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    background-color: var(--white);
-    box-shadow: 0 0 1px 1px var(--black40);
+    background-color: var(--background-primary);
+    box-shadow: 0 0 1px 1px var(--border);
     cursor: pointer;
     transition: .3s;
 }
 
 .anuncio:hover {
-    box-shadow: 0 0 10px 1px var(--black40);
+    box-shadow: 0 0 10px 1px var(--border);
 }
 
 .anuncio:hover .button-want button {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
 }
 
 .anuncio:hover img {
@@ -341,7 +344,7 @@ main {
 
 .img-anuncio {
     width: 350px;
-    height: 250px;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -370,29 +373,42 @@ main {
     word-wrap: break-word;
     width: 70%;
     height: 100%;
-    max-height: 250px;
     transition: .3s;
+    color: var(--font-color-secondary);
+}
+
+.titulo-preco {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
 }
 
 .anuncio h2 {
-    font-weight: 500;
+    font-weight: bold;
 }
 
-.anuncio h3 {
-    font-weight: 400;
+.valor-anuncio {
+    font-weight: bold;
+    color: var(--background-dest);
+}
+
+.descr-anuncio {
+    word-wrap: break-word;
+    height: 30%;
+    max-height: 3.961rem;
 }
 
 .anuncio p {
     display: flex;
-    font-size: 13px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    font-size: 0.813rem;
+    margin-bottom: 0.625rem;
 }
 
 .local-anuncio {
-    font-size: 13px;
+    font-size: 0.813rem;
     font-weight: 300;
     font-style: italic;
+    margin: 0 !important;
 }
 
 /* Resposividade

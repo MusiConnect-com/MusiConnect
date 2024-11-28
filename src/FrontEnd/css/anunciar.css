@@ -1,15 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 html {
     height: 100vh;
 }
 /* Style body */
 body {
-    background-color: var(--light-grey);
+    background-color: var(--body);
     height: 100%;
 }
 
@@ -22,7 +16,7 @@ header {
     z-index: 1001;
     position: fixed;
     top: 0;
-    background-color: var(--light-grey);
+    background-color: var(--body);
     padding-top: 20px;
 }
 
@@ -32,14 +26,14 @@ header {
 }
 
 .progress-novo-anuncio h1 {
-    font-size: 38px;
     text-align: center;
 }
 
 /* Estilizando a barra de progresso */
 .progress {
+    height: 10px;
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: var(--bar);
     border-radius: 5px;
     margin: 20px 0;
 }
@@ -47,7 +41,7 @@ header {
 .progress-bar {
     height: 10px;
     width: 0%;
-    background-color: #F96900; /* Cor do progresso */
+    background-color: var(--color-dest);
     border-radius: 5px;
     transition: width 0.3s ease;
 }
@@ -62,10 +56,10 @@ header {
 .step {
     width: 20%;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 .step.active {
-    color: var(--orange);
+    color: var(--color-dest);
 }
 
 /* Estilizando a main */
@@ -85,33 +79,45 @@ main {
     align-items: center;
     flex-direction: column;
     gap: 50px;
-    background-color: var(--white);
+    background-color: var(--card);
     border-radius: 5px;
     padding: 20px;
     width: 80%;
 }
 
-/* Estilizando inputs */
+.obrigatorio {
+    color: var(--erro);
+}
 .form-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 5px;
 }
 
-.form-input input[type="text"]{
-    width: 300px;
+.form-input input, .form-input select, .form-input textarea{
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    color: var(--font-color-secondary);
+    border-radius: 5px;
 }
+
 .form-input textarea {
-    width: 30%;
+    width: 500px;
     height: 150px;
     resize: none;
 }
+
+.form-input input[type="text"] {
+    width: 300px;
+}
 .form-input input[type="number"], #cep {
-    width: 100px;
+    width: 120px;
 }
 .form-input select {
     width: 200px;
-    height: 25px;
+    cursor: pointer;
 }
 
 /* Estilizando o conjunto de campos*/
@@ -124,7 +130,7 @@ fieldset {
 }
 
 /* Estilizando as etapas */
-#form-step-event, #form-step-address, #form-step-vacancy{
+#form-step-address, #form-step-vacancy{
     display: flex;
     justify-content:center;
     align-items: left;
@@ -132,6 +138,12 @@ fieldset {
     width: 100%;
     box-sizing: border-box;
     border: none;
+}
+
+#form-step-event {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
 /* Estilizando a etapa Evento */
@@ -149,25 +161,28 @@ fieldset {
 
 #layout-preview-picture {
     display: flex;
-    margin-top: 10px;
+}
+
+#form-input-picture {
+    display: flex;
+    justify-content: start;
 }
 
 #preview-picture {
     width: 200px;
     height: 200px;
-    border: 2px dashed var(--navy-blue);
+    border: 2px dashed var(--border-dest);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: #f5f5f5;
     cursor: pointer;
     overflow: hidden;
 }
 
 #botao-foto {
-    color: var(--black);
-    font-size: 14px;
+    color: var(--font-color-secondary);
+    font-size: 0.875rem;
     text-align: center;
     padding: 10px 20px;
     border-radius: 5px;
@@ -185,8 +200,6 @@ fieldset {
     object-fit: cover;
     z-index: 0;
 }
-
-
 
 /* Estilizando a etapa Endereço */
 #grupo-inputs-endereco {
@@ -224,7 +237,7 @@ fieldset {
 }
 #form-step-contact p {
     text-align: justify;
-    font-size: 12px;
+    font-size: 0.75rem;
     margin-top: 10px;
     width: 70%;
 }
@@ -244,9 +257,9 @@ fieldset {
 }
 
 #botao-voltar {
-    background-color: var(--light-grey);
-    color: var(--dark-grey);
-    font-size: 18px;
+    background-color: var(--button-muted);
+    color: var(--font-color-secondary);
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
     text-align: center;
@@ -261,20 +274,20 @@ fieldset {
 }
 
 #botao-voltar:hover {
-    background-color: var(--navy-blue);
-    color: var(--white);
+    background-color: var(--button-hover);
+    color: var(--font-color-primary);
 }
 
 #botao-avancar{
-    background-color: var(--dark-navy-blue);
-    font-size: 18px;
+    background-color: var(--button);
+    font-size: 1.125rem;
     font-weight: 500;
     text-align: center;
     text-transform: uppercase;
-    color: var(--white);
+    color: var(--font-color-primary);
     width: 15%;
     padding: 12px 30px;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -282,7 +295,11 @@ fieldset {
 }
 
 #botao-avancar:hover {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
     transition: .3s;
+}
+
+.char-count {
+    margin-left: 5px;
+    color: var(--font-color-muted);
 }

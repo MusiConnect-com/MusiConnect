@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     if ($_SESSION['UsuarioTipo'] !== "M") return header('Location: ../../BackEnd/views/logout.php');
 
@@ -30,7 +31,7 @@
 
     try {
         
-        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioDataHr >= DATEADD(DAY,-5,GETDATE());");
+        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios;");
         $stmt->execute();
         
     } catch (Exception $e) {
@@ -125,10 +126,6 @@
                         <input type="text" placeholder="Cidade" name="cidade">
                         <button class="button-search" type="submit"><i class="bi bi-search"></i></button>
                     </form>
-                </div>
-
-                <div class="content-img">
-                    <img src="/img/tocar-guitarra.png" alt="">
                 </div>
             </div>
         </section>

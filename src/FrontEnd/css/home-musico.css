@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--light-grey);
+    background-color: var(--body);
     min-height: 100vh;
     margin: 0;
 }
@@ -29,7 +29,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--navy-blue);
+    background-color: var(--header);
     height: 10vh;
     min-height: 90px;
     max-height: 90px;
@@ -57,12 +57,12 @@ footer {
     align-items: center;
     width: 100%;
     height: 20vh;
-    background-color: var(--navy-blue);
+    background-color: var(--footer);
 }
 
 footer h3{
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 /* Style nav Header */
@@ -95,8 +95,8 @@ footer h3{
 }
 
 .nav-links .nav-active a{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
 }
 
 .nav-links a{
@@ -106,20 +106,17 @@ footer h3{
     cursor: pointer;
     padding: 10px;
     text-decoration: none;
-    font-size: 16px;
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 .nav-links a:hover{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
 .nav-links #search-icon::before{
-    font-size: 16px;
-    color: var(--white);
+    color: var(--font-color-primary);
     padding: 14.5px;
     border-radius: 5px;
     cursor: pointer;
@@ -127,8 +124,7 @@ footer h3{
 }
 
 .nav-links #search-icon:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
 }
 
 .search-header {
@@ -159,7 +155,6 @@ footer h3{
 
 .search-header input {
     background-color: var(--white);
-    font-size: 14px;
     font-weight: 100;
     padding: 0px 0px 0px 10px;
     border: 1px solid transparent !important;
@@ -176,7 +171,7 @@ footer h3{
 
 
 .search-header .bi-x::before{
-    font-size: 26px;
+    font-size: 1.625rem;
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -191,7 +186,7 @@ footer h3{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     margin-left: 1%;
     height: 100%;
     padding: 0 1%;
@@ -199,7 +194,7 @@ footer h3{
 }
 
 .profile p {
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 
@@ -222,10 +217,6 @@ footer h3{
     transition: border-color .3s ease;
 }
 
-.profile-button img:hover {
-    border-color:var(--orange);
-}
-
 .profile-list {
     display: none;
     justify-content: center;
@@ -238,9 +229,8 @@ footer h3{
     width: 250px;
     padding: 20px;
     opacity: 0;
-    background-color: var(--navy-blue);
-    color: var(--white);
-    border: 1px solid var(--black25);
+    background-color: var(--background-secondary);
+    color: var(--font-color-primary);
     border-radius: 5px;
     transition: opacity .3s ease;
 }
@@ -256,7 +246,7 @@ footer h3{
 
 .profile-list .content-top img {
     border-radius: 100%;
-    border: 2px solid var(--orange);
+    border: 2px solid var(--background-dest);
     width: 40px;
     height: 40px;
     cursor: default;
@@ -264,22 +254,22 @@ footer h3{
 }
 
 .profile-list .content-top p {
-    color: var(--white);
-    font-size: 16px;
+    color: var(--font-color-primary);
+    font-size: 1rem;
     font-weight: 500;
     margin-right: auto;
 }
 
 .profile-list .content-top i::before {
-    font-size: 26px;
+    font-size: 1.625rem;
     transition: .3s;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .profile-list .content-top i:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
     border-radius: 5px;
 }
 
@@ -295,14 +285,14 @@ footer h3{
     padding: 10px 10px;
     transition: .3s;
     border-radius: 5px;
-    color: var(--white);
+    color: var(--font-color-primary);
     width: 100%;
     text-decoration: none;
     font-weight: 500;
 }
 
 .profile-list-items:hover{
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
@@ -322,10 +312,9 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 0 100px 0;
+    padding: 50px 0 50px 0;
     gap: 20px;
     width: 100%;
-    background-color: var(--light-grey);
 }
 
 
@@ -347,13 +336,12 @@ main {
 }
 
 .search .content-text h1 {
-    color: var(--black);
-    font-size: 40px;
+    color: var(--font-color);
     font-weight: 500;
 }
 
 .search .content-text span {
-    color: var(--orange);
+    color: var(--color-dest);
 }
 
 .search .content-text span:hover {
@@ -369,10 +357,10 @@ main {
 }
 
 .search-input input {
-    background-color: var(--white);
+    background-color: var(--background-primary);
     padding: 0px 0px 0px 10px;
     border-radius: 5px 0 0 5px;
-    border: 1px solid var(--black40);
+    border: 1px solid var(--border);
     box-sizing: border-box;
     outline: none;
     width: 60%;
@@ -385,23 +373,22 @@ main {
 }
 
 .search-input button {
-    background-color: var(--navy-blue);
-    color: var(--white);
+    background-color: var(--button);
+    color: var(--font-color-primary);
     border-radius: 0 5px 5px 0;
     border: none;
     transition: .3s;
     width: 10%;
     height: 50px;
-}
-
-.search-input button:hover {
-    background-color: var(--orange);
-    color: var(--white);
     cursor: pointer;
 }
 
+.search-input button:hover {
+    background-color: var(--button-hover);  
+}
+
 .search-input button i {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .search .content-img {
@@ -421,9 +408,9 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px 0 100px 0;
+    padding: 50px 0 50px 0;
     width: 100%; 
-    background-color: var(--dark-navy-blue);
+    background-color: var(--background-secondary);
 }
 
 /* Style title anuncios */
@@ -435,23 +422,21 @@ main {
 }
 
 .section-2 .title h1 {
-    color: var(--white);
-    font-size: 40px;
+    color: var(--font-color-primary);
     font-weight: 500;
-    margin-top: 50px;
     width: 100%;
 }
 
 .title .see-all {
     display: flex;
     gap: 5px;
-    margin-top: 30px;
-    font-size: 16px;
+    margin-top: 20px;
+    font-size: 1rem;
     font-weight: 400;
 }
 
 .title .see-all p {
-    color: var(--white);
+    color: var(--font-color-primary);
     text-decoration: underline;
     cursor: pointer;
     transition: .3s;
@@ -459,11 +444,11 @@ main {
 
 #arrow-see-all {
     transition: .3s;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 .title .see-all p:hover + #arrow-see-all, .title .see-all p:hover {
-    color: var(--orange);
+    color: var(--color-dest);
 }
 
 .title .see-all p:hover + #arrow-see-all {
@@ -477,8 +462,8 @@ main {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin-top: 40px;
-    margin-bottom: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 100%;
     height: 500px;
 }
@@ -506,15 +491,16 @@ main {
     overflow: auto;
     border: none;
     border-radius: 5px;
-    background-color: var(--white);
-    box-shadow: 0 0 1px 1px var(--black40);
+    background-color: var(--background-primary);
+    box-shadow: 0 0 1px 1px var(--border);
+    color: var(--font-color-secondary);
     cursor: pointer;
     text-decoration: none;
     transition: all .3s ease;
 }
 
 .anuncio:hover {
-    box-shadow: 0 0 10px 1px var(--black40);
+    box-shadow: 0 0 10px 1px var(--border);
 }
 
 .anuncio:hover img {
@@ -551,7 +537,7 @@ main {
 }
 
 .valor-anuncio {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     height: 50%;
     padding: 10px 0 0 0;
@@ -560,14 +546,14 @@ main {
 .local-anuncio {
     font-style: italic;
     height: 20%;
-    font-size: 13px;
+    font-size: 0.813rem;
     font-weight: 300;
 }
 
 /*Style button-ADS*/
 .anuncio button{
-    background-color: var(--dark-navy-blue);
-    color: var(--white);
+    background-color: var(--button);
+    color: var(--font-color-primary);
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -575,25 +561,24 @@ main {
     width: 90%;
     cursor: pointer;
     transition: .3s;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
 }
 
 .anuncio button:hover {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
     transition: .3s;
 }
 
 .anuncios-recentes i {
-    font-size: 30px;
-    color: var(--white);
+    font-size: 1.875rem;
+    color: var(--font-color-primary);
     cursor: pointer;
     transition: .3s;
 }
 
 .anuncios-recentes i::before {
-    background-color: var(--navy-blue);
+    background-color: var(--button);
     border-radius: 5px;
     text-align: center;
     padding: 8px 8px 8px 10px;
@@ -601,8 +586,8 @@ main {
 }
 
 .anuncios-recentes i:hover::before {
-    color: var(--white);
-    background-color: var(--orange);
+    color: var(--font-color-primary);
+    background-color: var(--button-hover);
 }
 
 

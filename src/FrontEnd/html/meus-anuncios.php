@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     $usuarioId = $_SESSION['UsuarioId'];
     $nome = $_SESSION['UsuarioNome'];
@@ -79,10 +80,10 @@
             <nav class="nav-links">
                 <ul>
                 <li><i id="search-icon" class="bi bi-search"></i></li>
-                    <li id="profiles-search"><a href="">Buscar Músicos</a></li>
+                    <li id="profiles-search"><a href="../../FrontEnd/html/buscar-musicos.php">Buscar Músicos</a></li>
                     <li class="nav-active"><a href="./meus-anuncios.php">Meus Anúncios</a></li>
                     <li><a href="./anunciar.php">Anunciar</a></li>
-                    <li><a href="home-contratante.php">Home</a></li>
+                    <li><a href="./home-contratante.php">Home</a></li>
                 </ul>
             </nav>
 
@@ -136,18 +137,21 @@
                             $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
                             $dataFim = new DateTime($result['AnuncioDataHrFim']);
         
-                            echo '<a href="./ver-anuncio.php" class="anuncio">';
+                            echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
                             echo '<div class="img-anuncio"><img src='. $result['MidiaCaminho'].' alt=""></div>';
                             echo '<div class="info-anuncio">';
+                            echo '<div class="titulo-preco">';
                             echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";
-        
                             echo '<h3 class="valor-anuncio">R$ ' . htmlspecialchars($result['AnuncioValor']) . "</h3>";
-                            echo "<h3>" . htmlspecialchars($result['TipoEventoNome']) . "</h3>";
+                            echo "</div>";
+                            echo "<h4>" . htmlspecialchars($result['TipoEventoNome']) . "</h4>";
+                            echo '<h6>Data e Hora</h6>';
                             if ($dataInicio->format('d/m/Y') === $dataFim->format('d/m/Y')) {
                                 echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs</p>";
                             } else {
                                 echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs de ".$dataFim->format('d/m/Y')."</p>";
                             }
+                            echo '<h6>Descrição</h6>';
                             echo '<p class="descr-anuncio">' . htmlspecialchars($result['AnuncioDesc']) . "</p>";
                             echo '<p class="local-anuncio">' . htmlspecialchars($result['CidadeNome']) . ", " . htmlspecialchars($result['EstadoUf']) . "</p>";
                             echo "</div>";

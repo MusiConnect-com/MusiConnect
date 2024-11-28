@@ -1,3 +1,28 @@
+// Limitar caracteres na descrição e no complemento
+const comp = document.getElementById("complemento");
+const desc = document.getElementById("description");
+const countComp = document.getElementById("char-count-comp");
+const countDesc = document.getElementById("char-count-desc");
+
+// Função para limitar os caracteres e atualizar o contador
+comp.addEventListener("input", function() {
+  let maxLength = 50;
+  let length = comp.value.length;
+  let remaining = maxLength - length;
+
+  // Impede o texto de ultrapassar o limite
+  remaining >= 0 ? countComp.textContent = `Restam ${remaining}` : comp.value = comp.value.substring(0, maxLength);
+});
+
+desc.addEventListener("input", function() {
+  let maxLength = 200;
+  let length = desc.value.length;
+  let remaining = maxLength - length;
+
+  remaining >= 0 ? countDesc.textContent = `Restam ${remaining}` : desc.value = desc.value.substring(0, maxLength);
+});
+
+
 // Função para atualizar a barra de progresso
 let indexStep = 0;
 const form = document.getElementById('form-signup');

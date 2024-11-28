@@ -7,7 +7,30 @@
 }
 
 /* global */
-:root {
+:root.tema-claro {
+    --body:#EEEEEE;
+    --header:#003366;
+    --footer:#003366;
+    --font-color-primary:#ffff;
+    --font-color-secondary:#000000;
+    --font-color-muted:#333333;
+    --font-color-dest:#F96900;
+    --color-dest:#F96900;
+    --background-primary:#EEEEEE;
+    --background-secondary:#003366;
+    --background-dest:#F96900;
+    --card:#ffff;
+    --bar:#e0e0e0;
+    --border:#a0a0a0;
+    --border-muted:#393939;
+    --border-dest:var(--background-dest);
+    --button:#00264d;
+    --button-muted:#EEEEEE;
+    --button-hover:var(--background-dest);
+    --color-hover:#ffff;
+    --background-hover:#F96900;
+    --erro:#e63636;
+    --zap:#25D366;
     --grey:#f0f0f0;
     --dark-grey:#333333;
     --light-grey:#EEEEEE;
@@ -20,28 +43,124 @@
     --red:#e63636;
     --orange:#F96900;
     --soft-yellow:#FFD700;
+    --font-default: 16px;
+    --font-max: 24px;
+    --font-min:12px;
 }
 
-body, button, a, h1, h2, h3, p {
+:root.tema-escuro {
+    --body:#171717;
+    --header:#020202;
+    --footer:#020202;
+    --font-color-primary:#ffff;
+    --font-color-secondary:#ffff;
+    --font-color-muted:#dcdcdc;
+    --font-color-dest:#F96900;
+    --color-dest:#F96900;
+    --background-primary:#171717;
+    --background-secondary:#020202;
+    --background-dest:#F96900;
+    --card:#020202;
+    --bar:#232323;
+    --border:#a0a0a0;
+    --border-muted:#393939;
+    --border-dest:var(--background-dest);
+    --button:#020202;
+    --button-muted:#171717;
+    --button-hover:var(--background-dest);
+    --color-hover:#ffff;
+    --background-hover:#2c2c2c;
+    --erro:#e63636;
+    --zap:#25D366;
+    --grey: #2c2c2c; /* Cinza médio-escuro */
+    --dark-grey: #1a1a1a; /* Cinza escuro */
+    --light-grey: #3a3a3a; /* Cinza claro para o tema escuro */
+    --white: #f0f0f0; /* Branco suave */
+    --navy-blue: #00509e; /* Azul mais saturado */
+    --dark-navy-blue: #003f7f; /* Azul escuro */
+    --black25: #ffffff25; /* Transparência sobre fundo claro */
+    --black40: #ffffff40; /* Transparência sobre fundo claro */
+    --black: #e0e0e0; /* Cinza claro para substituição do preto absoluto */
+    --red: #ff6666; /* Vermelho mais vibrante */
+    --orange: #ff8c42; /* Laranja mais claro */
+    --soft-yellow: #ffee88; /* Amarelo pálido */
+    --font-default: 16px;
+    --font-max: 24px;
+    --font-min: 12px;
+}
+
+:root.tema-daltonico {
+    --body: #FFFFFF; /* Branco puro para máxima neutralidade */
+    --header: #0000FF; /* Azul forte */
+    --footer: #0000FF; /* Azul forte */
+    --font-color-primary: #000000; /* Preto puro */
+    --font-color-secondary: #000000; /* Preto puro */
+    --font-color-muted: #4C4C4C; /* Cinza médio para contraste */
+    --font-color-dest: #FFA500; /* Laranja vívido */
+    --color-dest: #FFA500; /* Laranja vívido */
+    --background-primary: #FFFFFF; /* Branco puro */
+    --background-secondary: #0000FF; /* Azul forte */
+    --background-dest: #FFA500; /* Laranja vívido */
+    --card: #FFFFFF; /* Branco puro */
+    --bar: #CCCCCC; /* Cinza claro */
+    --border: #808080; /* Cinza médio-escuro */
+    --border-muted: #4C4C4C; /* Cinza escuro */
+    --border-dest: var(--background-dest); /* Laranja vívido */
+    --button: #0055FF; /* Azul acessível e distintivo */
+    --button-muted: #FFFFFF; /* Branco puro */
+    --button-hover: var(--background-dest); /* Laranja vívido */
+    --color-hover: #000000; /* Preto puro */
+    --background-hover: #FFA500; /* Laranja vívido */
+    --erro: #FF0000; /* Vermelho forte */
+    --zap: #00CC00; /* Verde limão */
+
+    --grey: #bcbcbc; /* Cinza com contraste elevado */
+    --dark-grey: #515151; /* Cinza escuro */
+    --light-grey: #e0e0e0; /* Cinza claro */
+    --white: #ffffff; /* Branco puro */
+    --navy-blue: #3357ff; /* Azul brilhante */
+    --dark-navy-blue: #2234a8; /* Azul escuro */
+    --black25: #00000025; /* Mantém a transparência */
+    --black40: #00000040; /* Mantém a transparência */
+    --black: #151515; /* Preto puro */
+    --red: #ff5757; /* Vermelho acessível para protanopia */
+    --orange: #ffa500; /* Laranja vibrante */
+    --soft-yellow: #ffee00; /* Amarelo brilhante */
+    --font-default: 16px;
+    --font-max: 24px;
+    --font-min: 12px;
+}
+
+
+html {
+    font-size: var(--font-default);
+}
+
+body{
     font-family: "Poppins", sans-serif;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 300;
-    color: var(--dark-grey);
+    color: var(--font-color-secondary);
+}
+
+input {
+    color: var(--font-color-secondary);
 }
 
 ::placeholder {
     font-family: "Poppins", sans-serif;
     font-style: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 100;
 }
 
 input:focus, textarea:focus{
-    border-color: var(--orange) !important;
-    box-shadow: 0 0 1px 1px var(--orange);
+    border-color: var(--border-dest) !important;
+    box-shadow: 0 0 1px 1px var(--border-dest);
     font-family: "Poppins", sans-serif;
     font-style: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 300;
     outline: none;
 }
@@ -49,7 +168,7 @@ input:focus, textarea:focus{
 input:not(:focus) , textarea:not(:focus){
     font-family: "Poppins", sans-serif;
     font-style: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 300;
 }
 

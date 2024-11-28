@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     if ($_SESSION['UsuarioTipo'] !== "C") return header('Location: ../../BackEnd/views/logout.php');
 
@@ -36,22 +37,22 @@
         }
         
         if ((!isset($_GET['nome-art'], $_GET['cidade'])) || ($_GET['nome-art'] == '' AND $_GET['cidade'] == '')) {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis;");
             $stmt->execute();
         } 
         else if ($NomeArt !== '' && $CidadeNome == '') {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioTitulo = :AnuncioTitulo;");
-            $stmt->bindParam(':AnuncioTitulo', $NomeArt, PDO::PARAM_STR);
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt;");
+            $stmt->bindParam(':NomeArt', $NomeArt, PDO::PARAM_STR);
             $stmt->execute();
         }
         else if ($NomeArt == '' && $CidadeNome !== '') {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE CidadeNome = :CidadeNome;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE CidadeNome = :CidadeNome;");
             $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
             $stmt->execute();
         }
         else {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarAnuncios WHERE AnuncioTitulo = :AnuncioTitulo AND CidadeNome = :CidadeNome;");
-            $stmt->bindParam(':AnuncioTitulo', $NomeArt, PDO::PARAM_STR);
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt AND CidadeNome = :CidadeNome;");
+            $stmt->bindParam(':NomeArt', $NomeArt, PDO::PARAM_STR);
             $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
             $stmt->execute();
         }
@@ -72,7 +73,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <link rel="stylesheet" href="../css/buscar-anuncios.css">
+    <link rel="stylesheet" href="../css/buscar-musicos.css">
     <link rel="stylesheet" href="../global.css">
     <script src="../js/perfil.js" defer></script>
     <script src="../js/pesquisar-cabecalho-musico.js" defer></script>
@@ -143,7 +144,7 @@
         <!--SEÇÃO 1-->
         <section class="section-1">
             <div class="search">
-                <form action="./buscar-anuncios.php" method="get" class="search-input">
+                <form action="./buscar-musicos.php" method="get" class="search-input">
                     <input type="text" placeholder="Nome Artístico" name="nome-art">
                     <input type="text" placeholder="Cidade" name="cidade">
                     <button class="button-search" type="submit"><i class="bi bi-search"></i></button>
@@ -167,33 +168,29 @@
         <!--FIM SEÇÃO 1-->
         <!--SEÇÃO 2-->
         <section class="section-2">
-        <div class="anuncios">
+        <div class="musicos">
             <?php
                 try {
                     if ($stmt->rowCount() == 0) {
-                        echo "<p> Nenhum anúncio encontrado </p>";
+                        echo "<p> Nenhum músico encontrado </p>";
                     } 
                     else {
                         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
-                            $dataFim = new DateTime($result['AnuncioDataHrFim']);
-        
-                            echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
-                            echo '<div class="img-anuncio"><img src='. $result['MidiaCaminho'].' alt=""></div>';
-                            echo '<div class="info-anuncio">';
-                            echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";
-        
-                            echo '<h3 class="valor-anuncio">R$ ' . htmlspecialchars($result['AnuncioValor']) . "</h3>";
-                            echo "<h3>" . htmlspecialchars($result['TipoEventoNome']) . "</h3>";
-                            if ($dataInicio->format('d/m/Y') === $dataFim->format('d/m/Y')) {
-                                echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs</p>";
-                            } else {
-                                echo "<p>".$dataInicio->format('d/m/Y')." - ".$dataInicio->format('H:i')."hrs até ".$dataFim->format('H:i')."hrs de ".$dataFim->format('d/m/Y')."</p>";
-                            }
-                            echo '<p class="descr-anuncio">' . htmlspecialchars($result['AnuncioDesc']) . "</p>";
-                            echo '<p class="local-anuncio">' . htmlspecialchars($result['CidadeNome']) . ", " . htmlspecialchars($result['EstadoUf']) . "</p>";
-                            echo "</div>";
-                            echo "</a>";
+                            echo '<a href="#" class="profiles-items">';
+                            echo '<div class="content-img"><img src="'.$result['MidiaCaminho'].'" alt=""></div>';
+                            echo '<div class="content-text">';
+                            echo '<div class="content-text-top">';
+                            echo '<h2>'.$result['UsuarioNomeArt'].'</h2>';
+                            echo '<h3 class="value">R$'.$result['UsuarioPreco'].'</h3>';
+                            echo '</div>';
+                            echo '<ul>';
+                            echo '<li class="genres"> <h6>Gênero Musical</h6> <p>'.$result['GeneroMuNome'].'</p></li>';
+                            echo '<li class="habilidades"> <h6>Habilidades</h6> <p>'.$result['HabilidadeNome'].'</p></li>';
+                            echo '<li class="descr"> <h6>Descrição</h6> <p>'.$result['UsuarioDesc'].'</p></li>';
+                            echo '<li class="local">'.$result['CidadeNome']." - ".$result['EstadoUf'].'</li>';
+                            echo '</ul>';
+                            echo '</div>';
+                            echo '</a>';
                         }
                     }
         
@@ -213,7 +210,7 @@
         <div class="filters">
             <div class="filters-list" id="filters-list">   
                 <div class="list">          
-                    <div class="genero-musical">
+                    <div class="filter-genero-musical">
                         <p>Gênero Musical</p>
 
                         <div class="options-label">
@@ -244,7 +241,7 @@
                         </div>
                     </div>
 
-                    <div class="Habilidades">
+                    <div class="filter-Habilidades">
                         <p>Habilidades</p>
 
                         <div class="options-label">
@@ -276,7 +273,7 @@
                     </div>
 
 
-                    <div class="value">
+                    <div class="filter-value">
                         <p>Valor</p>
 
                         <div class="input">
@@ -286,7 +283,7 @@
                     </div>
                 </div>
 
-                <div class="buttons">
+                <div class="filter-buttons">
                     <button type="button" class="button-clean">Limpar</button>
                     <button type="button" class="button-filter">Filtrar</button>
                 </div>

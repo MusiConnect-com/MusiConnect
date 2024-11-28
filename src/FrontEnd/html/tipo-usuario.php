@@ -1,6 +1,7 @@
 <?php
 
     session_start();
+    include '../../FrontEnd/html/acessibilidade.html';
 
     if (!isset($_SESSION['UsuarioCpf'], $_SESSION['UsuarioEmail'], $_SESSION['UsuarioNome'], $_SESSION['UsuarioSobrenome'], $_SESSION['UsuarioSenha'])) {
         header('Location: ./cadastro-inicial.php');
@@ -107,10 +108,65 @@
             </fieldset>
 
             <fieldset class="form-step hidden" id="form-step-personal-data">
-                <h1>Perfil</h1>
-                <span id="error-profile"></span>
-                <div class="profile">
-                    <div class="form-step-group" id="profile-picture-group">
+                <div id="layout-personal-data">
+                    <h3>Perfil</h3>
+                    <span id="error-profile"></span>
+                    <div class="profile">
+                        <div class="info-profile-group">
+                            <div class="form-step-group">
+                                <label for="date-birth">Data de Nascimento<span class="obrigatorio">*</span></label>
+                                <input type="date" id="date-birth" name="date-birth" required>
+                            </div>
+                            <div class="form-step-group">
+                                <label for="sex">Sexo<span class="obrigatorio">*</span></label>
+                                <select name="sex" id="sex">
+                                    <option value="" disabled selected>Selecione o Sexo</option>
+                                    <option value="F">Feminino</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="N">Não informar</option>
+                                </select>
+                            </div>
+                    
+                            <div class="form-step-group">
+                                <label for="phone">Telefone<span class="obrigatorio">*</span></label>
+                                <input type="text" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Endereço</h3>
+                    <span id="error-address"></span>
+                    <div class="address">
+                        <div class="form-step-group" id="form-step-group-cidade">
+                            <label for="cidade">Cidade<span class="obrigatorio">*</span></label>
+                            <select id="cidade" name="cidade" required>
+                                <option value="0" selected disabled>Selecione a cidade</option>
+                                <?php echo $cidadeOptions; ?>
+                            </select>
+                        </div>
+                        <div class="form-step-group">
+                            <label for="logradouro">Logradouro<span class="obrigatorio">*</span></label>
+                            <input type="text" id="logradouro" name="logradouro" required>
+                        </div>
+                        <div class="form-step-group">
+                            <label for="numero">Número<span class="obrigatorio">*</span></label>
+                            <input type="number" id="numero" name="numero" required>
+                        </div>
+                        <div class="form-step-group">
+                            <label for="complemento">Complemento <small id="char-count-comp" class="char-count"></small></label>
+                            <input type="text" id="complemento" name="complemento">
+                            
+                        </div>
+                        <div class="form-step-group">
+                            <label for="bairro">Bairro<span class="obrigatorio">*</span></label>
+                            <input type="text" id="bairro" name="bairro" required>
+                        </div>
+                        <div class="form-step-group">
+                            <label for="cep">CEP<span class="obrigatorio">*</span></label>
+                            <input type="text" id="cep" name="cep" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-step-group" id="profile-picture-group">
                         <div id="layout-preview-picture">
                             <div id="preview-picture" onclick="document.getElementById('foto').click()">
                                 <img id="image-preview" src="" alt="Pré-visualização da foto" style="display: none;">
@@ -119,62 +175,10 @@
                             <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
                         </div>
                     </div>
-                    <div class="info-profile-group">
-                        <div class="form-step-group">
-                            <label for="date-birth">Data de Nascimento*</label>
-                            <input type="date" id="date-birth" name="date-birth" required>
-                        </div>
-                        <div class="form-step-group">
-                            <label for="sex">Sexo*</label>
-                            <select name="sex" id="sex">
-                                <option value="">Selecione o Sexo</option>
-                                <option value="F">Feminino</option>
-                                <option value="M">Masculino</option>
-                                <option value="N">Não quero me expor</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-step-group">
-                            <label for="phone">Telefone*</label>
-                            <input type="text" id="phone" name="phone" required>
-                        </div>
-                    </div>
-                </div>
-                <h1>Endereço</h1>
-                <span id="error-address"></span>
-                <div class="address">
-                    <div class="form-step-group" id="form-step-group-cidade">
-                        <label for="cidade">Cidade*</label>
-                        <select id="cidade" name="cidade" required>
-                            <option value="0" selected disabled>Selecione a cidade</option>
-                            <?php echo $cidadeOptions; ?>
-                        </select>
-                    </div>
-                    <div class="form-step-group">
-                        <label for="logradouro">Logradouro*</label>
-                        <input type="text" id="logradouro" name="logradouro" required>
-                    </div>
-                    <div class="form-step-group">
-                        <label for="numero">Número*</label>
-                        <input type="number" id="numero" name="numero" required>
-                    </div>
-                    <div class="form-step-group">
-                        <label for="complemento">Complemento*</label>
-                        <input type="text" id="complemento" name="complemento">
-                    </div>
-                    <div class="form-step-group">
-                        <label for="bairro">Bairro*</label>
-                        <input type="text" id="bairro" name="bairro" required>
-                    </div>
-                    <div class="form-step-group">
-                        <label for="cep">CEP*</label>
-                        <input type="text" id="cep" name="cep" required>
-                    </div>
-                </div>
             </fieldset>
 
             <fieldset class="form-step hidden" id="form-step-about-music">
-                <h1>Sobre o Músico</h1>
+                <h3>Sobre o Músico</h3>
                 <span id="error-about-music"></span>
                 <div class="form-step-group">
                     <label for="stage-name">Nome Artístico</label>
@@ -182,14 +186,14 @@
                 </div>
                 <div class="selects-skill-genre">
                     <div class="form-step-group">
-                        <label for="skill">Habilidade*</label>
+                        <label for="skill">Habilidade<span class="obrigatorio">*</span></label>
                         <select id="skill" name="skill">
                             <option value="">Selecione uma habilidade</option>
                             <?php echo $habilidadeOptions; ?>
                         </select>
                     </div>
                     <div class="form-step-group">
-                        <label for="genre-music">Gênero Musical*</label>
+                        <label for="genre-music">Gênero Musical<span class="obrigatorio">*</span></label>
                         <select id="genre-music" name="genre-music">
                             <option value="">Selecione um gênero musical</option>
                             <?php echo $generoMusicalOptions; ?>
@@ -197,7 +201,7 @@
                     </div>
                 </div>
                 <div class="form-step-group">
-                    <label for="description">Descrição</label>
+                    <label for="description">Descrição <small id="char-count-desc" class="char-count"></small></label>
                         <textarea name="description" id="description" placeholder="Fale sobre você e sua carreira..." required></textarea>
                 </div>
                 <div class="form-step-group">

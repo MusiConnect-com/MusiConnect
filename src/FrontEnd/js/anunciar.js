@@ -1,3 +1,37 @@
+// Limitar caracteres na descrição e no complemento
+const comp = document.getElementById("complemento");
+const desc = document.getElementById("descricao");
+const bene = document.getElementById("beneficios");
+const countComp = document.getElementById("char-count-comp");
+const countDesc = document.getElementById("char-count-desc");
+const countBene = document.getElementById("char-count-bene");
+
+// Função para limitar os caracteres e atualizar o contador
+comp.addEventListener("input", function() {
+  let maxLength = 50;
+  let length = comp.value.length;
+  let remaining = maxLength - length;
+
+  // Impede o texto de ultrapassar o limite
+  remaining >= 0 ? countComp.textContent = `Restam ${remaining}` : comp.value = comp.value.substring(0, maxLength);
+});
+
+desc.addEventListener("input", function() {
+  let maxLength = 200;
+  let length = desc.value.length;
+  let remaining = maxLength - length;
+
+  remaining >= 0 ? countDesc.textContent = `Restam ${remaining}` : desc.value = desc.value.substring(0, maxLength);
+});
+
+bene.addEventListener("input", function() {
+    let maxLength = 200;
+    let length = bene.value.length;
+    let remaining = maxLength - length;
+
+    remaining >= 0 ? countBene.textContent = `Restam ${remaining}` : bene.value = bene.value.substring(0, maxLength);
+});
+
 // Mostrando imagem selecionada
 const erroEvento = document.getElementById('erro-evento');
 const erroEndereco = document.getElementById('erroEndereco');

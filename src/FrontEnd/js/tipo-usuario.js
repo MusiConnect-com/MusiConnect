@@ -1,4 +1,4 @@
-  
+
 const selectMusic = document.querySelector(".select-music");
 const selectContractor = document.querySelector(".select-contractor");
 const span = document.querySelector("span");

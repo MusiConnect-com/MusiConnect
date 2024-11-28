@@ -1,3 +1,4 @@
+<?php include '../../FrontEnd/html/acessibilidade.html';?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

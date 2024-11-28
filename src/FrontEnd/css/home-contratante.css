@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--light-grey);
+    background-color: var(--body);
     min-height: 100vh;
     margin: 0;
 }
@@ -15,7 +15,7 @@ body {
 /* Style overlay */
 .overlay {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -29,7 +29,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--navy-blue);
+    background-color: var(--header);
     height: 10vh;
     min-height: 90px;
     max-height: 90px;
@@ -57,12 +57,12 @@ footer {
     align-items: center;
     width: 100%;
     height: 20vh;
-    background-color: var(--navy-blue);
+    background-color: var(--footer);
 }
 
 footer h3{
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 /* Style nav Header */
@@ -95,8 +95,8 @@ footer h3{
 }
 
 .nav-links .nav-active a{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
 }
 
 .nav-links a{
@@ -106,20 +106,17 @@ footer h3{
     cursor: pointer;
     padding: 10px;
     text-decoration: none;
-    font-size: 16px;
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 .nav-links a:hover{
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
 .nav-links #search-icon::before{
-    font-size: 16px;
-    color: var(--white);
+    color: var(--font-color-primary);
     padding: 14.5px;
     border-radius: 5px;
     cursor: pointer;
@@ -127,8 +124,7 @@ footer h3{
 }
 
 .nav-links #search-icon:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
 }
 
 .search-header {
@@ -159,7 +155,6 @@ footer h3{
 
 .search-header input {
     background-color: var(--white);
-    font-size: 14px;
     font-weight: 100;
     padding: 0px 0px 0px 10px;
     border: 1px solid transparent !important;
@@ -176,7 +171,7 @@ footer h3{
 
 
 .search-header .bi-x::before{
-    font-size: 26px;
+    font-size: 1.625rem;
     border-radius: 5px;
     cursor: pointer;
     transition: .3s;
@@ -191,7 +186,7 @@ footer h3{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     margin-left: 1%;
     height: 100%;
     padding: 0 1%;
@@ -199,7 +194,7 @@ footer h3{
 }
 
 .profile p {
-    color: var(--white);
+    color: var(--font-color-primary);
 }
 
 
@@ -222,10 +217,6 @@ footer h3{
     transition: border-color .3s ease;
 }
 
-.profile-button img:hover {
-    border-color:var(--orange);
-}
-
 .profile-list {
     display: none;
     justify-content: center;
@@ -238,9 +229,8 @@ footer h3{
     width: 250px;
     padding: 20px;
     opacity: 0;
-    background-color: var(--navy-blue);
-    color: var(--white);
-    border: 1px solid var(--black25);
+    background-color: var(--background-secondary);
+    color: var(--font-color-primary);
     border-radius: 5px;
     transition: opacity .3s ease;
 }
@@ -256,7 +246,7 @@ footer h3{
 
 .profile-list .content-top img {
     border-radius: 100%;
-    border: 2px solid var(--orange);
+    border: 2px solid var(--background-dest);
     width: 40px;
     height: 40px;
     cursor: default;
@@ -264,22 +254,22 @@ footer h3{
 }
 
 .profile-list .content-top p {
-    color: var(--white);
-    font-size: 16px;
+    color: var(--font-color-primary);
+    font-size: 1rem;
     font-weight: 500;
     margin-right: auto;
 }
 
 .profile-list .content-top i::before {
-    font-size: 26px;
+    font-size: 1.625rem;
     transition: .3s;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .profile-list .content-top i:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--background-dest);
+    color: var(--font-color-primary);
     border-radius: 5px;
 }
 
@@ -295,14 +285,14 @@ footer h3{
     padding: 10px 10px;
     transition: .3s;
     border-radius: 5px;
-    color: var(--white);
+    color: var(--font-color-primary);
     width: 100%;
     text-decoration: none;
     font-weight: 500;
 }
 
 .profile-list-items:hover{
-    background-color: var(--orange);
+    background-color: var(--background-dest);
     transition: .3s;
 }
 
@@ -321,10 +311,10 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 0 100px 0;
+    padding: 50px 0 50px 0;
     gap: 20px;
     width: 100%;
-    background-color: var(--light-grey);
+    background-color: var(--background-primary);
 }
 
 /*Style criar anúncio*/
@@ -346,17 +336,17 @@ main {
 
 
 .create-ads .content-text h1 {
-    color: var(--black);
-    font-size: 40px;
+    color: var(--font-color-secondary);
     font-weight: 500;
 }
 
 .create-ads .content-text a {
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 500;
     text-decoration: none;
-    background-color: var(--dark-navy-blue);
-    color: var(--white);
+    background-color: var(--button);
+    color: var(--font-color-primary);
+    border: 1px solid var(--border);
     border-radius: 5px;
     width: 50%;
     padding: 10px;
@@ -366,7 +356,7 @@ main {
 
 .create-ads .content-text a:hover {
     transition: .3s;
-    background-color: var(--orange);
+    background-color: var(--button-hover);
 }
 
 .create-ads .content-img {
@@ -380,14 +370,9 @@ main {
     width: 300px;
 }
 
-
 /*Style search*/
-.create-ads .content-search {
-    margin-top: 50px;
-}
-
 .create-ads .content-search span {
-    color: var(--orange);
+    color: var(--color-dest);
 }
 
 .search-input {
@@ -398,10 +383,10 @@ main {
 }
 
 .search-input input {
-    background-color: var(--white);
+    background-color: var(--background-primary);
     padding: 0px 0px 0px 10px;
     border-radius: 5px 0 0 5px;
-    border: 1px solid var(--black40);
+    border: 1px solid var(--border);
     box-sizing: border-box;
     outline: none;
     width: 60%;
@@ -414,23 +399,22 @@ main {
 }
 
 .search-input button {
-    background-color: var(--navy-blue);
-    color: var(--white);
+    background-color: var(--button);
+    color: var(--font-color-primary);
     border-radius: 0 5px 5px 0;
-    border: none;
+    border: 1px solid var(--border);
     transition: .3s;
     width: 10%;
     height: 50px;
 }
 
 .search-input button:hover {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
     cursor: pointer;
 }
 
 .search-input button i {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 /* style seção 3 */
@@ -439,7 +423,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-navy-blue);
+    background-color: var(--background-secondary);
     width: 100%;
 }
 
@@ -452,9 +436,8 @@ main {
 }
 
 .section-2 .title h1 {
-    font-size: 40px;
     font-weight: 500;
-    color: var(--white);
+    color: var(--font-color-primary);
     margin-top: 50px;
     width: 100%;
 }
@@ -462,38 +445,36 @@ main {
 .title .see-all {
     display: flex;
     gap: 5px;
-    margin-top: 30px;
-    font-size: 16px;
+    margin-top: 20px;
+    font-size: 1rem;
     font-weight: 400;
 }
 
 .title .see-all p {
-    color: var(--white);
+    color: var(--font-color-primary);
     text-decoration: underline;
     cursor: pointer;
     transition: .3s;
 }
 
 #arrow-see-all {
-    color: var(--white);
+    color: var(--font-color-primary);
     transition: .3s;
 }
 
 .title .see-all p:hover + #arrow-see-all, .title .see-all p:hover {
-    color: var(--orange);
+    color: var(--color-dest);
 }
 
 .title .see-all p:hover + #arrow-see-all {
     transform: translateX(5px);
 }
 
-
 /* Style perfis */
 .profiles-music {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     width: 95%;
-    gap: 50px;
     margin-top: 50px;
 }
 
@@ -501,22 +482,22 @@ main {
     display: flex;
     justify-content: left;
     width: 100%;
-    height: 450px;
+    height: 28.125rem;
     overflow: hidden;
     margin-bottom: 50px;
     cursor:pointer;
     transition: .3s ease;
-    box-shadow: 0 0 1px 1px var(--black40);
+    box-shadow: 0 0 1px 1px var(--border);
     border-radius: 5px;
 }
 
 .profiles-items:hover {
-    box-shadow: 0 0 10px 1px var(--black40);
+    box-shadow: 0 0 10px 1px var(--border);
 }
 
 .profiles-items:hover .content-text a {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
+    color: var(--font-color-primary);
 }
 
 .profiles-items:hover .content-img img {
@@ -527,7 +508,7 @@ main {
     display: flex;
     justify-content: center;
     width: 30%;
-    height: 450px;
+    height: 28.125rem;
     overflow: hidden;
     border-radius: 5px 0 0 5px;
     
@@ -543,58 +524,74 @@ main {
 .profiles-items .content-text {
     display: flex;
     flex-direction: column;
-    background-color: var(--white);
+    background-color: var(--background-primary);
     padding: 20px;
     width: 70%;
     height: 100%;
     transition: .3s ease;
 }
 
-.content-text h1 {
-    color: var(--dark-grey);
-    font-size: 32px;
+.content-text-top {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.content-text h2 {
+    color: var(--font-color-secondary);
     font-weight: 600;
+}
+
+.content-text .value {
+    font-weight: bold;
+    color: var(--color-dest);
 }
 
 .profiles-items ul{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 80%;
-    gap: 20px;
-    color: var(--black);
-    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    color: var(--font-color-secondary);
     transition: .3s ease;
+}
+
+.profiles-items ul .descr p{
+    word-wrap: break-word;
+    height: 3.961rem;
+    max-height: 3.961rem;
 }
 
 .profiles-items ul .local {
     font-style: italic;
 }
 
-.profiles-items ul .value {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--dark-grey);
+#layout-btn-contratar {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    height: 15%;
 }
-
 
 .profiles-items .content-text a {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     text-decoration: none;
-    background-color: var(--dark-navy-blue);
-    color: var(--white);
+    background-color: var(--button);
+    color: var(--font-color-primary);
+    border: 1px solid var(--border);
     border-radius: 5px;
     width: 200px;
-    height: 15%;
+    height: 100%;
     transition: .3s;
 }
 
 .profiles-items  .content-text a:hover {
     transform: translateY(-5px);
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--button-hover);
 }

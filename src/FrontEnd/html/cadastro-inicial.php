@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-
+include '../../FrontEnd/html/acessibilidade.html';
 ?>
 
 <!DOCTYPE html>

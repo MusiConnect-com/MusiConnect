@@ -2,6 +2,7 @@
 
     include '../../BackEnd/views/verificar-logado.php';
     include '../../BackEnd/views/conexao.php';
+    include '../../FrontEnd/html/acessibilidade.html';
 
     if ($_SESSION['UsuarioTipo'] !== "C") return header('Location: ../../BackEnd/views/logout.php');
 
@@ -80,7 +81,7 @@
             <nav class="nav-links">
                 <ul>
                     <li><i id="search-icon" class="bi bi-search"></i></li>
-                    <li id="profiles-search"><a href="../../FrontEnd/html/buscar-perfis.php">Buscar Músicos</a></li>
+                    <li id="profiles-search"><a href="../../FrontEnd/html/buscar-musicos.php">Buscar Músicos</a></li>
                     <li><a href="./meus-anuncios.php">Meus Anúncios</a></li>
                     <li><a href="./anunciar.php">Anunciar</a></li>
                     <li class="nav-active"><a href="home-contratante.php">Home</a></li>
@@ -131,7 +132,7 @@
                     <p> Precisando de um músico?<br>
                         Crie um anúncio agora e selecione o ideal que o seu evento merece!
                     </p>
-                    <a href="" class="btn-create-ads">Criar Agora</a>
+                    <a href="./anunciar.php" class="btn-create-ads">Criar Agora</a>
 
                     <div class="content-search">
                         <p>Se preferir, você pode fazer uma busca rápida por perfis de músicos <br>
@@ -162,22 +163,24 @@
                 <?php
                     try {
                         if ($stmt->rowCount() == 0) {
-                            echo "<p> Nenhum perfil encontrado </p>";
+                            echo "<p> Nenhum músico encontrado </p>";
                         }
                         else {
                             while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 echo '<div class="profiles-items">';
                                 echo '<div class="content-img"><img src="'.$result['MidiaCaminho'].'" alt=""></div>';
                                 echo '<div class="content-text">';
-                                echo '<h1>'.$result['UsuarioNomeArt'].'</h1>';
+                                echo '<div class="content-text-top">';
+                                echo '<h2>'.$result['UsuarioNomeArt'].'</h2>';
+                                echo '<h3 class="value">R$'.$result['UsuarioPreco'].'</h3>';
+                                echo '</div>';
                                 echo '<ul>';
-                                echo '<li class="genres"> Gênero Musical : '.$result['GeneroMuNome'].'</li>';
-                                echo '<li class="habilidades"> Habilidades : '.$result['HabilidadeNome'].'</li>';
-                                echo '<li class="descr">'.$result['UsuarioDesc'].'</li>';
+                                echo '<li class="genres"> <h6>Gênero Musical</h6> <p>'.$result['GeneroMuNome'].'</p></li>';
+                                echo '<li class="habilidades"> <h6>Habilidades</h6> <p>'.$result['HabilidadeNome'].'</p></li>';
+                                echo '<li class="descr"> <h6>Descrição</h6> <p>'.$result['UsuarioDesc'].'</p></li>';
                                 echo '<li class="local">'.$result['CidadeNome']." - ".$result['EstadoUf'].'</li>';
-                                echo '<li class="value">R$'.$result['UsuarioPreco'].'</li>';
                                 echo '</ul>';
-                                echo '<a href="">Contratar</a>';
+                                echo '<div id="layout-btn-contratar"><a href="">Contratar</a></div>';
                                 echo '</div>';
                                 echo '</div>';
                             }
