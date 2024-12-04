@@ -22,12 +22,12 @@
         } catch (Exception $e) {
             error_log("Erro ao desativar o anuncio: " . $e->getMessage());
             echo '<script>alert("Ocorreu um erro inesperado. Tente novamente.");</script>';
-            header('Location: ../../FrontEnd/html/ver-anuncio-user-con.php?id='. $anuncioId);
+            header('Location: ../../FrontEnd/html/meus-anuncios.php');
             exit();
         }
     } else {
         echo '<script>alert("Perdemos o anúncio escolhido, escolha-o novamente");</script>';
-        header('Location: ../../FrontEnd/html/ver-anuncio-user-con.php?id='. $anuncioId);
+        header('Location: ../../FrontEnd/html/meus-anuncios.php');
         exit();
     }
 ?>
