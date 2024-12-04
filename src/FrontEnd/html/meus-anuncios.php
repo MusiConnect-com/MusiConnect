@@ -136,13 +136,18 @@
                         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
                             $dataFim = new DateTime($result['AnuncioDataHrFim']);
-        
-                            echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
+                            
+                            $class = $result['AnuncioStatus'] == 'ATIVO' ? 'anuncio' : 'anuncio-disabled';
+                            
+                            echo '<a target="_blank" href="./ver-anuncio-user-con.php?id='.$result["AnuncioId"].'" class="'.$class.'">';
                             echo '<div class="img-anuncio"><img src='. $result['MidiaCaminho'].' alt=""></div>';
                             echo '<div class="info-anuncio">';
                             echo '<div class="titulo-preco">';
                             echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";
                             echo '<h3 class="valor-anuncio">R$ ' . htmlspecialchars($result['AnuncioValor']) . "</h3>";
+                            if ($result['AnuncioStatus'] == 'DESATIVADO') {
+                                echo '<h3>DESATIVADO</h3>';
+                            }
                             echo "</div>";
                             echo "<h4>" . htmlspecialchars($result['TipoEventoNome']) . "</h4>";
                             echo '<h6>Data e Hora</h6>';

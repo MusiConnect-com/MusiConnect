@@ -31,7 +31,7 @@
 
     try {
         
-        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis;");
+        $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE MidiaDestino = 'perfil' OR MidiaDestino IS NULL;");
         $stmt->execute();
         
     } catch (Exception $e) {
@@ -167,7 +167,7 @@
                         }
                         else {
                             while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<div class="profiles-items">';
+                                echo '<a target="_blank" href="./ver-musico.php?id='.$result['UsuarioId'].'" class="profiles-items">';
                                 echo '<div class="content-img"><img src="'.$result['MidiaCaminho'].'" alt=""></div>';
                                 echo '<div class="content-text">';
                                 echo '<div class="content-text-top">';
@@ -180,9 +180,8 @@
                                 echo '<li class="descr"> <h6>Descrição</h6> <p>'.$result['UsuarioDesc'].'</p></li>';
                                 echo '<li class="local">'.$result['CidadeNome']." - ".$result['EstadoUf'].'</li>';
                                 echo '</ul>';
-                                echo '<div id="layout-btn-contratar"><a href="">Contratar</a></div>';
                                 echo '</div>';
-                                echo '</div>';
+                                echo '</a>';
                             }
 
                             $stmt->closeCursor();

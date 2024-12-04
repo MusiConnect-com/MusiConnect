@@ -111,12 +111,46 @@ try {
     if (!$resultado) {
         throw new Exception("Não foi possível inserir o usuário.");
     }
-    $_SESSION['UsuarioTipo'] = $usuarioTipo;
-    $_SESSION['UsuarioId'] = $resultado['UsuarioId'];
-    unset($_SESSION['UsuarioSenha'], $_SESSION['UsuarioEmail'], $_SESSION['UsuarioCpf']);
+
+    $usuarioId = $resultado['UsuarioId'];
+    // Verificando se há múltiplos arquivos
+    if (isset($_FILES['fotos']) && is_array($_FILES['fotos']['name'])) {
+        $fotos = $_FILES['fotos']; // Será um array de arquivos
+        foreach ($fotos['tmp_name'] as $index => $tmpName) {
+            // Processar cada foto individualmente
+            $fotoNome = $fotos['name'][$index];
+            $fotoTamanho = $fotos['size'][$index];
+            $pastaUpload = "../../FrontEnd/upload/";
+            $nomeUniqFoto = uniqid();
+            $extensaoFoto = strtolower(pathinfo($fotoNome, PATHINFO_EXTENSION));
+            $fotoCaminho = $pastaUpload . $nomeUniqFoto . "." . $extensaoFoto;
+            
+            $uploadConcluido = move_uploaded_file($tmpName, $fotoCaminho);
+            if (!$uploadConcluido) {
+                throw new Exception('Foto galeria não movida com sucesso');
+            }
+
+            $stmt = $conexao->prepare("
+                EXEC SpInserirFotoGaleria
+                @UsuarioId = :usuarioId,
+                @FotoNome = :fotoNome,
+                @FotoCaminho = :fotoCaminho,
+                @FotoTamanho = :fotoTamanho"
+            );
+
+            $stmt->bindParam(':usuarioId', $usuarioId);
+            $stmt->bindParam(':fotoNome', $fotoNome);
+            $stmt->bindParam(':fotoCaminho', $fotoCaminho);
+            $stmt->bindParam(':fotoTamanho', $fotoTamanho);
+
+            if (!$stmt->execute()) {
+                throw new Exception('Erro ao inserir fotos galeria no banco');
+            }
+        }
+    }
 
     // Redireciona o usuário para a página inicial correspondente
-    header("Location: " . ($usuarioTipo === 'M' ? '../../frontend/html/home-musico.php' : '../../frontend/html/home-contratante.php'));
+    header('Location: ../../FrontEnd/html/login.php');
     exit();
 
 } catch (Exception $e) {

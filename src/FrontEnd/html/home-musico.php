@@ -157,7 +157,7 @@
                                     $dataInicio = new DateTime($result['AnuncioDataHrInicio']);
                                     $dataFim = new DateTime($result['AnuncioDataHrFim']);
                                 
-                                    echo '<a href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
+                                    echo '<a target="_blank" href="./ver-anuncio.php?id='.$result["AnuncioId"].'" class="anuncio">';
                                     echo '<div class="img-anuncio"><img src="'. htmlspecialchars($result['MidiaCaminho']) .'" alt=""></div>';
                                     echo '<div class="info-anuncio">';
                                     echo "<h2>" . htmlspecialchars($result['AnuncioTitulo']) . "</h2>";

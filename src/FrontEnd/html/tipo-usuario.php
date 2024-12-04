@@ -72,6 +72,7 @@
             <div class="steps">
                 <p class="step default" id="step-goal">Objetivo</p>
                 <p class="step default" id="step-personal-data">Dados Pessoais</p>
+                <p class="step default" id="step-photos">Galeria</p>
                 <p class="step hidden-step" id="step-music">Sobre o Músico</p>
             </div>
         </div>
@@ -167,14 +168,24 @@
                     </div>
                 </div>
                 <div class="form-step-group" id="profile-picture-group">
-                        <div id="layout-preview-picture">
-                            <div id="preview-picture" onclick="document.getElementById('foto').click()">
-                                <img id="image-preview" src="" alt="Pré-visualização da foto" style="display: none;">
-                                <span id="botao-foto">Adicionar Foto</span>
-                            </div>
-                            <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
+                    <div id="layout-preview-picture">
+                        <div id="preview-picture" onclick="document.getElementById('foto').click()">
+                            <img id="image-preview" src="" alt="Pré-visualização da foto" style="display: none;">
+                            <span id="botao-foto">Adicionar Foto</span>
                         </div>
+                        <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
                     </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-step hidden" id="form-step-gallery-photos">
+                <h3>Galeria de Fotos</h3>
+                <span id="error-gallery-photos"></span>
+                <div class="form-step-group" id="gallery-photos">
+                    <button type="button" id="add-foto" >Adicionar Foto</button>
+                    <div id="inputs-gallery"></div>
+                    <div id="preview-gallery"></div>
+                </div>
             </fieldset>
 
             <fieldset class="form-step hidden" id="form-step-about-music">

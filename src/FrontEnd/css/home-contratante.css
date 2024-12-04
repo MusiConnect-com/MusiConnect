@@ -489,6 +489,7 @@ main {
     transition: .3s ease;
     box-shadow: 0 0 1px 1px var(--border);
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .profiles-items:hover {

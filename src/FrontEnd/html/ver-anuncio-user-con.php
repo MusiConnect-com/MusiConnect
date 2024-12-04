@@ -4,7 +4,7 @@
     include '../../BackEnd/views/conexao.php';
     include '../../FrontEnd/html/acessibilidade.html';
 
-    if ($_SESSION['UsuarioTipo'] !== "M") return header('Location: ../../BackEnd/views/logout.php');
+    if ($_SESSION['UsuarioTipo'] !== "C") return header('Location: ../../BackEnd/views/logout.php');
 
     $usuarioId = $_SESSION['UsuarioId'];
     $nome = $_SESSION['UsuarioNome'];
@@ -54,7 +54,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicConnect</title>
-    <link rel="stylesheet" href="../css/ver-anuncio.css">
+    <link rel="stylesheet" href="../css/ver-anuncio-user-con.css">
     <link rel="stylesheet" href="../global.css">
     <script src="../js/perfil.js" defer></script>
     <script src="../js/pesquisar-cabecalho-musico.js" defer></script>
@@ -187,7 +187,9 @@
                     // Nome de Contato e Contato
                     echo "<h3>Contato</h3>";
                     echo '<p>' . htmlspecialchars($result['AnuncioNomeContato']) . " - " . '<span id="telefone">'. htmlspecialchars($result['AnuncioContato']) . "</span>" . "</p>";
-                    echo '<button type="button" id="botao-zap">Entrar em Contato <i class="bi bi-whatsapp"></i></button>';
+                    $botao = $result['AnuncioStatus'] == 'ATIVO' ? 'Desativar' : 'Ativar';
+                    $link = $result['AnuncioStatus'] == 'ATIVO' ? '../../BackEnd/views/desativar-anuncio.php?id='.$anuncioId : '../../BackEnd/views/ativar-anuncio.php?id='.$anuncioId;
+                    echo '<a href="'.$link.'" id="botao-func">'.$botao.'</a>';
                     echo "</div>";   
                     
                     // Fechar a consulta
@@ -198,7 +200,7 @@
                             alert("Ocorreu um erro inesperado. Tente novamente.");
                             window.location.href = "../../FrontEnd/html/home-contratante.php";
                         </script>';
-                }
+                } 
             ?>
         </div>
     </main>

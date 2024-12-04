@@ -296,203 +296,159 @@ footer h3{
     transition: .3s;
 }
 
+/*Style main*/
 main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 9.375rem;
-    padding-bottom: 50px;
+    margin-top: 5vh;
+    padding: 1.25rem;
 }
-/*Style ads*/
-.meus-anuncios {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 40px;
+
+/* Container principal dos anúncios */
+.músico {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    background-color: var(--background-primary);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.header-musico {
+    display: flex;
+    justify-content: center;
+    height: 25.625rem;
+    max-height: 25.625rem;
+    gap: 5rem;
+}
+
+/* Estilização da imagem do anúncio */
+.content-img {
+    width: 31.25rem;
+    height: 25.625rem;
+    border-radius: 0.313rem;
+    overflow: hidden;
+}
+
+.content-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.header-right-musico {
     width: 80%;
 }
 
-.anuncio {
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    width: 100%;
-    height: 18.75rem;
-    max-height: 18.75rem;
-    overflow: auto;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    background-color: var(--background-primary);
-    box-shadow: 0 0 1px 1px var(--border);
-    cursor: pointer;
-    transition: .3s;
-}
-
-.anuncio:hover {
-    box-shadow: 0 0 10px 1px var(--border);
-}
-
-.anuncio:hover .button-want button {
-    background-color: var(--button-hover);
-}
-
-.anuncio:hover img {
-    transform: scale(1.1);
-}
-
-.img-anuncio {
-    width: 350px;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* @media (max-width: 1000px) {
-    .ad-item .img-ad {
-        width: 200px;
-    }
-
-    .ad-item .info-ad{
-        width: 68%;
-    }
-} */
-
-.img-anuncio img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .3s ease;
-}
-
-/*Style informações anuncio*/
-.info-anuncio{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 15px;
-    word-wrap: break-word;
-    width: 70%;
-    height: 100%;
-    transition: .3s;
+/* Título do anúncio */
+.header-right-musico h1 {
+    font-weight: bold;
     color: var(--font-color-secondary);
 }
 
-.titulo-preco {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.anuncio h2 {
+/* Valor do anúncio */
+.value {
+    font-size: 1.75rem;
     font-weight: bold;
+    color: var(--color-dest);
 }
 
-.valor-anuncio {
-    font-weight: bold;
-    color: var(--background-dest);
+.descr-p {
+    height: 3.438rem;
 }
 
-.descr-anuncio {
-    word-wrap: break-word;
-    height: 30%;
-    max-height: 3.961rem;
-}
-
-.anuncio p {
-    display: flex;
-    font-size: 0.813rem;
-    margin-bottom: 0.625rem;
-}
-
-.local-anuncio {
-    font-size: 0.813rem;
-    font-weight: 300;
-    font-style: italic;
-    margin: 0 !important;
-}
-
-/* Resposividade
-@media (max-width: 768px) {
-    .meus-anuncios h2 {
-        font-size: 2rem;
-    }
-
-    .anuncio h3 {
-        font-size: 1.5rem;
-    }
-
-    .anuncio p {
-        font-size: 0.9rem;
-    }
+/* p {
+    font-size: 0.875rem;
+    color: var(--font-color-secondary);
 } */
- /* Anuncio desativado */
- .anuncio-disabled {
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    width: 100%;
-    height: 18.75rem;
-    max-height: 18.75rem;
-    overflow: auto;
+
+#botao-zap {
+    margin-top: 1.25rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--font-color-primary);
+    background-color: var(--zap);
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    background-color: var(--disabled);
-    box-shadow: 0 0 1px 1px var(--border);
+    border-radius: 0.313rem;
+    padding: 0.625rem 1.25rem;
     cursor: pointer;
     transition: .3s;
 }
 
-.anuncio-disabled:hover {
-    box-shadow: 0 0 10px 1px var(--border);
+#botao-zap:hover {
+    color: var(--zap);
+    background-color: var(--button);
 }
 
-.anuncio-disabled:hover .button-want button {
-    background-color: var(--button-hover);
+.body-musico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8rem;
 }
 
-.anuncio-disabled:hover img {
-    transform: scale(1.1);
+.body-carac-musico {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    width: 90%;
 }
 
-.anuncio-disabled .img-anuncio {
-    width: 350px;
-    height: 100%;
+.carac-musico {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 1rem;
+}
+
+.carac-musico img {
+    width: 3.5rem;
+}
+
+.bi-music-note-beamed {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-size: 3rem;
+}
+
+.layout-h3-h6 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+}
+
+.gallery-photo {
+    text-align: center;
+}
+
+.gallery-photo h3 {
+    margin-bottom: 2rem;
+}
+
+.photos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.content-photo {
+    width: calc(28rem - 2rem);
+    height: 20rem;
     overflow: hidden;
-    background-color: var(--disabled);
+    border-radius: 0.313rem;
 }
 
-/* @media (max-width: 1000px) {
-    .ad-item .img-ad {
-        width: 200px;
-    }
-
-    .ad-item .info-ad{
-        width: 68%;
-    }
-} */
-
-.anuncio-disabled .img-anuncio img{
+.content-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: .3s ease;
-    opacity: 0.5;
-}
-
-/*Style informações anuncio*/
-.anuncio-disabled .info-anuncio{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 15px;
-    word-wrap: break-word;
-    width: 70%;
-    height: 100%;
-    transition: .3s;
-    color: var(--font-disabled);
-}
-
-.anuncio-disabled .valor-anuncio {
-    font-weight: bold;
-    color: var(--font-disabled);
 }

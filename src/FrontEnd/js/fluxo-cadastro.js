@@ -64,22 +64,17 @@ function nextStep() {
 
   if (totalHidden === 0) {
     if (nextIndexStep < totalSteps) {
-      let width = nextIndexStep * 30;
-      if (nextIndexStep === totalSteps - 1) {
-        width = 10 + (nextIndexStep * 30);
-      }
+      let width = (nextIndexStep / totalSteps) * 100;
       next(width);
-    } else if (nextIndexStep >= totalSteps) {
-      form.submit();
     }
   } else if (totalHidden !== 0) {
     if (nextIndexStep < totalDefault) {
-      let width = nextIndexStep * 50;
+      let width = (nextIndexStep / totalDefault) * 100;
       next(width);
-    } else if (nextIndexStep >= totalDefault) {
-      form.submit();
     }
   }
+
+  return nextIndexStep;
 }
 
 function backStep() {
@@ -104,7 +99,6 @@ function backStep() {
 
   if (backIndexStep >= 0) {
       let width = (backIndexStep / totalSteps) * 100;
-
       back(width);
   }
 }
@@ -157,18 +151,18 @@ function validateMusicOption() {
   }
 }
 
-function validateFile(file) {
+function validateFile(file, erro) {
   const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
 
   if (!file) {
-    errorProfileSpan.innerHTML = "Imagem é obrigatória";
+    erro.innerHTML = "Imagem é obrigatória";
     return false;
   } else if (!fileTypes.includes(file.type)) {
-    errorProfileSpan.innerHTML = "Esse arquivo não é uma imagem.";
+    erro.innerHTML = "Esse arquivo não é uma imagem.";
     return false;
   }
   
-  errorProfileSpan.innerHTML = "";
+  erro.innerHTML = "";
   return true;
 }
 
@@ -188,7 +182,7 @@ function validatePersonalData() {
   const cidade = document.getElementById("cidade").value;
 
   // Inicializa a variável isValid como true
-  if (!validateFile(inputFile.files[0])) {
+  if (!validateFile(inputFile.files[0], errorProfileSpan)) {
     inputFile.value = ""; 
     preview.src = ""; 
     return false; 
@@ -241,38 +235,45 @@ function validateSkillsAndGenres() {
   }
 }
 
+const validacoesDeEtapas = [
+  { validacao1: validateSelection, validacao2: validateMusicOption },
+  { validacao1: validatePersonalData },
+  { validacao1: null },
+  { validacao1: validateSkillsAndGenres }
+];
+
+function validarAvancoDeEtapa(index){
+  let indexValidacao = validacoesDeEtapas[index];
+
+  let validacao = indexValidacao.validacao1 ? indexValidacao.validacao1() : true;
+  if (validacao) {
+    if (indexValidacao.validacao2) {indexValidacao.validacao2()}
+    return true;
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    return false;
+  }
+  
+}
+
 btnNext.addEventListener('click', function (event) {
   event.preventDefault();
 
-  if (indexStep === 0) {
-    if (validateSelection()) {
-      validateMusicOption();
-      nextStep();
-    }
-  } else if (indexStep === 1) {
-    if (validatePersonalData()) {
-      nextStep();
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth' 
-      });
-    }
-  } else if (indexStep === 2) {
-    if (validateSkillsAndGenres()) {
-      nextStep();
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth' 
-      });
+  if (validarAvancoDeEtapa(indexStep)) {
+    let indexAtual = nextStep();
+    console.log(`${indexAtual} de ${totalSteps}`)
+    if (indexAtual >= totalSteps) {
+      removerFotoVazia();
+      form.submit();
     }
   }
 });
 
 btnBack.addEventListener('click', function(event){
   event.preventDefault();
-  console.log("indexAtual " + indexStep);
   backStep();
 });
 
@@ -284,8 +285,8 @@ inputFile.addEventListener('change', function(event) {
   preview.src = ""; 
 
   if (file) {
-      if (!validateFile(file)) {
-          inputFoto.value = ""; 
+      if (!validateFile(file, errorProfileSpan)) {
+          inputFile.value = ""; 
           preview.src = ""; 
           return; 
       }
@@ -301,3 +302,89 @@ inputFile.addEventListener('change', function(event) {
   }
 });
 
+function mostrarFotoInserida(fotos, preview) {
+  const erroFotos = document.getElementById('error-gallery-photos');
+
+  const foto = fotos[0]; 
+
+  if (!foto || !validateFile(foto, erroFotos)) {
+    return; 
+  }
+
+  const previewDiv = document.createElement('div');
+  previewDiv.classList.add('layout-preview-gallery');
+  const btnClose = adicionarBotaoClose();
+  const img = document.createElement('img');
+  img.src = URL.createObjectURL(foto); 
+  previewDiv.appendChild(img);
+  previewDiv.appendChild(btnClose);
+  preview.appendChild(previewDiv);
+}
+
+function removerFotoVazia() {
+  let inputs = document.querySelectorAll('.fotos');
+  let inputsGaleria = document.getElementById('inputs-gallery');
+
+  inputs.forEach(foto => {
+    if (foto.value === '') {inputsGaleria.removeChild(foto);}
+  });
+}
+
+function adicionarInputFoto() {
+  const previewGaleria = document.getElementById('preview-gallery');
+  const inputsGaleria = document.getElementById('inputs-gallery');
+
+  const input = document.createElement('input');
+
+  input.type = 'file';
+  input.name = 'fotos[]';
+  input.style.display = 'none';
+  input.classList.add('fotos');
+  input.accept = 'image/png, image/jpeg, image/jpg';
+
+  inputsGaleria.appendChild(input);
+
+  input.click();
+
+  input.addEventListener('change', function(event) {
+    const fotos = event.target.files;
+    
+    mostrarFotoInserida(fotos, previewGaleria);
+  });
+}
+
+function adicionarBotaoClose() {
+  const btnClose = document.createElement('button');
+  btnClose.type = 'button';
+  const iconClose = document.createElement('i');
+  iconClose.classList.add('bi-x-lg');
+  btnClose.appendChild(iconClose);
+
+  return btnClose;
+}
+
+function removerFotoInserida(id) {
+  let preview = document.querySelectorAll('.layout-preview-gallery');
+
+  if (preview[id]) {preview[id].remove()}
+}
+
+function capturarIdBotaoCloseClicado(event) {
+  let btnClicado = event.target.closest('button'); // encontra o botão mais próximo
+  let btnsClose = document.querySelectorAll('.layout-preview-gallery button');
+  return Array.from(btnsClose).indexOf(btnClicado); // retorna o índice do botão clicado
+}
+
+const addFoto = document.getElementById('add-foto');
+addFoto.addEventListener('click', ()=>{
+  removerFotoVazia();
+  adicionarInputFoto();
+});
+
+const previewGaleria = document.getElementById('preview-gallery');
+previewGaleria.addEventListener('click', function(event) {
+  if (event.target.closest('button')) {
+    let id = capturarIdBotaoCloseClicado(event);
+    removerFotoInserida(id);
+  }
+});

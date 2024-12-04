@@ -15,10 +15,12 @@
     --font-color-secondary:#000000;
     --font-color-muted:#333333;
     --font-color-dest:#F96900;
+    --font-disabled:#808080;
     --color-dest:#F96900;
     --background-primary:#EEEEEE;
     --background-secondary:#003366;
     --background-dest:#F96900;
+    --disabled: #cccccc;
     --card:#ffff;
     --bar:#e0e0e0;
     --border:#a0a0a0;

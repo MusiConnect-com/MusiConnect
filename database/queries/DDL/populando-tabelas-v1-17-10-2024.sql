@@ -29,6 +29,10 @@ VALUES
 ('Teclado', 'Conhecimento em teclado e piano'),
 ('Violão', 'Tocar violão e instrumentos de corda acústica');
 
+INSERT INTO TbHabilidade (HabilidadeNome, HabilidadeDesc)
+VALUES
+('Trompete', 'Habilidade com Trompete');
+
 INSERT INTO TbGeneroMusical (GeneroMuNome, GeneroMuDesc)
 VALUES
 ('Rock', 'Estilo musical baseado em guitarras e baterias'),

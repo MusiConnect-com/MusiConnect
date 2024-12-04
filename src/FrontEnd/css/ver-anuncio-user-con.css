@@ -296,203 +296,104 @@ footer h3{
     transition: .3s;
 }
 
+/*Style main*/
 main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 9.375rem;
-    padding-bottom: 50px;
-}
-/*Style ads*/
-.meus-anuncios {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 40px;
-    width: 80%;
+    margin-top: 5vh;
+    padding: 1.25rem;
 }
 
+/* Container principal dos anúncios */
 .anuncio {
     display: flex;
-    flex-direction: row;
-    max-width: 100%;
     width: 100%;
-    height: 18.75rem;
-    max-height: 18.75rem;
-    overflow: auto;
     border: none;
-    border-radius: 5px;
     text-decoration: none;
     background-color: var(--background-primary);
-    box-shadow: 0 0 1px 1px var(--border);
-    cursor: pointer;
-    transition: .3s;
+    overflow: hidden;
+    transition: 0.3s;
 }
 
-.anuncio:hover {
-    box-shadow: 0 0 10px 1px var(--border);
+/* Lado esquerdo (imagem e informações básicas) */
+.left-anuncio {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
 }
 
-.anuncio:hover .button-want button {
-    background-color: var(--button-hover);
-}
-
-.anuncio:hover img {
-    transform: scale(1.1);
-}
-
+/* Estilização da imagem do anúncio */
 .img-anuncio {
-    width: 350px;
+    width: 100%;
     height: 100%;
+    max-height: 31.25rem;
+    border-radius: 0.313rem;
     overflow: hidden;
 }
 
-/* @media (max-width: 1000px) {
-    .ad-item .img-ad {
-        width: 200px;
-    }
-
-    .ad-item .info-ad{
-        width: 68%;
-    }
-} */
-
-.img-anuncio img{
+.img-anuncio img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: .3s ease;
+    transition: transform 0.3s ease;
 }
 
-/*Style informações anuncio*/
-.info-anuncio{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 15px;
-    word-wrap: break-word;
-    width: 70%;
-    height: 100%;
-    transition: .3s;
+/* Informações básicas do lado esquerdo */
+.info-anuncio {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Lado direito (detalhes do anúncio) */
+.right-anuncio {
+    width: 30%;
+    padding: 0 20px;
+}
+
+/* Título do anúncio */
+.right-anuncio h1 {
+    font-weight: bold;
     color: var(--font-color-secondary);
 }
 
-.titulo-preco {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.anuncio h2 {
-    font-weight: bold;
-}
-
+/* Valor do anúncio */
 .valor-anuncio {
+    font-size: 1.75rem;
     font-weight: bold;
-    color: var(--background-dest);
+    color: var(--color-dest);
+    margin: 10px 0;
 }
 
-.descr-anuncio {
-    word-wrap: break-word;
-    height: 30%;
-    max-height: 3.961rem;
+/* Títulos de seções dentro do conteúdo */
+.anuncio h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--font-color-secondary);
 }
 
-.anuncio p {
-    display: flex;
-    font-size: 0.813rem;
-    margin-bottom: 0.625rem;
+/* Estilo para as informações adicionais, como contato e datas */
+.descr-anuncio,
+.local-anuncio,
+.info-anuncio p {
+    font-size: 0.875rem;
+    color: var(--font-color-secondary);
 }
 
-.local-anuncio {
-    font-size: 0.813rem;
-    font-weight: 300;
-    font-style: italic;
-    margin: 0 !important;
-}
-
-/* Resposividade
-@media (max-width: 768px) {
-    .meus-anuncios h2 {
-        font-size: 2rem;
-    }
-
-    .anuncio h3 {
-        font-size: 1.5rem;
-    }
-
-    .anuncio p {
-        font-size: 0.9rem;
-    }
-} */
- /* Anuncio desativado */
- .anuncio-disabled {
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    width: 100%;
-    height: 18.75rem;
-    max-height: 18.75rem;
-    overflow: auto;
+#botao-func {
+    margin-top: 20px;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--font-color-primary);
+    background-color: var(--button);
     border: none;
     border-radius: 5px;
-    text-decoration: none;
-    background-color: var(--disabled);
-    box-shadow: 0 0 1px 1px var(--border);
+    padding: 10px 20px;
     cursor: pointer;
     transition: .3s;
+    text-decoration: none;
 }
 
-.anuncio-disabled:hover {
-    box-shadow: 0 0 10px 1px var(--border);
-}
-
-.anuncio-disabled:hover .button-want button {
+#botao-func:hover {
     background-color: var(--button-hover);
-}
-
-.anuncio-disabled:hover img {
-    transform: scale(1.1);
-}
-
-.anuncio-disabled .img-anuncio {
-    width: 350px;
-    height: 100%;
-    overflow: hidden;
-    background-color: var(--disabled);
-}
-
-/* @media (max-width: 1000px) {
-    .ad-item .img-ad {
-        width: 200px;
-    }
-
-    .ad-item .info-ad{
-        width: 68%;
-    }
-} */
-
-.anuncio-disabled .img-anuncio img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .3s ease;
-    opacity: 0.5;
-}
-
-/*Style informações anuncio*/
-.anuncio-disabled .info-anuncio{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 15px;
-    word-wrap: break-word;
-    width: 70%;
-    height: 100%;
-    transition: .3s;
-    color: var(--font-disabled);
-}
-
-.anuncio-disabled .valor-anuncio {
-    font-weight: bold;
-    color: var(--font-disabled);
 }

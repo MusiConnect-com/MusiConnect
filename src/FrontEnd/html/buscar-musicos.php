@@ -37,21 +37,21 @@
         }
         
         if ((!isset($_GET['nome-art'], $_GET['cidade'])) || ($_GET['nome-art'] == '' AND $_GET['cidade'] == '')) {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE MidiaDestino = 'perfil' OR MidiaDestino IS NULL;");
             $stmt->execute();
         } 
         else if ($NomeArt !== '' && $CidadeNome == '') {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt AND (MidiaDestino = 'perfil' OR MidiaDestino IS NULL);");
             $stmt->bindParam(':NomeArt', $NomeArt, PDO::PARAM_STR);
             $stmt->execute();
         }
         else if ($NomeArt == '' && $CidadeNome !== '') {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE CidadeNome = :CidadeNome;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE CidadeNome = :CidadeNome AND (MidiaDestino = 'perfil' OR MidiaDestino IS NULL);");
             $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
             $stmt->execute();
         }
         else {
-            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt AND CidadeNome = :CidadeNome;");
+            $stmt = $conexao->prepare("SELECT * FROM VwVisualizarPerfis WHERE UsuarioNomeArt = :NomeArt AND CidadeNome = :CidadeNome AND (MidiaDestino = 'perfil' OR MidiaDestino IS NULL);");
             $stmt->bindParam(':NomeArt', $NomeArt, PDO::PARAM_STR);
             $stmt->bindParam(':CidadeNome', $CidadeNome, PDO::PARAM_STR);
             $stmt->execute();
@@ -176,7 +176,7 @@
                     } 
                     else {
                         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo '<a href="#" class="profiles-items">';
+                            echo '<a target="_blank" href="./ver-musico.php?id='.$result['UsuarioId'].'" class="profiles-items">';
                             echo '<div class="content-img"><img src="'.$result['MidiaCaminho'].'" alt=""></div>';
                             echo '<div class="content-text">';
                             echo '<div class="content-text-top">';
